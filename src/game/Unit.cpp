@@ -11125,6 +11125,8 @@ void Unit::setDeathState(DeathState s)
             InterruptNonMeleeSpells(false);
 
         UnsummonAllTotems();
+		// avoid that corpses run in fear
+        StopMoving();
         RemoveAllControlled();
         RemoveAllAurasOnDeath();
         ExitVehicle();
