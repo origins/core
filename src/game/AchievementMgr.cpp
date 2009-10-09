@@ -1774,11 +1774,12 @@ void AchievementMgr::SendAllAchievementData()
                 data << uint32(secsToTimeBitFields(iter->second.date));
                 send = data.size() > 0x7f00;
             }
-            data << int32(-1);
             
             if( iter == m_completedAchievements.end() )
                 cAchievements = true;
         }
+
+		data << int32(-1);
 
         for(; iter2 != m_criteriaProgress.end() && !send; ++iter2)
         {

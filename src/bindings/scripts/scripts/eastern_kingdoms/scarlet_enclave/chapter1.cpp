@@ -673,6 +673,12 @@ CreatureAI* GetAI_npc_ros_dark_rider(Creature* pCreature)
 }
 
 // correct way: 52312 52314 52555 ...
+enum SG
+{
+	GHOULS = 28845,
+	GHOULS = 28846,
+}
+
 struct CW_DLL_DECL npc_dkc1_gothikAI : public ScriptedAI
 {
     npc_dkc1_gothikAI(Creature *c) : ScriptedAI(c) {}
