@@ -4258,7 +4258,7 @@ void Spell::SpellDamageWeaponDmg(uint32 i)
     // multiple weapon dmg effect workaround
     // execute only the last weapon damage
     // and handle all effects at once
-    for (int j = 0; j < 3; ++j)
+    for (int j = i+1; j < 3; ++j)
     {
         switch(m_spellInfo->Effect[j])
         {
@@ -4266,8 +4266,7 @@ void Spell::SpellDamageWeaponDmg(uint32 i)
             case SPELL_EFFECT_WEAPON_DAMAGE_NOSCHOOL:
             case SPELL_EFFECT_NORMALIZED_WEAPON_DMG:
             case SPELL_EFFECT_WEAPON_PERCENT_DAMAGE:
-                if (j < i)                                  // we must calculate only at last weapon effect
-                    return;
+                    return;     // we must calculate only at last weapon effect
             break;
         }
     }
@@ -4535,7 +4534,9 @@ void Spell::SpellDamageWeaponDmg(uint32 i)
             case RANGED_ATTACK: unitMod = UNIT_MOD_DAMAGE_RANGED;   break;
         }
 
-        float weapon_total_pct  = m_caster->GetModifierValue(unitMod, TOTAL_PCT);
+        float weapon_total_pct = 1.0f;
+        if ( m_spellInfo->SchoolMask & SPELL_SCHOOL_MASK_NORMAL )
+             weapon_total_pct = m_caster->GetModifierValue(unitMod, TOTAL_PCT);
 
         if(fixed_bonus)
             fixed_bonus = int32(fixed_bonus * weapon_total_pct);
@@ -4543,7 +4544,7 @@ void Spell::SpellDamageWeaponDmg(uint32 i)
             spell_bonus = int32(spell_bonus * weapon_total_pct);
     }
 
-    int32 weaponDamage = m_caster->CalculateDamage(m_attackType, normalized);
+    int32 weaponDamage = m_caster->CalculateDamage(m_attackType, normalized, true);
 
     // Sequence is important
     for (int j = 0; j < 3; ++j)
