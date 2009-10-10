@@ -7126,6 +7126,13 @@ void Player::_ApplyItemBonuses(ItemPrototype const *proto, uint8 slot, bool appl
         }
     }
 
+    // Apply Spell Power from ScalingStatValue if set
+    if(ssv)
+    {
+        if (int32 spellbonus = ssv->getSpellBonus(proto->ScalingStatValue))
+            ApplySpellPowerBonus(spellbonus, apply);
+    }
+
     // If set ScalingStatValue armor get it or use item armor
     uint32 armor = proto->Armor;
     if (ssv)
@@ -11087,6 +11094,7 @@ Item* Player::EquipItem( uint16 pos, Item *pItem, bool update )
 
         if( slot == EQUIPMENT_SLOT_MAINHAND )
             UpdateExpertise(BASE_ATTACK);
+
         else if( slot == EQUIPMENT_SLOT_OFFHAND )
             UpdateExpertise(OFF_ATTACK);
 
@@ -11369,8 +11377,9 @@ void Player::DestroyItem( uint8 bag, uint8 slot, bool update )
                     break;
                 }
 
-                if ( slot == EQUIPMENT_SLOT_MAINHAND )
+                if( slot == EQUIPMENT_SLOT_MAINHAND )
                     UpdateExpertise(BASE_ATTACK);
+
                 else if( slot == EQUIPMENT_SLOT_OFFHAND )
                     UpdateExpertise(OFF_ATTACK);
 
@@ -13259,9 +13268,7 @@ void Player::RewardQuest( Quest const *pQuest, uint32 reward, Object* questGiver
         }
     }
 
-    //if( qInfo->HasSpecialFlag( QUEST_FLAGS_TIMED ) )
-    //    SetTimedQuest( 0 );
-    m_timedquests.erase(pQuest->GetQuestId());
+    RemoveTimedQuest(quest_id);
 
     if (pQuest->GetRewChoiceItemsCount() > 0)
     {
@@ -13473,6 +13480,7 @@ void Player::FailQuest(uint32 questId)
         {
             QuestStatusData& q_status = mQuestStatus[questId];
 
+            RemoveTimedQuest(questId);
             q_status.m_timer = 0;
 
             SendQuestTimerFailed(questId);
