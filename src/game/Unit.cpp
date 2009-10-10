@@ -1211,6 +1211,9 @@ void Unit::CalculateSpellDamageTaken(SpellNonMeleeDamage *damageInfo, int32 dama
     if( damageSchoolMask & SPELL_SCHOOL_MASK_NORMAL )
         damage = CalcArmorReducedDamage(pVictim, damage, spellInfo, attackType);
 
+    if (GetTypeId() == TYPEID_PLAYER && pVictim->GetTypeId() == TYPEID_PLAYER)
+        damage -= ((Player*)pVictim)->GetSpellDamageReduction(damage);
+
     // Calculate absorb resist
     if(damage > 0)
     {
@@ -1447,6 +1450,14 @@ void Unit::CalculateMeleeDamage(Unit *pVictim, uint32 damage, CalcDamageInfo *da
         default:
 
             break;
+    }
+
+    if (GetTypeId() == TYPEID_PLAYER && pVictim->GetTypeId() == TYPEID_PLAYER)
+    {
+        if (attackType != RANGED_ATTACK)
+            damage-=((Player*)pVictim)->GetMeleeDamageReduction(damage);
+        else
+            damage-=((Player*)pVictim)->GetRangedDamageReduction(damage);
     }
 
     // Calculate absorb resist

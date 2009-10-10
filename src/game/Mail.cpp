@@ -875,7 +875,7 @@ void WorldSession::SendMailTo(Player* receiver, uint8 messageType, uint8 station
             m->subject = subject;
             m->itemTextId = itemTextId;
 
-            if(mi)
+            if (mi)
                 m->AddAllItems(*mi);
 
             m->expire_time = expire_time;
@@ -887,20 +887,20 @@ void WorldSession::SendMailTo(Player* receiver, uint8 messageType, uint8 station
 
             receiver->AddMail(m);                           // to insert new mail to beginning of maillist
 
-            if(mi)
+            if (mi)
             {
                 for(MailItemMap::iterator mailItemIter = mi->begin(); mailItemIter != mi->end(); ++mailItemIter)
                 {
                     MailItem& mailItem = mailItemIter->second;
-                    if(mailItem.item)
+                    if (mailItem.item)
                         receiver->AddMItem(mailItem.item);
                 }
             }
         }
-        else if(mi)
+        else if (mi)
             mi->deleteIncludedItems();
     }
-    else if(mi)
+    else if (mi)
         mi->deleteIncludedItems();
 
     CharacterDatabase.BeginTransaction();
@@ -909,7 +909,7 @@ void WorldSession::SendMailTo(Player* receiver, uint8 messageType, uint8 station
         "VALUES ('%u', '%u', '%u', '%u', '%u', '%u', '%s', '%u', '%u', '" UI64FMTD "','" UI64FMTD "', '%u', '%u', '%d')",
         mailId, messageType, stationery, mailTemplateId, sender_guidlow_or_entry, receiver_guidlow, subject.c_str(), itemTextId, (mi && !mi->empty() ? 1 : 0), (uint64)expire_time, (uint64)deliver_time, money, COD, checked);
 
-    if(mi)
+    if (mi)
     {
         for(MailItemMap::const_iterator mailItemIter = mi->begin(); mailItemIter != mi->end(); ++mailItemIter)
         {
