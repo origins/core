@@ -31,6 +31,7 @@
 #include "Language.h"
 #include "AuctionHouseBot.h"
 #include "DBCStores.h"
+#include "BattleGroundMgr.h"
 
 enum MailShowFlags
 {
@@ -840,7 +841,15 @@ void WorldSession::SendMailTo(Player* receiver, uint8 messageType, uint8 station
     if(messageType == MAIL_AUCTION && !mi && !money)        // auction mail without any items and money
         expire_delay = sWorld.getConfig(CONFIG_MAIL_DELIVERY_DELAY);
     else
-        expire_delay = (COD > 0) ? 3*DAY : 30*DAY;
+        expire_delay = (COD > 0) ? 3 * DAY : 30 * DAY;
+
+	if (messageType == MAIL_CREATURE)
+    {
+        // mail from battlemaster (rewardmarks) should last only one day
+        BattleGroundTypeId bgTypeId = sBattleGroundMgr.GetBattleMasterBG(sender_guidlow_or_entry);
+        if (bgTypeId != BATTLEGROUND_TYPE_NONE)
+            expire_delay = DAY;
+    }
 
     time_t expire_time = deliver_time + expire_delay;
 
