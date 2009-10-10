@@ -5799,11 +5799,6 @@ void AuraEffect::PeriodicTick()
             if (crit)
                 pdamage = pCaster->SpellCriticalDamageBonus(m_spellProto, pdamage, m_target);
 
-            //As of 2.2 resilience reduces damage from DoT ticks as much as the chance to not be critically hit
-            // Reduce dot damage from resilience for players
-            if (m_target->GetTypeId()==TYPEID_PLAYER)
-                pdamage-=((Player*)m_target)->GetDotDamageReduction(pdamage);
-
             pCaster->CalcAbsorbResist(m_target, GetSpellSchoolMask(GetSpellProto()), DOT, pdamage, &absorb, &resist, m_spellProto);
 
             sLog.outDetail("PeriodicTick: %u (TypeId: %u) attacked %u (TypeId: %u) for %u dmg inflicted by %u abs is %u",
@@ -5865,11 +5860,6 @@ void AuraEffect::PeriodicTick()
                 cleanDamage.mitigated_damage += pdamage - pdamageReductedArmor;
                 pdamage = pdamageReductedArmor;
             }
-
-            //As of 2.2 resilience reduces damage from DoT ticks as much as the chance to not be critically hit
-            // Reduce dot damage from resilience for players
-            if (m_target->GetTypeId()==TYPEID_PLAYER)
-                pdamage-=((Player*)m_target)->GetDotDamageReduction(pdamage);
 
             pCaster->CalcAbsorbResist(m_target, GetSpellSchoolMask(GetSpellProto()), DOT, pdamage, &absorb, &resist, m_spellProto);
 

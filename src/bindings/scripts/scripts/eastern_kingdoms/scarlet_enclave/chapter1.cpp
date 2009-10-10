@@ -676,8 +676,8 @@ CreatureAI* GetAI_npc_ros_dark_rider(Creature* pCreature)
 enum SG
 {
 	GHOULS = 28845,
-	GHOULS = 28846,
-}
+	GHOSTS = 28846
+};
 
 struct CW_DLL_DECL npc_dkc1_gothikAI : public ScriptedAI
 {
