@@ -104,7 +104,7 @@ struct CW_DLL_DECL npc_injured_rainspeaker_oracleAI : public npc_escortAI
 
     void JustDied(Unit* killer)
     {
-        if (!IsBeingEscorted)
+        if (!HasEscortState(STATE_ESCORT_ESCORTING))
             return;
 
         if (Player* pPlayer = GetPlayerForEscort())
