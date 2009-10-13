@@ -19,6 +19,7 @@
  */
 
 #include "Common.h"
+#include "../shared/Config/Config.h"
 #include "ObjectAccessor.h"
 #include "ObjectMgr.h"
 #include "SystemConfig.h"
@@ -644,15 +645,28 @@ void WorldSession::HandlePlayerLogin(LoginQueryHolder * holder)
         SendPacket( &data );
         DEBUG_LOG( "WORLD: Sent motd (SMSG_MOTD)" );
 
-		//GM Announce Logon
-		if(pCurrChar->isGameMaster())
-		{
-			std::string msg = "GM ";
-			msg += pCurrChar->GetName();
-			msg += " has logged in. ";
-			sWorld.SendWorldText(LANG_SYSTEMMESSAGE, msg.c_str());
+		/* GameMaster Announce Option */
 
-			sLog.outString(msg.c_str());
+		// Logon \\
+
+		// Config Options
+
+		// Announce Login on/off
+		bool AnnounceLogin = sConfig.GetBoolDefault("GMAnnounceLogin", true); 
+		// Announce Message at GM login
+		std::string GMLoginMsg = sConfig.GetStringDefault("GMAnnounceLoginMessage", " logged in]"); 
+		
+		// Main function
+		if(AnnounceLogin && pCurrChar->isGameMaster())
+		{
+			SendNotification("GM mode is ON"); 
+			std::string loginmsg = "GM ";
+			loginmsg += pCurrChar->GetName();
+			loginmsg += GMLoginMsg;
+
+			sWorld.SendWorldText(LANG_SYSTEMMESSAGE, loginmsg.c_str());
+
+			sLog.outString(loginmsg.c_str());
 		}
 
         // send server info
