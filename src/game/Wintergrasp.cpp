@@ -494,6 +494,9 @@ void OPvPWintergrasp::OnCreatureCreate(Creature *creature, bool add)
                     }
             }
             break;
+        case CREATURE_TURRET:
+            creature->setFaction(WintergraspFaction[m_defender]);
+            break;
         default:
             if (m_creEntryPair.find(entry) != m_creEntryPair.end()) // guards and npc
             {
@@ -630,16 +633,27 @@ bool OPvPWintergrasp::UpdateCreatureInfo(Creature *creature) const
 
 bool OPvPWintergrasp::UpdateGameObjectInfo(GameObject *go) const
 {
-    switch(go->GetEntry())
+    switch(go->GetGOInfo()->displayId)
     {
-        // Defender's Portal
-        case 190763:
+        case 8165: // Wintergrasp Keep Door
+        case 7877: // Wintergrasp Fortress Wall
+        case 7878: // Wintergrasp Keep Tower
+        case 7906: // Wintergrasp Fortress Gate
+        case 7909: // Wintergrasp Wall
+        case 8244: // Defender's Portal - Vehicle Teleporter
             go->SetUInt32Value(GAMEOBJECT_FACTION, WintergraspFaction[m_defender]);
             return true;
-        // Titan relic
-        case 192829:
+        case 7900: // Flamewatch Tower - Shadowsight Tower - Winter's Edge Tower
+        case 7967: // Titan relic
             go->SetUInt32Value(GAMEOBJECT_FACTION, WintergraspFaction[OTHER_TEAM(m_defender)]);
             return true;
+        case 8208: // Goblin Workshop
+            SiegeWorkshop *workshop = GetWorkshopByGOGuid(go->GetGUID());
+            if (workshop)
+            {
+                go->SetUInt32Value(GAMEOBJECT_FACTION, WintergraspFaction[workshop->m_buildingState->GetTeam()]);
+                return true;
+            }
     }
 
     // Note: this is only for test, still need db support
@@ -941,6 +955,12 @@ void OPvPWintergrasp::EndBattle()
 
         for (PlayerSet::iterator itr = m_players[team].begin(); itr != m_players[team].end(); ++itr)
         {
+            // When WG ends the zone is cleaned including corpses, revive all players if dead
+            if ((*itr)->isDead())
+            {
+                (*itr)->ResurrectPlayer(1.0f);
+                ObjectAccessor::Instance().ConvertCorpseForPlayer((*itr)->GetGUID());
+            }
             if ((*itr)->HasAura(SPELL_LIEUTENANT))
             {
                 if (!sWorld.getConfig(CONFIG_OUTDOORPVP_WINTERGRASP_CUSTOM_HONOR))
@@ -957,12 +977,6 @@ void OPvPWintergrasp::EndBattle()
             REMOVE_WARTIME_AURAS(*itr);
             REMOVE_TENACITY_AURA(*itr);
             (*itr)->CombatStop(true);
-            
-            // When WG ends the zone is cleaned including corpses, revive all players if dead
-            if (((*itr)->isDead()) || ((*itr)->HasFlag(PLAYER_FLAGS, PLAYER_FLAGS_GHOST))) 
-            {
-                (*itr)->ResurrectPlayer(1.0f);
-            }
         }
 
         // destroyed all vehicles

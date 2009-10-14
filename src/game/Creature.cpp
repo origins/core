@@ -2201,7 +2201,7 @@ bool Creature::_IsTargetAcceptable(const Unit *target) const
     const Unit *myVictim = getAttackerForHelper();
 
     // if I'm already fighting target, the target is acceptable
-    if (myVictim == target)
+    if (myVictim == target || target->getVictim() == this)
         return true;
 
     // if I'm hostile towards the target, the target is acceptable
@@ -2245,7 +2245,7 @@ bool Creature::canCreatureAttack(Unit const *pVictim, bool force) const
     if(!pVictim->isInAccessiblePlaceFor(this))
         return false;
 
-    if(!AI()->CanAIAttack(pVictim))
+    if(IsAIEnabled && !AI()->CanAIAttack(pVictim))
         return false;
 
     if(sMapStore.LookupEntry(GetMapId())->IsDungeon())

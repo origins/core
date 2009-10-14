@@ -11383,7 +11383,7 @@ Unit* Creature::SelectVictim()
     // Note: creature not have targeted movement generator but have attacker in this case
     for(AttackerSet::const_iterator itr = m_attackers.begin(); itr != m_attackers.end(); ++itr)
     {
-        if((*itr) && canCreatureAttack(*itr) && (*itr)->GetTypeId() != TYPEID_PLAYER
+        if((*itr) && !canCreatureAttack(*itr) && (*itr)->GetTypeId() != TYPEID_PLAYER
           && !((Creature*)(*itr))->HasUnitTypeMask(UNIT_MASK_CONTROLABLE_GUARDIAN))
             return NULL;
     }
@@ -14307,7 +14307,10 @@ void Unit::RestoreFaction()
         }
 
         if(CreatureInfo const *cinfo = ((Creature*)this)->GetCreatureInfo())  // normal creature
-            setFaction(cinfo->faction_A);
+        {
+            FactionTemplateEntry const *faction = getFactionTemplateEntry();
+            setFaction((faction && faction->friendlyMask & 0x004) ? cinfo->faction_H : cinfo->faction_A);
+        }
     }
 }
 
