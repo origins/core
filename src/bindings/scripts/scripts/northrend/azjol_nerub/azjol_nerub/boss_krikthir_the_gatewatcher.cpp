@@ -95,6 +95,11 @@ enum Yells
 
 };
 
+enum Misc
+{
+    ACHIEVEMENT_WATCH_HIM_DIE              =   1296
+};
+
 struct CW_DLL_DECL boss_krik_thirAI : public ScriptedAI
 {
     boss_krik_thirAI(Creature *c) : ScriptedAI(c)

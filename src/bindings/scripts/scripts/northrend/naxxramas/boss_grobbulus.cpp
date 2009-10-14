@@ -92,7 +92,7 @@ struct CW_DLL_DECL boss_grobbulusAI : public BossAI
     }
 };
 
-struct TRINITY_DLL_DECL npc_grobbulus_poison_cloudAI : public Scripted_NoMovementAI
+struct CW_DLL_DECL npc_grobbulus_poison_cloudAI : public Scripted_NoMovementAI
 {
     npc_grobbulus_poison_cloudAI(Creature* pCreature) : Scripted_NoMovementAI(pCreature)
     {
