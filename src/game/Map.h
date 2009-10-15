@@ -48,11 +48,9 @@ class WorldObject;
 class TempSummon;
 class Player;
 class CreatureGroup;
-class BattleGround;
 struct ScriptInfo;
 struct ScriptAction;
 struct Position;
-
 
 
 typedef ACE_RW_Thread_Mutex GridRWLock;
@@ -632,10 +630,6 @@ class CW_DLL_SPEC BattleGroundMap : public Map
         void RemoveAllPlayers();
 
         virtual void InitVisibilityDistance();
-        BattleGround* GetBG() { return m_bg; }
-        void SetBG(BattleGround* bg) { m_bg = bg; }
-    private:
-        BattleGround* m_bg;
 };
 
 /*inline

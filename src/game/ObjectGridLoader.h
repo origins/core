@@ -28,7 +28,6 @@
 #include "Cell.h"
 
 class ObjectWorldLoader;
-class BattleGround;
 
 class CW_DLL_DECL ObjectGridLoader
 {

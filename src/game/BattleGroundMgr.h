@@ -32,8 +32,6 @@ typedef std::map<uint32, BattleGround*> BattleGroundSet;
 typedef std::list<BattleGround*> BGFreeSlotQueueType;
 
 typedef UNORDERED_MAP<uint32, BattleGroundTypeId> BattleMastersMap;
-typedef UNORDERED_MAP<uint32, BattleGroundEventIdx> CreatureBattleEventIndexesMap;
-typedef UNORDERED_MAP<uint32, BattleGroundEventIdx> GameObjectBattleEventIndexesMap;
 
 #define BATTLEGROUND_ARENA_POINT_DISTRIBUTION_DAY 86400     // seconds in a day
 #define COUNT_OF_PLAYERS_TO_AVERAGE_WAIT_TIME 10
@@ -242,29 +240,6 @@ class BattleGroundMgr
             return BATTLEGROUND_TYPE_NONE;
         }
 
-        void LoadCreatureBattleEventIndexes();
-        BattleGroundEventIdx GetCreatureEventIndex(uint32 dbTableGuidLow) const
-        {
-            CreatureBattleEventIndexesMap::const_iterator itr = mCreatureBattleEventIndexMap.find(dbTableGuidLow);
-            if(itr != mCreatureBattleEventIndexMap.end())
-                return itr->second;
-            BattleGroundEventIdx none;
-            none.event1 = BG_EVENT_NONE;
-            none.event2 = BG_EVENT_NONE;
-            return none;                                    // needed to check for error
-        }
-        void LoadGameObjectBattleEventIndexes();
-        BattleGroundEventIdx GetGameObjectEventIndex(uint32 dbTableGuidLow) const
-        {
-            GameObjectBattleEventIndexesMap::const_iterator itr = mGameObjectBattleEventIndexMap.find(dbTableGuidLow);
-            if(itr != mGameObjectBattleEventIndexMap.end())
-                return itr->second;
-            BattleGroundEventIdx none;
-            none.event1 = BG_EVENT_NONE;
-            none.event2 = BG_EVENT_NONE;
-            return none;                                    // needed to check for error
-        }
-
         bool isArenaTesting() const { return m_ArenaTesting; }
         bool isTesting() const { return m_Testing; }
 
@@ -274,11 +249,9 @@ class BattleGroundMgr
         static BattleGroundTypeId BGTemplateId(BattleGroundQueueTypeId bgQueueTypeId);
         static uint8 BGArenaType(BattleGroundQueueTypeId bgQueueTypeId);
 
-		static bool IsBGWeekend(BattleGroundTypeId bgTypeId);
+        static bool IsBGWeekend(BattleGroundTypeId bgTypeId);
     private:
         BattleMastersMap    mBattleMastersMap;
-        CreatureBattleEventIndexesMap mCreatureBattleEventIndexMap;
-        GameObjectBattleEventIndexesMap mGameObjectBattleEventIndexMap;
 
         /* Battlegrounds */
         BattleGroundSet m_BattleGrounds[MAX_BATTLEGROUND_TYPE_ID];

@@ -64,7 +64,7 @@ class CW_DLL_DECL MapInstanced : public Map
     private:
 
         InstanceMap* CreateInstance(uint32 InstanceId, InstanceSave *save, uint8 difficulty);
-        BattleGroundMap* CreateBattleGroundMap(uint32 InstanceId, BattleGround* bg);
+        BattleGroundMap* CreateBattleGround(uint32 InstanceId);
 
         InstancedMaps m_InstancedMaps;
 

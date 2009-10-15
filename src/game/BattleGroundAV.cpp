@@ -31,7 +31,10 @@
 
 BattleGroundAV::BattleGroundAV()
 {
-	m_StartMessageIds[BG_STARTING_EVENT_FIRST]  = LANG_BG_AV_START_TWO_MINUTES;
+    m_BgObjects.resize(BG_AV_OBJECT_MAX);
+    m_BgCreatures.resize(AV_CPLACE_MAX+AV_STATICCPLACE_MAX);
+
+    m_StartMessageIds[BG_STARTING_EVENT_FIRST]  = LANG_BG_AV_START_TWO_MINUTES;
     m_StartMessageIds[BG_STARTING_EVENT_SECOND] = LANG_BG_AV_START_ONE_MINUTE;
     m_StartMessageIds[BG_STARTING_EVENT_THIRD]  = LANG_BG_AV_START_HALF_MINUTE;
     m_StartMessageIds[BG_STARTING_EVENT_FOURTH] = LANG_BG_AV_HAS_BEGUN;
@@ -247,7 +250,50 @@ void BattleGroundAV::UpdateScore(uint16 team, int16 points )
 
 Creature* BattleGroundAV::AddAVCreature(uint16 cinfoid, uint16 type )
 {
-	return 0;
+    uint32 level;
+    bool isStatic=false;
+    Creature* creature = NULL;
+    assert(type <= AV_CPLACE_MAX + AV_STATICCPLACE_MAX);
+    if(type>=AV_CPLACE_MAX) //static
+    {
+        type-=AV_CPLACE_MAX;
+        cinfoid=int(BG_AV_StaticCreaturePos[type][4]);
+        creature = AddCreature(BG_AV_StaticCreatureInfo[cinfoid][0],(type+AV_CPLACE_MAX),BG_AV_StaticCreatureInfo[cinfoid][1],BG_AV_StaticCreaturePos[type][0],BG_AV_StaticCreaturePos[type][1],BG_AV_StaticCreaturePos[type][2],BG_AV_StaticCreaturePos[type][3]);
+        level = ( BG_AV_StaticCreatureInfo[cinfoid][2] == BG_AV_StaticCreatureInfo[cinfoid][3] ) ? BG_AV_StaticCreatureInfo[cinfoid][2] : urand(BG_AV_StaticCreatureInfo[cinfoid][2],BG_AV_StaticCreatureInfo[cinfoid][3]);
+        isStatic=true;
+    }
+    else
+    {
+        creature = AddCreature(BG_AV_CreatureInfo[cinfoid][0],type,BG_AV_CreatureInfo[cinfoid][1],BG_AV_CreaturePos[type][0],BG_AV_CreaturePos[type][1],BG_AV_CreaturePos[type][2],BG_AV_CreaturePos[type][3]);
+        level = ( BG_AV_CreatureInfo[cinfoid][2] == BG_AV_CreatureInfo[cinfoid][3] ) ? BG_AV_CreatureInfo[cinfoid][2] : urand(BG_AV_CreatureInfo[cinfoid][2],BG_AV_CreatureInfo[cinfoid][3]);
+    }
+    if(!creature)
+        return NULL;
+    if(creature->GetEntry() == BG_AV_CreatureInfo[AV_NPC_A_CAPTAIN][0] || creature->GetEntry() == BG_AV_CreatureInfo[AV_NPC_H_CAPTAIN][0])
+        creature->SetRespawnDelay(RESPAWN_ONE_DAY); // TODO: look if this can be done by database + also add this for the wingcommanders
+
+    if((isStatic && cinfoid>=10 && cinfoid<=14) || (!isStatic && ((cinfoid >= AV_NPC_A_GRAVEDEFENSE0 && cinfoid<=AV_NPC_A_GRAVEDEFENSE3) ||
+        (cinfoid>=AV_NPC_H_GRAVEDEFENSE0 && cinfoid<=AV_NPC_H_GRAVEDEFENSE3))))
+    {
+        if(!isStatic && ((cinfoid>=AV_NPC_A_GRAVEDEFENSE0 && cinfoid<=AV_NPC_A_GRAVEDEFENSE3)
+            || (cinfoid>=AV_NPC_H_GRAVEDEFENSE0 && cinfoid<=AV_NPC_H_GRAVEDEFENSE3)))
+        {
+            CreatureData &data = objmgr.NewOrExistCreatureData(creature->GetDBTableGUIDLow());
+            data.spawndist      = 5;
+        }
+        //else spawndist will be 15, so creatures move maximum=10
+        //creature->SetDefaultMovementType(RANDOM_MOTION_TYPE);
+        creature->GetMotionMaster()->Initialize();
+        creature->setDeathState(JUST_DIED);
+        creature->Respawn();
+        //TODO: find a way to add a motionmaster without killing the creature (i
+        //just copied this code from a gm-command
+    }
+
+    if(level != 0)
+        level += m_MaxLevel-60; //maybe we can do this more generic for custom level-range.. actually it's blizzlike
+    creature->SetLevel(level);
+    return creature;
 }
 
 void BattleGroundAV::Update(uint32 diff)
