@@ -53,10 +53,6 @@ void BattleGroundAA::StartingEventCloseDoors()
 
 void BattleGroundAA::StartingEventOpenDoors()
 {
-	if(BG_STARTING_EVENT_FOURTH)
-	{
-		StartingEventOpenDoors();
-	}
 }
 
 void BattleGroundAA::AddPlayer(Player *plr)

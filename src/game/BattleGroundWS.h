@@ -122,18 +122,18 @@ enum BG_WS_Graveyards
     WS_GRAVEYARD_MAIN_HORDE        = 772
 };
 
+enum BG_WS_CarrierDebuffs
+{
+    WS_SPELL_FOCUSED_ASSAULT   = 46392,
+    WS_SPELL_BRUTAL_ASSAULT    = 46393
+};
+
 enum BG_WS_CreatureTypes
 {
     WS_SPIRIT_MAIN_ALLIANCE   = 0,
     WS_SPIRIT_MAIN_HORDE      = 1,
 
     BG_CREATURES_MAX_WS       = 2
-};
-
-enum BG_WS_CarrierDebuffs
-{
-    WS_SPELL_FOCUSED_ASSAULT   = 46392,
-    WS_SPELL_BRUTAL_ASSAULT    = 46393
 };
 
 class BattleGroundWGScore : public BattleGroundScore
@@ -143,6 +143,14 @@ class BattleGroundWGScore : public BattleGroundScore
         virtual ~BattleGroundWGScore() {};
         uint32 FlagCaptures;
         uint32 FlagReturns;
+};
+
+enum BG_WS_Events
+{
+    WS_EVENT_FLAG_A               = 0,
+    WS_EVENT_FLAG_H               = 1,
+    // spiritguides will spawn (same moment, like WS_EVENT_DOOR_OPEN)
+    WS_EVENT_SPIRITGUIDES_SPAWN   = 2
 };
 
 class BattleGroundWS : public BattleGround
@@ -201,11 +209,12 @@ class BattleGroundWS : public BattleGround
         void SetTeamPoint(uint32 TeamID, uint32 Points = 0) { m_TeamScores[GetTeamIndexByTeamId(TeamID)] = Points; }
         void RemovePoint(uint32 TeamID, uint32 Points = 1)  { m_TeamScores[GetTeamIndexByTeamId(TeamID)] -= Points; }
     private:
-        uint64 m_FlagKeepers[2];                            // 0 - alliance, 1 - horde
-        uint64 m_DroppedFlagGUID[2];
-        uint8 m_FlagState[2];                               // for checking flag state
-        int32 m_FlagsTimer[2];
-        int32 m_FlagsDropTimer[2];
+        uint64 m_FlagKeepers[BG_TEAMS_COUNT];
+
+        uint64 m_DroppedFlagGUID[BG_TEAMS_COUNT];
+        uint8 m_FlagState[BG_TEAMS_COUNT];
+        int32 m_FlagsTimer[BG_TEAMS_COUNT];
+        int32 m_FlagsDropTimer[BG_TEAMS_COUNT];
 
         uint32 m_ReputationCapture;
         uint32 m_HonorWinKills;

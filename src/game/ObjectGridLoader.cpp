@@ -117,6 +117,8 @@ void AddObjectHelper(CellPair &cell, GridRefManager<T> &m, uint32 &count, Map* m
     obj->AddToWorld();
     if(obj->isActiveObject())
         map->AddToActive(obj);
+	//if (bg)
+            //bg->OnObjectDBLoad(obj);
 
     ++count;
 }
@@ -124,6 +126,8 @@ void AddObjectHelper(CellPair &cell, GridRefManager<T> &m, uint32 &count, Map* m
 template <class T>
 void LoadHelper(CellGuidSet const& guid_set, CellPair &cell, GridRefManager<T> &m, uint32 &count, Map* map)
 {
+    BattleGround* bg = map->IsBattleGroundOrArena() ? ((BattleGroundMap*)map)->GetBG() : NULL;
+
     for(CellGuidSet::const_iterator i_guid = guid_set.begin(); i_guid != guid_set.end(); ++i_guid)
     {
         T* obj = new T;
