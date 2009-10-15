@@ -245,6 +245,11 @@ void BattleGroundAV::UpdateScore(uint16 team, int16 points )
     }
 }
 
+Creature* BattleGroundAV::AddAVCreature(uint16 cinfoid, uint16 type )
+{
+	return 0;
+}
+
 void BattleGroundAV::Update(uint32 diff)
 {
     BattleGround::Update(diff);

@@ -1673,6 +1673,11 @@ void BattleGround::SpawnBGObject(uint64 const& guid, uint32 respawntime)
     }
 }
 
+bool BattleGround::DelCreature(uint32 type)
+{
+	return 0;
+}
+
 void BattleGround::SpawnBGCreature(uint64 const& guid, uint32 respawntime)
 {
     Creature* obj = HashMapHolder<Creature>::Find(guid);
@@ -1709,6 +1714,13 @@ bool BattleGround::DelObject(uint32 type)
     obj->SetRespawnTime(0);                                 // not save respawn time
     obj->Delete();
     m_BgObjects[type] = 0;
+    return true;
+}
+
+bool BattleGround::AddSpiritGuide(uint32 type, float x, float y, float z, float o, uint32 team)
+{
+	uint32 entry = 0;
+
     return true;
 }
 
