@@ -65,6 +65,11 @@ CreatureAI* GetAI_boss_novos(Creature* pCreature)
     return new boss_novosAI (pCreature);
 }
 
+CreatureAI* GetAI_mob_crystal_handler(Creature* pCreature)
+{
+    return new mob_crystal_handlerAI (pCreature);
+}
+
 void AddSC_boss_novos()
 {
     Script *newscript;
@@ -72,5 +77,10 @@ void AddSC_boss_novos()
     newscript = new Script;
     newscript->Name="boss_novos";
     newscript->GetAI = &GetAI_boss_novos;
+    newscript->RegisterSelf();
+    
+    newscript = new Script;
+    newscript->Name="mob_crystal_handler";
+    newscript->GetAI = &GetAI_mob_crystal_handler;
     newscript->RegisterSelf();
 }

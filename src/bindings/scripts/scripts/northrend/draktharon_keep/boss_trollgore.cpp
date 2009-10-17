@@ -51,6 +51,9 @@ struct CW_DLL_DECL boss_trollgoreAI : public ScriptedAI
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
+        
+        if (pInstance)
+            pInstance->SetData(DATA_TROLLGORE_EVENT, DONE);
     }
     void KilledUnit(Unit *victim)
     {

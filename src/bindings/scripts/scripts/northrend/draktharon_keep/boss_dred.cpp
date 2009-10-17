@@ -37,7 +37,12 @@ struct CW_DLL_DECL boss_dredAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    void JustDied(Unit* killer)  {}
+    
+    void JustDied(Unit* killer)
+    {
+        if (pInstance)
+            pInstance->SetData(DATA_DRED_EVENT,DONE);
+    }
 };
 
 CreatureAI* GetAI_boss_dred(Creature* pCreature)
