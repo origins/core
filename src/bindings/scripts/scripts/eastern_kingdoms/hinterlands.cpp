@@ -33,7 +33,7 @@ EndContentData */
 ## npc_00x09hl
 ######*/
 
-enum
+enum eOOX
 {
     SAY_OOX_START           = -1000287,
     SAY_OOX_AGGRO1          = -1000288,
@@ -144,7 +144,7 @@ CreatureAI* GetAI_npc_00x09hl(Creature* pCreature)
 ## npc_rinji
 ######*/
 
-enum
+enum eRinji
 {
     SAY_RIN_FREE            = -1000403, //from here
     SAY_RIN_BY_OUTRUNNER    = -1000404,
@@ -218,11 +218,7 @@ struct CW_DLL_DECL npc_rinjiAI : public npc_escortAI
                 return;
 
             //only if attacked and escorter is not in combat?
-            switch(rand()%2)
-            {
-                case 0: DoScriptText(SAY_RIN_HELP_1, m_creature); break;
-                case 1: DoScriptText(SAY_RIN_HELP_2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_RIN_HELP_1,SAY_RIN_HELP_2), m_creature);
         }
     }
 

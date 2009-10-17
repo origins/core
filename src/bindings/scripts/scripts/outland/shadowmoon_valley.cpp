@@ -852,7 +852,7 @@ bool QuestAccept_npc_overlord_morghor(Player* pPlayer, Creature* pCreature, cons
 # npc_earthmender_wilda
 ####*/
 
-enum
+enum eMatureNetherwing
 {
     SAY_WIL_START               = -1000381,
     SAY_WIL_AGGRO1              = -1000382,

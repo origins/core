@@ -49,20 +49,31 @@ struct CW_DLL_DECL boss_ichoronAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
+    
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
+        
+        if (pInstance)
+        {
+            if (pInstance->GetData(DATA_WAVE_COUNT) == 6)
+            {
+                pInstance->SetData(DATA_1ST_BOSS_EVENT, DONE);
+                pInstance->SetData(DATA_WAVE_COUNT, 7);
+            }
+            else if (pInstance->GetData(DATA_WAVE_COUNT) == 12)
+            {
+                pInstance->SetData(DATA_2ND_BOSS_EVENT, DONE);
+                pInstance->SetData(DATA_WAVE_COUNT, 13);
+            }
+        }
     }
+    
     void KilledUnit(Unit *victim)
     {
         if (victim == m_creature)
             return;
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_SLAY_1, m_creature);break;
-            case 1: DoScriptText(SAY_SLAY_2, m_creature);break;
-            case 2: DoScriptText(SAY_SLAY_3, m_creature);break;
-        }
+        DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2,SAY_SLAY_3), m_creature);
     }
 };
 

@@ -3973,7 +3973,7 @@ void Unit::RemoveAurasDueToSpellBySteal(uint32 spellId, uint64 casterGUID, Unit 
 
     for(AuraMap::iterator iter = m_Auras.lower_bound(spellId); iter != m_Auras.upper_bound(spellId);)
     {
-        Aura * aur= iter->second;
+        Aura * aur = iter->second;
         if (casterGUID == aur->GetCasterGUID())
         {
             int32 damage[MAX_SPELL_EFFECTS];
@@ -4147,6 +4147,18 @@ void Unit::RemoveAllAuras()
         RemoveAura(iter);
 }
 
+void Unit::RemoveAllAuras(uint64 casterGUID, Aura * except /*=NULL*/, bool negative /*=true*/, bool positive /*=true*/)
+{
+    for(AuraMap::iterator iter = m_Auras.begin(); iter != m_Auras.end();)
+    {
+        if (iter->second != except && (!casterGUID || iter->second->GetCasterGUID()==casterGUID)
+            && ((negative && !iter->second->IsPositive()) || (positive && iter->second->IsPositive())))
+            RemoveAura(iter);
+        else
+            ++iter;
+    }
+}
+
 void Unit::RemoveArenaAuras(bool onleave)
 {
     // in join, remove positive buffs, on end, remove negative
@@ -4193,17 +4205,13 @@ void Unit::DelayAura(uint32 spellId, uint64 caster, int32 delaytime)
 void Unit::_RemoveAllAuraMods()
 {
     for (AuraMap::iterator i = m_Auras.begin(); i != m_Auras.end(); ++i)
-    {
         (*i).second->ApplyAllModifiers(false);
-    }
 }
 
 void Unit::_ApplyAllAuraMods()
 {
     for (AuraMap::iterator i = m_Auras.begin(); i != m_Auras.end(); ++i)
-    {
         (*i).second->ApplyAllModifiers(true);
-    }
 }
 
 bool Unit::HasAuraTypeWithMiscvalue(AuraType auratype, uint32 miscvalue) const
@@ -12088,9 +12096,7 @@ void Unit::SetPower(Powers power, uint32 val)
 
         // Update the pet's character sheet with happiness damage bonus
         if(pet->getPetType() == HUNTER_PET && power == POWER_HAPPINESS)
-        {
             pet->UpdateDamagePhysical(BASE_ATTACK);
-        }
     }
 }
 

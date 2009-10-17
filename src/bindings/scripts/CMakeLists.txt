@@ -380,6 +380,7 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/ulduar/ulduar/boss_thorim.cpp
    scripts/northrend/ulduar/ulduar/boss_xt002.cpp
    scripts/northrend/ulduar/ulduar/boss_yoggsaron.cpp
+   scripts/northrend/ulduar/ulduar/ulduar_teleporter.cpp
    scripts/northrend/ulduar/ulduar/def_ulduar.h
    scripts/northrend/ulduar/ulduar/instance_ulduar.cpp
    scripts/northrend/utgarde_keep/utgarde_keep/instance_utgarde_keep.cpp
@@ -407,6 +408,7 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/violet_hold/boss_xevozz.cpp
    scripts/northrend/violet_hold/boss_zuramat.cpp
    scripts/northrend/violet_hold/def_violet_hold.h
+   scripts/northrend/violet_hold/violet_hold.cpp
    scripts/northrend/borean_tundra.cpp
    scripts/northrend/dragonblight.cpp
    scripts/northrend/grizzly_hills.cpp

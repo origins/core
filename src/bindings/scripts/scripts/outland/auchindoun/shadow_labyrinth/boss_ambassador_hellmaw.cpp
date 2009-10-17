@@ -25,7 +25,7 @@ EndScriptData */
 #include "escort_ai.h"
 #include "def_shadow_labyrinth.h"
 
-enum
+enum eEnums
 {
     SAY_INTRO       = -1555000,
     SAY_AGGRO1      = -1555001,
@@ -118,21 +118,12 @@ struct CW_DLL_DECL boss_ambassador_hellmawAI : public npc_escortAI
 
     void EnterCombat(Unit *who)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
-            case 1: DoScriptText(SAY_AGGRO2, m_creature); break;
-            case 2: DoScriptText(SAY_AGGRO3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_AGGRO1,SAY_AGGRO2,SAY_AGGRO3), m_creature);
     }
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void JustDied(Unit *victim)

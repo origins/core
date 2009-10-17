@@ -49,6 +49,9 @@ struct CW_DLL_DECL boss_xt002_AI : public ScriptedAI
     void JustDied(Unit *victim)
     {
         DoScriptText(SAY_SLAY, m_creature);
+
+        if (m_pInstance)
+            m_pInstance->SetData(TYPE_XT002, DONE);
     }
 
     void MoveInLineOfSight(Unit* who) {}
@@ -60,8 +63,10 @@ struct CW_DLL_DECL boss_xt002_AI : public ScriptedAI
 
         if(m_creature->GetPositionX() < 700) // Not Blizzlike, anti-exploit to prevent players from pulling bosses to vehicles.
         {
-            m_creature->SetHealth(m_creature->GetMaxHealth());
-            DoCast(m_creature->getVictim(),SPELL_SONIC_BOOM);
+            m_creature->RemoveAllAuras();
+            m_creature->DeleteThreatList();
+            m_creature->CombatStop(false);
+            m_creature->GetMotionMaster()->MoveTargetedHome();
         }
 
         if (SEARING_LIGHT_Timer < diff)

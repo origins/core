@@ -68,6 +68,11 @@ CreatureAI* GetAI_boss_amanitar(Creature* pCreature)
     return new boss_amanitarAI (pCreature);
 }
 
+CreatureAI* GetAI_mob_amanitar_mushrooms(Creature *pCreature)
+{
+    return new mob_amanitar_mushroomsAI (pCreature);
+}
+
 void AddSC_boss_amanitar()
 {
     Script *newscript;
@@ -75,5 +80,10 @@ void AddSC_boss_amanitar()
     newscript = new Script;
     newscript->Name="boss_amanitar";
     newscript->GetAI = &GetAI_boss_amanitar;
+    newscript->RegisterSelf();
+
+    newscript = new Script;
+    newscript->Name="mob_amanitar_mushrooms";
+    newscript->GetAI = &GetAI_mob_amanitar_mushrooms;
     newscript->RegisterSelf();
 }

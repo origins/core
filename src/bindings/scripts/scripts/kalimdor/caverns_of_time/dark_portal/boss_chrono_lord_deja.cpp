@@ -24,7 +24,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_dark_portal.h"
 
-enum
+enum eEnums
 {
     SAY_ENTER                   = -1269006,
     SAY_AGGRO                   = -1269007,
@@ -87,11 +87,7 @@ struct CW_DLL_DECL boss_chrono_lord_dejaAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -111,7 +107,7 @@ struct CW_DLL_DECL boss_chrono_lord_dejaAI : public ScriptedAI
         //Arcane Blast
         if (ArcaneBlast_Timer < diff)
         {
-            DoCast(m_creature->getVictim(), HeroicMode ? H_SPELL_ARCANE_BLAST : SPELL_ARCANE_BLAST);
+            DoCast(m_creature->getVictim(), HEROIC(SPELL_ARCANE_BLAST, H_SPELL_ARCANE_BLAST));
             ArcaneBlast_Timer = 15000+rand()%10000;
         }else ArcaneBlast_Timer -= diff;
 
@@ -119,7 +115,7 @@ struct CW_DLL_DECL boss_chrono_lord_dejaAI : public ScriptedAI
         if (ArcaneDischarge_Timer < diff)
         {
             Unit* target = SelectUnit(SELECT_TARGET_RANDOM, 0);
-            DoCast(target,HeroicMode ? H_SPELL_ARCANE_DISCHARGE : SPELL_ARCANE_DISCHARGE);
+            DoCast(target,HEROIC(SPELL_ARCANE_DISCHARGE, H_SPELL_ARCANE_DISCHARGE));
             ArcaneDischarge_Timer = 20000+rand()%10000;
         }else ArcaneDischarge_Timer -= diff;
 

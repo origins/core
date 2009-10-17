@@ -35,7 +35,7 @@ EndContentData */
 # npc_kerlonian
 ####*/
 
-enum
+enum eKerlonian
 {
     SAY_KER_START               = -1000434,
 
@@ -105,20 +105,9 @@ struct CW_DLL_DECL npc_kerlonianAI : public FollowerAI
     {
         SetFollowPaused(true);
 
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(EMOTE_KER_SLEEP_1, m_creature); break;
-            case 1: DoScriptText(EMOTE_KER_SLEEP_2, m_creature); break;
-            case 2: DoScriptText(EMOTE_KER_SLEEP_3, m_creature); break;
-        }
+        DoScriptText(RAND(EMOTE_KER_SLEEP_1,EMOTE_KER_SLEEP_2,EMOTE_KER_SLEEP_3), m_creature);
 
-        switch(rand()%4)
-        {
-            case 0: DoScriptText(SAY_KER_SLEEP_1, m_creature); break;
-            case 1: DoScriptText(SAY_KER_SLEEP_2, m_creature); break;
-            case 2: DoScriptText(SAY_KER_SLEEP_3, m_creature); break;
-            case 3: DoScriptText(SAY_KER_SLEEP_4, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KER_SLEEP_1,SAY_KER_SLEEP_2,SAY_KER_SLEEP_3,SAY_KER_SLEEP_4), m_creature);
 
         m_creature->SetStandState(UNIT_STAND_STATE_SLEEP);
         m_creature->CastSpell(m_creature, SPELL_SLEEP_VISUAL, false);
@@ -183,7 +172,7 @@ bool QuestAccept_npc_kerlonian(Player* pPlayer, Creature* pCreature, const Quest
 # npc_prospector_remtravel
 ####*/
 
-enum
+enum eRemtravel
 {
     SAY_REM_START               = -1000415, // signed for 4966
     SAY_REM_AGGRO               = -1000427, // signed for 9999
@@ -310,7 +299,7 @@ bool QuestAccept_npc_prospector_remtravel(Player* pPlayer, Creature* pCreature, 
 # npc_threshwackonator
 ####*/
 
-enum
+enum eThreshwackonator
 {
     EMOTE_START             = -1000413, //signed for 4966
     SAY_AT_CLOSE            = -1000414, //signed for 4966

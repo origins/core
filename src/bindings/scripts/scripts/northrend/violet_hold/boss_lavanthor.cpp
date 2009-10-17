@@ -46,7 +46,7 @@ void AddSC_boss_lavanthor()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_lavanthor";
+    newscript->Name = "boss_lavanthor";
     newscript->GetAI = &GetAI_boss_lavanthor;
     newscript->RegisterSelf();
 }

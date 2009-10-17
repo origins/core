@@ -65,22 +65,12 @@ struct CW_DLL_DECL boss_pandemoniusAI : public ScriptedAI
 
     void KilledUnit(Unit* victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_KILL_1, m_creature); break;
-            case 1: DoScriptText(SAY_KILL_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KILL_1,SAY_KILL_2), m_creature);
     }
 
     void EnterCombat(Unit *who)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_AGGRO_1, m_creature); break;
-            case 1: DoScriptText(SAY_AGGRO_2, m_creature); break;
-            case 2: DoScriptText(SAY_AGGRO_3, m_creature); break;
-        }
-
+        DoScriptText(RAND(SAY_AGGRO_1,SAY_AGGRO_2,SAY_AGGRO_3), m_creature);
     }
 
     void UpdateAI(const uint32 diff)
@@ -92,7 +82,7 @@ struct CW_DLL_DECL boss_pandemoniusAI : public ScriptedAI
         {
             if (Unit* target = SelectUnit(SELECT_TARGET_RANDOM, 0))
             {
-                DoCast(target,HeroicMode ? H_SPELL_VOID_BLAST : SPELL_VOID_BLAST);
+                DoCast(target,HEROIC(SPELL_VOID_BLAST, H_SPELL_VOID_BLAST));
                 VoidBlast_Timer = 500;
                 ++VoidBlast_Counter;
             }
@@ -113,7 +103,7 @@ struct CW_DLL_DECL boss_pandemoniusAI : public ScriptedAI
 
                 DoScriptText(EMOTE_DARK_SHELL, m_creature);
 
-                DoCast(m_creature,HeroicMode ? H_SPELL_DARK_SHELL : SPELL_DARK_SHELL);
+                DoCast(m_creature,HEROIC(SPELL_DARK_SHELL, H_SPELL_DARK_SHELL));
                 DarkShell_Timer = 20000;
             }else DarkShell_Timer -= diff;
         }

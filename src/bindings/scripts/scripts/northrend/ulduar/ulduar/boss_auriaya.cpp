@@ -52,6 +52,9 @@ struct CW_DLL_DECL boss_auriaya_AI : public ScriptedAI
     void JustDied(Unit *victim)
     {
         DoScriptText(SAY_SLAY_1, m_creature);
+
+        if (m_pInstance)
+            m_pInstance->SetData(TYPE_AURIAYA, DONE);
     }
 
     void MoveInLineOfSight(Unit* who) {}

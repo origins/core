@@ -53,7 +53,22 @@ struct CW_DLL_DECL boss_zuramatAI : public ScriptedAI
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
+        
+        if (pInstance)
+        {
+            if (pInstance->GetData(DATA_WAVE_COUNT) == 6)
+            {
+                pInstance->SetData(DATA_1ST_BOSS_EVENT, DONE);
+                pInstance->SetData(DATA_WAVE_COUNT, 7);
+            }
+            else if (pInstance->GetData(DATA_WAVE_COUNT) == 12)
+            {
+                pInstance->SetData(DATA_2ND_BOSS_EVENT, DONE);
+                pInstance->SetData(DATA_WAVE_COUNT, 13);
+            }
+        }
     }
+    
     void KilledUnit(Unit *victim)
     {
         if (victim == m_creature)
@@ -73,7 +88,7 @@ void AddSC_boss_zuramat()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_zuramat";
+    newscript->Name = "boss_zuramat";
     newscript->GetAI = &GetAI_boss_zuramat;
     newscript->RegisterSelf();
 }

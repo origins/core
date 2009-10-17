@@ -4,68 +4,68 @@
 
 enum Texts
 {
-    SAY_KILL_1                          = -1603012,
-    SAY_KILL_2                          = -1603013,
-    SAY_KILL_3                          = -1603014,
-    SAY_LOW_HEALTH                      = -1603015,
-    SAY_DEATH                           = -1603016,
-    SAY_PLAYER_DEATH_1                  = -1603017,
-    SAY_PLAYER_DEATH_2                  = -1603018,
-    SAY_PLAYER_DEATH_3                  = -1603019,
-    SAY_ESCORT_START                    = -1603020,
+    SAY_KILL_1                          = -1603016,
+    SAY_KILL_2                          = -1603017,
+    SAY_KILL_3                          = -1603018,
+    SAY_LOW_HEALTH                      = -1603019,
+    SAY_DEATH                           = -1603020,
+    SAY_PLAYER_DEATH_1                  = -1603021,
+    SAY_PLAYER_DEATH_2                  = -1603022,
+    SAY_PLAYER_DEATH_3                  = -1603023,
+    SAY_ESCORT_START                    = -1603024,
 
-    SAY_SPAWN_DWARF                     = -1603021,
-    SAY_SPAWN_TROGG                     = -1603022,
-    SAY_SPAWN_OOZE                      = -1603023,
-    SAY_SPAWN_EARTHEN                   = -1603024,
+    SAY_SPAWN_DWARF                     = -1603025,
+    SAY_SPAWN_TROGG                     = -1603026,
+    SAY_SPAWN_OOZE                      = -1603027,
+    SAY_SPAWN_EARTHEN                   = -1603028,
 
-    SAY_EVENT_INTRO_1                   = -1603025,
-    SAY_EVENT_INTRO_2                   = -1603026,
-    SAY_EVENT_INTRO_3_ABED              = -1603027,
+    SAY_EVENT_INTRO_1                   = -1603029,
+    SAY_EVENT_INTRO_2                   = -1603030,
+    SAY_EVENT_INTRO_3_ABED              = -1603031,
 
-    SAY_EVENT_A_1                       = -1603028,
-    SAY_EVENT_A_2_KADD                  = -1603029,
-    SAY_EVENT_A_3                       = -1603030,
+    SAY_EVENT_A_1                       = -1603032,
+    SAY_EVENT_A_2_KADD                  = -1603033,
+    SAY_EVENT_A_3                       = -1603034,
 
-    SAY_EVENT_B_1                       = -1603031,
-    SAY_EVENT_B_2_MARN                  = -1603032,
-    SAY_EVENT_B_3                       = -1603033,
+    SAY_EVENT_B_1                       = -1603035,
+    SAY_EVENT_B_2_MARN                  = -1603036,
+    SAY_EVENT_B_3                       = -1603037,
 
-    SAY_EVENT_C_1                       = -1603034,
-    SAY_EVENT_C_2_ABED                  = -1603035,
-    SAY_EVENT_C_3                       = -1603036,
+    SAY_EVENT_C_1                       = -1603038,
+    SAY_EVENT_C_2_ABED                  = -1603039,
+    SAY_EVENT_C_3                       = -1603040,
 
-    SAY_EVENT_D_1                       = -1603037,
-    SAY_EVENT_D_2_ABED                  = -1603038,
-    SAY_EVENT_D_3                       = -1603039,
-    SAY_EVENT_D_4_ABED                  = -1603040,
+    SAY_EVENT_D_1                       = -1603041,
+    SAY_EVENT_D_2_ABED                  = -1603042,
+    SAY_EVENT_D_3                       = -1603043,
+    SAY_EVENT_D_4_ABED                  = -1603044,
 
-    SAY_EVENT_END_01                    = -1603041,
-    SAY_EVENT_END_02                    = -1603042,
-    SAY_EVENT_END_03_ABED               = -1603043,
-    SAY_EVENT_END_04                    = -1603044,
-    SAY_EVENT_END_05_ABED               = -1603045,
-    SAY_EVENT_END_06                    = -1603046,
-    SAY_EVENT_END_07_ABED               = -1603047,
-    SAY_EVENT_END_08                    = -1603048,
-    SAY_EVENT_END_09_KADD               = -1603049,
-    SAY_EVENT_END_10                    = -1603050,
-    SAY_EVENT_END_11_KADD               = -1603051,
-    SAY_EVENT_END_12                    = -1603052,
-    SAY_EVENT_END_13_KADD               = -1603053,
-    SAY_EVENT_END_14                    = -1603054,
-    SAY_EVENT_END_15_MARN               = -1603055,
-    SAY_EVENT_END_16                    = -1603056,
-    SAY_EVENT_END_17_MARN               = -1603057,
-    SAY_EVENT_END_18                    = -1603058,
-    SAY_EVENT_END_19_MARN               = -1603059,
-    SAY_EVENT_END_20                    = -1603060,
-    SAY_EVENT_END_21_ABED               = -1603061,
+    SAY_EVENT_END_01                    = -1603045,
+    SAY_EVENT_END_02                    = -1603046,
+    SAY_EVENT_END_03_ABED               = -1603047,
+    SAY_EVENT_END_04                    = -1603048,
+    SAY_EVENT_END_05_ABED               = -1603049,
+    SAY_EVENT_END_06                    = -1603050,
+    SAY_EVENT_END_07_ABED               = -1603051,
+    SAY_EVENT_END_08                    = -1603052,
+    SAY_EVENT_END_09_KADD               = -1603053,
+    SAY_EVENT_END_10                    = -1603054,
+    SAY_EVENT_END_11_KADD               = -1603055,
+    SAY_EVENT_END_12                    = -1603056,
+    SAY_EVENT_END_13_KADD               = -1603057,
+    SAY_EVENT_END_14                    = -1603058,
+    SAY_EVENT_END_15_MARN               = -1603059,
+    SAY_EVENT_END_16                    = -1603060,
+    SAY_EVENT_END_17_MARN               = -1603061,
+    SAY_EVENT_END_18                    = -1603062,
+    SAY_EVENT_END_19_MARN               = -1603063,
+    SAY_EVENT_END_20                    = -1603064,
+    SAY_EVENT_END_21_ABED               = -1603065,
 
-    SAY_VICTORY_SJONNIR_1               = -1603062,
-    SAY_VICTORY_SJONNIR_2               = -1603063,
+    SAY_VICTORY_SJONNIR_1               = -1603066,
+    SAY_VICTORY_SJONNIR_2               = -1603067,
 
-    SAY_ENTRANCE_MEET                   = -1603064,
+    SAY_ENTRANCE_MEET                   = -1603068,
 
     TEXT_ID_START                       = 13100,
     TEXT_ID_PROGRESS                    = 13101
@@ -181,13 +181,11 @@ struct CW_DLL_DECL mob_tribuna_controllerAI : public ScriptedAI
         {
             if (uiKaddrakEncounterTimer < diff)
             {
-                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
-                while (pTarget && pTarget->GetTypeId() != TYPEID_PLAYER)
-                    pTarget = SelectUnit(SELECT_TARGET_RANDOM,0);
-                if (pTarget && !lKaddrakGUIDList.empty())
-                    for(std::list<Creature*>::iterator itr = lKaddrakGUIDList.begin(); itr != lKaddrakGUIDList.end(); ++itr)
-                        if ((*itr)->isAlive())
-                            (*itr)->CastSpell(pTarget, HeroicMode ? H_SPELL_GLARE_OF_THE_TRIBUNAL : SPELL_GLARE_OF_THE_TRIBUNAL, true);
+                if (Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
+                    if (!lKaddrakGUIDList.empty())
+                        for (std::list<Creature*>::iterator itr = lKaddrakGUIDList.begin(); itr != lKaddrakGUIDList.end(); ++itr)
+                            if ((*itr)->isAlive())
+                                (*itr)->CastSpell(pTarget, HEROIC(SPELL_GLARE_OF_THE_TRIBUNAL, H_SPELL_GLARE_OF_THE_TRIBUNAL), true);
                 uiKaddrakEncounterTimer = 1500;
             } else uiKaddrakEncounterTimer -= diff;
         }
@@ -195,16 +193,13 @@ struct CW_DLL_DECL mob_tribuna_controllerAI : public ScriptedAI
         {
             if (uiMarnakEncounterTimer < diff)
             {
-                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
-                while (pTarget && pTarget->GetTypeId() != TYPEID_PLAYER)
-                    pTarget = SelectUnit(SELECT_TARGET_RANDOM,0);
-                if (pTarget)
+                if (Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                 {
                     if (Creature* pSummon = m_creature->SummonCreature(CREATURE_DARK_MATTER_TARGET, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN, 1000))
                     {
                         pSummon->SetDisplayId(11686);
                         pSummon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                        pSummon->CastSpell(pTarget, HeroicMode ? H_SPELL_DARK_MATTER : SPELL_DARK_MATTER, true);
+                        pSummon->CastSpell(pTarget, HEROIC(SPELL_DARK_MATTER, H_SPELL_DARK_MATTER), true);
                     }
                 }
                 uiMarnakEncounterTimer = 30000 + rand()%1000;
@@ -214,16 +209,13 @@ struct CW_DLL_DECL mob_tribuna_controllerAI : public ScriptedAI
         {
             if (uiAbedneumEncounterTimer < diff)
             {
-                Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
-                while (pTarget && pTarget->GetTypeId() != TYPEID_PLAYER)
-                    pTarget = SelectUnit(SELECT_TARGET_RANDOM,0);
-                if (pTarget)
+                if (Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                 {
                     if (Creature* pSummon = m_creature->SummonCreature(CREATURE_SEARING_GAZE_TARGET, pTarget->GetPositionX(), pTarget->GetPositionY(), pTarget->GetPositionZ(), 0.0f, TEMPSUMMON_TIMED_DESPAWN, 1000))
                     {
                         pSummon->SetDisplayId(11686);
                         pSummon->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
-                        pSummon->CastSpell(pTarget, HeroicMode ? H_SPELL_SEARING_GAZE : SPELL_SEARING_GAZE, true);
+                        pSummon->CastSpell(pTarget, HEROIC(SPELL_SEARING_GAZE, H_SPELL_SEARING_GAZE), true);
                     }
                 }
                 uiAbedneumEncounterTimer = 30000 + rand()%1000;

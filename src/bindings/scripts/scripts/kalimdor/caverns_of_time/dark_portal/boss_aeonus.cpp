@@ -24,7 +24,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_dark_portal.h"
 
-enum
+enum eEnums
 {
     SAY_ENTER           = -1269012,
     SAY_AGGRO           = -1269013,
@@ -96,11 +96,7 @@ struct CW_DLL_DECL boss_aeonusAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void UpdateAI(const uint32 diff)
@@ -112,7 +108,7 @@ struct CW_DLL_DECL boss_aeonusAI : public ScriptedAI
         //Sand Breath
         if (SandBreath_Timer < diff)
         {
-            DoCast(m_creature->getVictim(), HeroicMode ? H_SPELL_SAND_BREATH : SPELL_SAND_BREATH);
+            DoCast(m_creature->getVictim(), HEROIC(SPELL_SAND_BREATH, H_SPELL_SAND_BREATH));
             SandBreath_Timer = 15000+rand()%10000;
         }else SandBreath_Timer -= diff;
 

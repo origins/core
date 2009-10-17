@@ -92,7 +92,7 @@ bool GossipSelect_npc_astor_hadren(Player* pPlayer, Creature* pCreature, uint32 
 ## npc_deathstalker_erland
 ######*/
 
-enum
+enum eErland
 {
     SAY_QUESTACCEPT     = -1000335,
     SAY_START           = -1000336,
@@ -154,11 +154,7 @@ struct CW_DLL_DECL npc_deathstalker_erlandAI : public npc_escortAI
 
     void EnterCombat(Unit* who)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_AGGRO_1, m_creature, who);break;
-        case 1: DoScriptText(SAY_AGGRO_2, m_creature, who);break;
-        }
+        DoScriptText(RAND(SAY_AGGRO_1,SAY_AGGRO_2), m_creature, who);
     }
 };
 

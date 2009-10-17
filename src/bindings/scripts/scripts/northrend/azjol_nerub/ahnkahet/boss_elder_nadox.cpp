@@ -100,12 +100,7 @@ struct CW_DLL_DECL boss_elder_nadoxAI : public ScriptedAI
     {
         if (victim == m_creature)
             return;
-        switch(rand()%3)
-        {
-        case 0: DoScriptText(SAY_SLAY_1,m_creature); break;
-        case 1: DoScriptText(SAY_SLAY_2,m_creature); break;
-        case 2: DoScriptText(SAY_SLAY_3,m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2,SAY_SLAY_3), m_creature);
     }
 
     void JustDied(Unit* killer)
@@ -138,7 +133,7 @@ struct CW_DLL_DECL boss_elder_nadoxAI : public ScriptedAI
 
         if (plague_Timer < diff)
         {
-            DoCast(m_creature->getVictim(),HeroicMode ? H_SPELL_BROOD_PLAGUE : SPELL_BROOD_PLAGUE);
+            DoCast(m_creature->getVictim(),HEROIC(SPELL_BROOD_PLAGUE, H_SPELL_BROOD_PLAGUE));
             plague_Timer = 15000;
         }else plague_Timer -= diff;
 
@@ -160,11 +155,7 @@ struct CW_DLL_DECL boss_elder_nadoxAI : public ScriptedAI
             DoCast(m_creature,SPELL_SUMMON_SWARMERS);
             if (rand()%3 == 0)
             {
-                switch(rand()%2)
-                {
-                case 0: DoScriptText(SAY_EGG_SAC_1,m_creature); break;
-                case 1: DoScriptText(SAY_EGG_SAC_2,m_creature); break;
-                }
+                DoScriptText(RAND(SAY_EGG_SAC_1,SAY_EGG_SAC_2), m_creature);
             }
             swarmer_spawn_Timer = 10000;
         }else swarmer_spawn_Timer -= diff;

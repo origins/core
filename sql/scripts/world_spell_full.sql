@@ -693,11 +693,11 @@ INSERT INTO `spell_proc_event` (`entry`, `SchoolMask`, `SpellFamilyName`, `Spell
 ( 17364, 0x08,   0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Stormstrike 
 ( 17495, 0x00,   0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00000040,   0,   0,   0), -- Crest of Retribution 
 ( 17619, 0x00,  13, 0x00000000, 0x00000000, 0x00000000, 0x00008000, 0x00000000,   0,   0,   0), -- Alchemist's Stone 
-( 17793, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000002,   0,   0,   0), -- Improved Shadow Bolt (Rank 1)
-( 17796, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000002,   0,   0,   0), -- Improved Shadow Bolt (Rank 2)
-( 17801, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000002,   0,   0,   0), -- Improved Shadow Bolt (Rank 3)
-( 17802, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000002,   0,   0,   0), -- Improved Shadow Bolt (Rank 4)
-( 17803, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000002,   0,   0,   0), -- Improved Shadow Bolt (Rank 5)
+( 17793, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Improved Shadow Bolt (Rank 1)
+( 17796, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Improved Shadow Bolt (Rank 2)
+( 17801, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Improved Shadow Bolt (Rank 3)
+( 17802, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Improved Shadow Bolt (Rank 4)
+( 17803, 0x00,   5, 0x00000001, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Improved Shadow Bolt (Rank 5)
 ( 18094, 0x00,   5, 0x0000000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Nightfall (Rank 1)
 ( 18095, 0x00,   5, 0x0000000A, 0x00000000, 0x00000000, 0x00000000, 0x00000000,   0,   0,   0), -- Nightfall (Rank 2)
 ( 18820, 0x00,   0, 0x00000000, 0x00000000, 0x00000000, 0x00000000, 0x00010000,   0,   0,   0), -- Insight 
@@ -1638,7 +1638,10 @@ INSERT INTO `spell_bonus_data` (`entry`, `direct_bonus`, `dot_bonus`, `ap_bonus`
 (42231, 0.12898, -1, -1, -1, 'Druid - Hurricane Triggered'),
 (5570, -1, 0.2, -1, -1, 'Druid - Insect Swarm'),
 (33745, -1, -1, -1, 0.01, 'Druid - Lacerate($AP*0.05 / number of ticks)'),
-(33763, 0.6453, 0.09518, -1, -1, 'Druid - Lifebloom'),
+(33778, 0.516, 0, 0, 0, 'Druid - Lifebloom final heal'),
+(33763, 0, 0.09518, 0, 0, 'Druid - Lifebloom HoT(rank 1)'),
+(48450, 0, 0.09518, 0, 0, 'Druid - Lifebloom HoT(rank 2)'),
+(48451, 0, 0.09518, 0, 0, 'Druid - Lifebloom HoT(rank 3)'),
 (48628, -1, -1, -1, 0.15, 'Druid - Lock Jaw'),
 (8921, 0.1515, 0.13, -1, -1, 'Druid - Moonfire'),
 (50464, 0.67305, -1, -1, -1, 'Druid - Nourish'),

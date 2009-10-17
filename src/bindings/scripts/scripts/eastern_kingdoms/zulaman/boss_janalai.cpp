@@ -25,7 +25,7 @@ EndScriptData */
 #include "def_zulaman.h"
 #include "GridNotifiers.h"
 
-enum
+enum eEnums
 {
     SAY_AGGRO                   = -1568000,
     SAY_FIRE_BOMBS              = -1568001,
@@ -165,11 +165,7 @@ struct CW_DLL_DECL boss_janalaiAI : public ScriptedAI
 
     void KilledUnit(Unit* victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_SLAY_1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2), m_creature);
     }
 
     void EnterCombat(Unit *who)

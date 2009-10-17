@@ -27,17 +27,17 @@ struct CW_DLL_DECL instance_gundrak : public ScriptedInstance
     uint64 uiGalDarah;
     uint64 uiEckTheFerocious;
     
-    uint32 uiSladRanAltar;
-    uint32 uiMoorabiAltar;
-    uint32 uiDrakkariColossusAltar;
-    uint32 uiSladRanStatue;
-    uint32 uiMoorabiStatue;
-    uint32 uiDrakkariColossusStatue;
-    uint32 uiEckTheFerociousDoor;
-    uint32 uiGalDarahDoor1;
-    uint32 uiGalDarahDoor2;
-    uint32 uiBridge;
-    uint32 uiCollision;
+    uint64 uiSladRanAltar;
+    uint64 uiMoorabiAltar;
+    uint64 uiDrakkariColossusAltar;
+    uint64 uiSladRanStatue;
+    uint64 uiMoorabiStatue;
+    uint64 uiDrakkariColossusStatue;
+    uint64 uiEckTheFerociousDoor;
+    uint64 uiGalDarahDoor1;
+    uint64 uiGalDarahDoor2;
+    uint64 uiBridge;
+    uint64 uiCollision;
     
     uint32 m_auiEncounter[MAX_ENCOUNTER];
     
@@ -134,9 +134,11 @@ struct CW_DLL_DECL instance_gundrak : public ScriptedInstance
                 break;
             case 193188:
                 uiBridge = pGo->GetGUID();
+                HandleGameObject(NULL,true,pGo);
                 break;
             case 192633:
                 uiCollision = pGo->GetGUID();
+                HandleGameObject(NULL,true,pGo);
                 break;
         }
     }
@@ -212,6 +214,9 @@ struct CW_DLL_DECL instance_gundrak : public ScriptedInstance
             case DATA_SLAD_RAN_ALTAR:             return uiSladRanAltar;
             case DATA_MOORABI_ALTAR:              return uiMoorabiAltar;
             case DATA_DRAKKARI_COLOSSUS_ALTAR:    return uiDrakkariColossusAltar;
+            case DATA_SLAD_RAN_STATUE:            return uiSladRanStatue;
+            case DATA_MOORABI_STATUE:             return uiMoorabiStatue;
+            case DATA_DRAKKARI_COLOSSUS_STATUE:   return uiDrakkariColossusStatue;
         }
 
         return 0;
@@ -271,10 +276,10 @@ struct CW_DLL_DECL instance_gundrak : public ScriptedInstance
         
         if (pSladRanAltar && pSladRanAltar->GetGoState() == GO_STATE_ACTIVE &&
             pMoorabiAltar && pMoorabiAltar->GetGoState() == GO_STATE_ACTIVE &&
-            pDrakkariColossusAltar && pDrakkariColossusAltar->GetGoState())
+            pDrakkariColossusAltar && pDrakkariColossusAltar->GetGoState() == GO_STATE_ACTIVE)
         {
-            HandleGameObject(uiBridge,true);
-            HandleGameObject(uiCollision,true);
+            HandleGameObject(uiBridge,false);
+            HandleGameObject(uiCollision,false);
         }
     }
 };
@@ -291,9 +296,9 @@ bool GOHello_altar(Player *pPlayer, GameObject *pGO)
     {
         switch(pGO->GetEntry())
         {
-            case 192518: uiStatue = pInstance->GetData64(DATA_SLAD_RAN_ALTAR); break;
-            case 192519: uiStatue = pInstance->GetData64(DATA_MOORABI_ALTAR); break;
-            case 192520: uiStatue = pInstance->GetData64(DATA_DRAKKARI_COLOSSUS_ALTAR); break;
+            case 192518: uiStatue = pInstance->GetData64(DATA_SLAD_RAN_STATUE); break;
+            case 192519: uiStatue = pInstance->GetData64(DATA_MOORABI_STATUE); break;
+            case 192520: uiStatue = pInstance->GetData64(DATA_DRAKKARI_COLOSSUS_STATUE); break;
         }
         pInstance->HandleGameObject(uiStatue,true);
         ((instance_gundrak*)pInstance)->CheckAltars();

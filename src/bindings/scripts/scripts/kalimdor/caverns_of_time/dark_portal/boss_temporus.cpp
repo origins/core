@@ -24,7 +24,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_dark_portal.h"
 
-enum
+enum eEnums
 {
     SAY_ENTER               = -1269000,
     SAY_AGGRO               = -1269001,
@@ -71,11 +71,7 @@ struct CW_DLL_DECL boss_temporusAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -125,7 +121,7 @@ struct CW_DLL_DECL boss_temporusAI : public ScriptedAI
         //Wing ruffet
         if (WingBuffet_Timer < diff)
         {
-            DoCast(m_creature,HeroicMode ? H_SPELL_WING_BUFFET : SPELL_WING_BUFFET);
+            DoCast(m_creature,HEROIC(SPELL_WING_BUFFET, H_SPELL_WING_BUFFET));
             WingBuffet_Timer = 20000+rand()%10000;
         }else WingBuffet_Timer -= diff;
 
