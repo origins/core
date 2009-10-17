@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -24,9 +24,15 @@
 
 #define SAY_AGGRO                   -1000000
 #define SAY_SLAY                    -1000001
-struct CW_DLL_DECL boss_xt002_AI : public ScriptedAI
+
+struct CW_DLL_DECL boss_xt002_AI : public BossAI
 {
-    boss_xt002_AI(Creature *c) : ScriptedAI(c) {}
+    boss_xt002_AI(Creature *pCreature) : BossAI(pCreature, TYPE_XT002)
+    {
+        m_pInstance = pCreature->GetInstanceData();
+    }
+
+    ScriptedInstance* m_pInstance;
 
     uint32 SEARING_LIGHT_Timer;
     uint32 SONIC_BOOM_Timer;

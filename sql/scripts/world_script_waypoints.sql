@@ -1,4 +1,4 @@
--- Up to TC2 5408
+-- Up to CWCore 230
 
 -- This file contains all waypoints used by escortAI scripts
 /*
@@ -1689,4 +1689,4 @@ REPLACE INTO `creature_addon` ( `guid` ) SELECT `id_old` FROM `waypoint_data`;
 
 UPDATE `creature_addon`,`waypoint_data` SET `creature_addon`.`path_id` = `waypoint_data`.`id` WHERE `creature_addon`.`guid`=`waypoint_data`.`id_old`;
 
-ALTER TABLE `waypoint_data` DROP COLUMN `id_old`;
+ALTER TABLE `waypoint_data` DROP COLUMN `id_old`;   

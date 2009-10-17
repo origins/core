@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,26 +19,73 @@
 #include "precompiled.h"
 #include "def_ulduar.h"
 
+enum eGameObjects
+{
+    GO_Kologarn_CHEST_HERO  = 195047,
+    GO_Kologarn_CHEST       = 195046,
+    GO_Thorim_CHEST_HERO    = 194315,
+    GO_Thorim_CHEST         = 194314,
+    GO_Hodir_CHEST_HERO     = 194308,
+    GO_Hodir_CHEST          = 194307,
+    GO_Freya_CHEST_HERO     = 194325,
+    GO_Freya_CHEST          = 194324,
+};
+
 struct CW_DLL_DECL instance_ulduar : public ScriptedInstance
 {
-    instance_ulduar(Map* pMap) : ScriptedInstance(pMap) {Initialize();};
+    instance_ulduar(Map* pMap) : ScriptedInstance(pMap), KologarnChest(NULL), ThorimChest(NULL), HodirChest(NULL), FreyaChest(NULL) { Initialize(); };
 
     uint32 m_auiEncounter[MAX_ENCOUNTER];
+    std::string m_strInstData;
 
-    uint64 boss_assembly[3];
+    uint64 m_uiLeviathanGUID;
+    uint64 m_uiIgnisGUID;
+    uint64 m_uiRazorscaleGUID;
+    uint64 m_uiXT002GUID;
+    uint64 m_auiAssemblyGUIDs[3];
+    uint64 m_uiKologarnGUID;
+    uint64 m_uiAuriayaGUID;
+    uint64 m_uiMimironGUID;
+    uint64 m_uiHodirGUID;
+    uint64 m_uiThorimGUID;
+    uint64 m_uiFreyaGUID;
+    uint64 m_uiVezaxGUID;
+    uint64 m_uiYoggSaronGUID;
+    uint64 m_uiAlgalonGUID;
+
+    GameObject* KologarnChest, *ThorimChest, *HodirChest, *FreyaChest;
 
     void Initialize()
     {
-        memset(&m_auiEncounter, 0, sizeof(m_auiEncounter));
+        m_uiLeviathanGUID       = 0;
+        m_uiIgnisGUID           = 0;
+        m_uiRazorscaleGUID      = 0;
+        m_uiXT002GUID           = 0;
+        m_uiKologarnGUID        = 0;
+        m_uiAuriayaGUID         = 0;
+        m_uiMimironGUID         = 0;
+        m_uiHodirGUID           = 0;
+        m_uiThorimGUID          = 0;
+        m_uiFreyaGUID           = 0;
+        m_uiVezaxGUID           = 0;
+        m_uiYoggSaronGUID       = 0;
+        m_uiAlgalonGUID         = 0;
+        KologarnChest           = 0;
+        ThorimChest             = 0;
+        HodirChest              = 0;
+        FreyaChest              = 0;
 
-        for(uint8 i = 0; i < 3; ++i)
-            boss_assembly[i] = 0;
+        memset(&m_auiEncounter, 0, sizeof(m_auiEncounter));
+        memset(&m_auiAssemblyGUIDs, 0, sizeof(m_auiAssemblyGUIDs));
     }
 
     bool IsEncounterInProgress() const
     {
         for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
-            if (m_auiEncounter[i] == IN_PROGRESS) return true;
+        {
+            if (m_auiEncounter[i] == IN_PROGRESS)
+                return true;
+        }
 
         return false;
     }

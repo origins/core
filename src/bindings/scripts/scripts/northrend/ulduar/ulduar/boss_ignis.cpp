@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,9 @@
 #define SAY_AGGRO                   -10000002
 #define SAY_SLAY                    -1000003
 
-struct CW_DLL_DECL boss_ignis_AI : public ScriptedAI
+struct CW_DLL_DECL boss_ignis_AI : public BossAI
 {
-    boss_ignis_AI(Creature *c) : ScriptedAI(c) {}
+    boss_ignis_AI(Creature *pCreature) : BossAI(pCreature, TYPE_IGNIS) {}
 
     uint32 FLAME_JETS_Timer;
     uint32 SCORCH_Timer;

@@ -1,4 +1,4 @@
-/* Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+/* Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 2 of the License, or
@@ -352,12 +352,12 @@ void AddSC_boss_gothik()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_gothik";
+    newscript->Name = "boss_gothik";
     newscript->GetAI = &GetAI_boss_gothik;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_gothik_minion";
+    newscript->Name = "mob_gothik_minion";
     newscript->GetAI = &GetAI_mob_gothik_minion;
     newscript->RegisterSelf();
 }

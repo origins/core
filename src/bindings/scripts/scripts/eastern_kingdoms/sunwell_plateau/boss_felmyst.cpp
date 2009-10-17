@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 CW <http://www.CWcore.org/>
+/* Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation; either version 2 of the License, or
@@ -603,17 +603,17 @@ void AddSC_boss_felmyst()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_felmyst";
+    newscript->Name = "boss_felmyst";
     newscript->GetAI = &GetAI_boss_felmyst;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_felmyst_vapor";
+    newscript->Name = "mob_felmyst_vapor";
     newscript->GetAI = &GetAI_mob_felmyst_vapor;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_felmyst_trail";
+    newscript->Name = "mob_felmyst_trail";
     newscript->GetAI = &GetAI_mob_felmyst_trail;
     newscript->RegisterSelf();
 }

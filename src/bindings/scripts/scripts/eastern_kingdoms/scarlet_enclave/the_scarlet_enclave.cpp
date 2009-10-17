@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -105,7 +105,7 @@ void AddSC_the_scarlet_enclave()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_valkyr_battle_maiden";
+    newscript->Name = "npc_valkyr_battle_maiden";
     newscript->GetAI = &GetAI_npc_valkyr_battle_maiden;
     newscript->RegisterSelf();
 

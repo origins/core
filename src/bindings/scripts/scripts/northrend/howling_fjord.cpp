@@ -1,4 +1,4 @@
-/* Copyright (C) 2008-2009 CW <http://www.CWcore.org/>
+/* Copyright (C) 2008-2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -149,7 +149,7 @@ CreatureAI* GetAI_npc_apothecary_hanes(Creature* pCreature)
 ## npc_plaguehound_tracker
 ######*/
 
-enum
+enum ePlaguehound
 {
     QUEST_SNIFF_OUT_ENEMY        = 11253
 };
@@ -211,7 +211,7 @@ CreatureAI* GetAI_npc_plaguehound_tracker(Creature* pCreature)
 #define GOSSIP_RAZAEL_REPORT "High Executor Anselm wants a report on the situation."
 #define GOSSIP_LYANA_REPORT "High Executor Anselm requests your report."
 
-enum
+enum eRazael
 {
     QUEST_REPORTS_FROM_THE_FIELD = 11221,
     NPC_RAZAEL = 23998,
@@ -280,7 +280,7 @@ void AddSC_howling_fjord()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_razael_and_lyana";
+    newscript->Name = "npc_razael_and_lyana";
     newscript->pGossipHello =  &GossipHello_npc_razael_and_lyana;
     newscript->pGossipSelect = &GossipSelect_npc_razael_and_lyana;
     newscript->RegisterSelf();

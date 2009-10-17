@@ -63,6 +63,8 @@ static Locations PipeLocations[] =
   {1297.7,  595.6,  199.9} //right
 };
 
+static Locations CenterPoint = {1295.21, 667.157, 189.691};
+
 struct CW_DLL_DECL boss_sjonnirAI : public ScriptedAI
 {
     boss_sjonnirAI(Creature *c) : ScriptedAI(c)
@@ -289,15 +291,15 @@ void AddSC_boss_sjonnir()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_sjonnir";
+    newscript->Name = "boss_sjonnir";
     newscript->GetAI = &GetAI_boss_sjonnir;
     newscript->RegisterSelf();
-    
+
     newscript = new Script;
-    newscript->Name="mob_malformed_ooze";
+    newscript->Name = "mob_malformed_ooze";
     newscript->GetAI = &GetAI_mob_malformed_ooze;
     newscript->RegisterSelf();
-    
+
     newscript = new Script;
     newscript->Name = "mob_iron_sludge";
     newscript->GetAI = &GetAI_mob_iron_sludge;

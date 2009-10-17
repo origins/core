@@ -140,6 +140,29 @@ struct CW_DLL_DECL mob_demon_chainAI : public ScriptedAI
     }
 };
 
+struct CW_DLL_DECL mob_fiendish_portalAI : public PassiveAI
+{
+    mob_fiendish_portalAI(Creature *c) : PassiveAI(c),summons(m_creature){}
+
+    SummonList summons;
+
+    void Reset()
+    {
+        summons.DespawnAll();
+    }
+
+    void JustSummoned(Creature* summon)
+    {
+        summons.Summon(summon);
+        DoZoneInCombat(summon);
+    }
+
+    void DespawnAllImp()
+    {
+        summons.DespawnAll();
+    }
+};
+
 struct CW_DLL_DECL boss_terestianAI : public ScriptedAI
 {
     boss_terestianAI(Creature *c) : ScriptedAI(c)
@@ -368,17 +391,22 @@ void AddSC_boss_terestian_illhoof()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_terestian_illhoof";
+    newscript->Name = "boss_terestian_illhoof";
     newscript->GetAI = &GetAI_boss_terestian_illhoof;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_fiendish_imp";
+    newscript->Name = "mob_fiendish_imp";
     newscript->GetAI = &GetAI_mob_fiendish_imp;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_kilrek";
+    newscript->Name= "mob_fiendish_portal";
+    newscript->GetAI = &GetAI_mob_fiendish_portal;
+    newscript->RegisterSelf();
+
+    newscript = new Script;
+    newscript->Name = "mob_kilrek";
     newscript->GetAI = &GetAI_mob_kilrek;
     newscript->RegisterSelf();
 

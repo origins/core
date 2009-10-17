@@ -1,4 +1,4 @@
-/* Copyright (C) 2009 CW <http://www.CWcore.org/>
+/* Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
 * This program is free software; you can redistribute it and/or modify
 * it under the terms of the GNU General Public License as published by
 * the Free Software Foundation; either version 2 of the License, or
@@ -736,17 +736,17 @@ void AddSC_boss_eredar_twins()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_sacrolash";
+    newscript->Name = "boss_sacrolash";
     newscript->GetAI = &GetAI_boss_sacrolash;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_alythess";
+    newscript->Name = "boss_alythess";
     newscript->GetAI = &GetAI_boss_alythess;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_shadow_image";
+    newscript->Name = "mob_shadow_image";
     newscript->GetAI = &GetAI_mob_shadow_image;
     newscript->RegisterSelf();
 }

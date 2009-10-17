@@ -32,7 +32,7 @@ bool GossipSelect_npc_sinclari(Player* pPlayer, Creature* pCreature, uint32 uiSe
     return true;
 }
 
-struct TRINITY_DLL_DECL npc_teleportation_portalAI : public ScriptedAI
+struct CW_DLL_DECL npc_teleportation_portalAI : public ScriptedAI
 {
     npc_teleportation_portalAI(Creature *c) : ScriptedAI(c)
     {

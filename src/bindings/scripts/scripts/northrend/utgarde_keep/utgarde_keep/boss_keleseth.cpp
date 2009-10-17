@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_utgarde_keep.h"
 
-enum
+enum eEnums
 {
     ACHIEVEMENT_ON_THE_ROCKS                 = 1919,
 
@@ -349,7 +349,7 @@ void AddSC_boss_keleseth()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_keleseth";
+    newscript->Name = "boss_keleseth";
     newscript->GetAI = &GetAI_boss_keleseth;
     newscript->RegisterSelf();
 
@@ -359,7 +359,7 @@ void AddSC_boss_keleseth()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_vrykul_skeleton";
+    newscript->Name = "mob_vrykul_skeleton";
     newscript->GetAI = &GetAI_mob_vrykul_skeleton;
     newscript->RegisterSelf();
 }

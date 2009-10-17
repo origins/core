@@ -77,7 +77,7 @@ void AddSC_boss_urom()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_urom";
+    newscript->Name = "boss_urom";
     newscript->GetAI = &GetAI_boss_urom;
     newscript->RegisterSelf();
 }

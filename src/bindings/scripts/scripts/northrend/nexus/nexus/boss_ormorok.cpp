@@ -24,7 +24,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_nexus.h"
 
-enum
+enum eEnums
 {
 //Spells
     SPELL_CRYSTAL_SPIKES_N                     = 47958, //Don't work, using walkaround
@@ -295,17 +295,17 @@ void AddSC_boss_ormorok()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_ormorok";
+    newscript->Name = "boss_ormorok";
     newscript->GetAI = &GetAI_boss_ormorok;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_crystal_spike";
+    newscript->Name = "mob_crystal_spike";
     newscript->GetAI = &GetAI_mob_crystal_spike;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_crystalline_tangler";
+    newscript->Name = "mob_crystalline_tangler";
     newscript->GetAI = &GetAI_mob_crystalline_tangler;
     newscript->RegisterSelf();
 }

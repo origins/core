@@ -887,6 +887,10 @@ void Spell::EffectDummy(uint32 i)
 
                     creatureTarget->ForcedDespawn();
 
+                    WorldPacket data(SMSG_GAMEOBJECT_SPAWN_ANIM_OBSOLETE, 8);
+                    data << uint64(Crystal_Prison->GetGUID());
+                    m_caster->SendMessageToSet(&data, true);
+
                     return;
                 }
                 case 23074:                                 // Arcanite Dragonling
@@ -1643,7 +1647,7 @@ void Spell::EffectDummy(uint32 i)
             if (m_spellInfo->SpellFamilyFlags[1] & 0x20000 && i == 1)
             {
                 int32 dmg = m_damage * damage / 100;
-                m_caster->CastCustomSpell(unitTarget, 54171, &dmg , 0, 0, true);
+                m_caster->CastCustomSpell(unitTarget, 54171, &dmg, 0, 0, true);
                 return;
             }
             switch(m_spellInfo->SpellIconID)
@@ -1683,7 +1687,7 @@ void Spell::EffectDummy(uint32 i)
             {
                 case 54171:                                   //Divine Storm
                 {
-                    m_caster->CastCustomSpell(unitTarget, 54172, damage , 0, 0, true);
+                    m_caster->CastCustomSpell(unitTarget, 54172, &damage, 0, 0, true);
                 }
                 case 20425:                                   // Judgement of command
                 {
@@ -5363,7 +5367,8 @@ void Spell::EffectScriptEffect(uint32 effIndex)
                         {
                             if(Creature *oldContainer = dynamic_cast<Creature*>(seat->GetPassenger(1)))
                                 oldContainer->DisappearAndDie();
-                            unitTarget->CastSpell(seat->GetBase(), 62473, true);
+                            // TODO: a hack, range = 11, should after some time cast, otherwise too far
+                            unitTarget->CastSpell(seat->GetBase(), 62496, true);
                             unitTarget->EnterVehicle(seat, 1);
                         }
                     }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -154,7 +154,7 @@ void AddSC_utgarde_keep()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_dragonflayer_forge_master";
+    newscript->Name = "npc_dragonflayer_forge_master";
     newscript->GetAI = &GetAI_npc_dragonflayer_forge_master;
     newscript->RegisterSelf();
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -91,12 +91,10 @@ enum Yells
     SAY_PREFIGHT_2                         =   -1601010,
     SAY_PREFIGHT_3                         =   -1601011,
 };
-
 enum Misc
 {
     ACHIEVEMENT_WATCH_HIM_DIE              =   1296
 };
-
 struct CW_DLL_DECL boss_krik_thirAI : public ScriptedAI
 {
     boss_krik_thirAI(Creature *c) : ScriptedAI(c)
@@ -521,42 +519,42 @@ void AddSC_boss_krik_thir()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_krik_thir";
+    newscript->Name = "boss_krik_thir";
     newscript->GetAI = &GetAI_boss_krik_thir;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_skittering_infector";
+    newscript->Name = "npc_skittering_infector";
     newscript->GetAI = &GetAI_npc_skittering_infector;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_anub_ar_skirmisher";
+    newscript->Name = "npc_anub_ar_skirmisher";
     newscript->GetAI = &GetAI_npc_anub_ar_skirmisher;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_anub_ar_shadowcaster";
+    newscript->Name = "npc_anub_ar_shadowcaster";
     newscript->GetAI = &GetAI_npc_anub_ar_shadowcaster;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_watcher_gashra";
+    newscript->Name = "npc_watcher_gashra";
     newscript->GetAI = &GetAI_npc_watcher_gashra;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_anub_ar_warrior";
+    newscript->Name = "npc_anub_ar_warrior";
     newscript->GetAI = &GetAI_npc_anub_ar_warrior;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_watcher_silthik";
+    newscript->Name = "npc_watcher_silthik";
     newscript->GetAI = &GetAI_npc_watcher_silthik;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_watcher_narjil";
+    newscript->Name = "npc_watcher_narjil";
     newscript->GetAI = &GetAI_npc_watcher_narjil;
     newscript->RegisterSelf();
 }

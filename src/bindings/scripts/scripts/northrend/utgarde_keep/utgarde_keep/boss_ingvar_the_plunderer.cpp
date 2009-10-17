@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_utgarde_keep.h"
 
-enum
+enum eEnums
 {
     //Yells Ingvar
     YELL_AGGRO_1                        = -1574005,
@@ -277,7 +277,7 @@ CreatureAI* GetAI_boss_ingvar_the_plunderer(Creature* pCreature)
     return new boss_ingvar_the_plundererAI (pCreature);
 }
 
-enum
+enum eSpells
 {
 //we don't have that text in db so comment it until we get this text
 //    YELL_RESSURECT                      = -1574025,
@@ -389,7 +389,7 @@ CreatureAI* GetAI_mob_annhylde_the_caller(Creature* pCreature)
     return new mob_annhylde_the_callerAI (pCreature);
 }
 
-enum
+enum eShadowAxe
 {
     SPELL_SHADOW_AXE_DAMAGE                     = 42750,
     H_SPELL_SHADOW_AXE_DAMAGE                   = 59719
@@ -441,17 +441,17 @@ void AddSC_boss_ingvar_the_plunderer()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_ingvar_the_plunderer";
+    newscript->Name = "boss_ingvar_the_plunderer";
     newscript->GetAI = &GetAI_boss_ingvar_the_plunderer;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_annhylde_the_caller";
+    newscript->Name = "mob_annhylde_the_caller";
     newscript->GetAI = &GetAI_mob_annhylde_the_caller;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_ingvar_throw_dummy";
+    newscript->Name = "mob_ingvar_throw_dummy";
     newscript->GetAI = &GetAI_mob_ingvar_throw_dummy;
     newscript->RegisterSelf();
 }

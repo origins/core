@@ -2081,6 +2081,10 @@
 							RelativePath="..\scripts\northrend\ulduar\ulduar\instance_ulduar.cpp"
 							>
 						</File>
+						<File
+							RelativePath="..\scripts\northrend\ulduar\ulduar\ulduar_teleporter.cpp"
+							>
+						</File>
 					</Filter>
 				</Filter>
 				<Filter
@@ -2200,6 +2204,10 @@
 					</File>
 					<File
 						RelativePath="..\scripts\northrend\violet_hold\instance_violet_hold.cpp"
+						>
+					</File>
+					<File
+						RelativePath="..\scripts\northrend\violet_hold\violet_hold.cpp"
 						>
 					</File>
 				</Filter>
@@ -2668,15 +2676,15 @@
 				Name="custom"
 				>
 				<File
-					RelativePath="..\scripts\custom\on_events.cpp"
-					>
-				</File>
-				<File
 					RelativePath="..\scripts\custom\npc_acherus_taxi.cpp"
 					>
 				</File>
 				<File
 					RelativePath="..\scripts\custom\npc_wyrmresttempel_taxi.cpp"
+					>
+				</File>
+				<File
+					RelativePath="..\scripts\custom\on_events.cpp"
 					>
 				</File>
 			</Filter>
@@ -2752,7 +2760,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Release|Win32"
+					Name="Debug|x64"
 					>
 					<Tool
 						Name="VCCLCompilerTool"
@@ -2760,7 +2768,7 @@
 					/>
 				</FileConfiguration>
 				<FileConfiguration
-					Name="Debug|x64"
+					Name="Release|Win32"
 					>
 					<Tool
 						Name="VCCLCompilerTool"

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -133,7 +133,7 @@ void AddSC_boss_maexxna()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_maexxna";
+    newscript->Name = "boss_maexxna";
     newscript->GetAI = &GetAI_boss_maexxna;
     newscript->RegisterSelf();
 }

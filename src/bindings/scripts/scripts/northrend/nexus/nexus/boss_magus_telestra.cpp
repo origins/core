@@ -24,7 +24,7 @@ EndScriptData */
 #include "precompiled.h"
 #include "def_nexus.h"
 
-enum
+enum eEnums
 {
 //Spells
     SPELL_ICE_NOVA_N          = 47772,
@@ -350,7 +350,7 @@ void AddSC_boss_magus_telestra()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_magus_telestra";
+    newscript->Name = "boss_magus_telestra";
     newscript->GetAI = &GetAI_boss_magus_telestra;
     newscript->RegisterSelf();
 }

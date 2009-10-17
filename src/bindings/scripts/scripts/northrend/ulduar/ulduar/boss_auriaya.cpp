@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -27,9 +27,14 @@
 #define SAY_AGGRO                   -2615016
 #define SAY_SLAY_1                  -2615017
 
-struct CW_DLL_DECL boss_auriaya_AI : public ScriptedAI
+struct CW_DLL_DECL boss_auriaya_AI : public BossAI
 {
-    boss_auriaya_AI(Creature *c) : ScriptedAI(c) {}
+    boss_auriaya_AI(Creature *pCreature) : BossAI(pCreature, TYPE_AURIAYA)
+    {
+        m_pInstance = pCreature->GetInstanceData();
+    }
+
+    ScriptedInstance* m_pInstance;
 
     uint32 TERRIFYING_SCREECH_Timer;
     uint32 SONIC_BOOM_Timer;

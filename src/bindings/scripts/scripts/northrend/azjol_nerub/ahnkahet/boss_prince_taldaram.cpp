@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -398,15 +398,15 @@ void AddSC_boss_taldaram()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_taldaram";
+    newscript->Name = "boss_taldaram";
     newscript->GetAI = &GetAI_boss_taldaram;
     newscript->RegisterSelf();
-    
+
     newscript = new Script;
-    newscript->Name="mob_taldaram_flamesphere";
+    newscript->Name = "mob_taldaram_flamesphere";
     newscript->GetAI = &GetAI_mob_taldaram_flamesphere;
     newscript->RegisterSelf();
-    
+
     newscript = new Script;
     newscript->Name = "prince_taldaram_sphere";
     newscript->pGOHello = &GOHello_prince_taldaram_sphere;

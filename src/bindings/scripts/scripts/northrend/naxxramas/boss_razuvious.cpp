@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2008 - 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -131,7 +131,7 @@ void AddSC_boss_razuvious()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_razuvious";
+    newscript->Name = "boss_razuvious";
     newscript->GetAI = &GetAI_boss_razuvious;
     newscript->RegisterSelf();
 }

@@ -1,4 +1,4 @@
--- Up to TC2 5408
+-- Up to CWCore 230
 
 -- --------
 -- LINKED

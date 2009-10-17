@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -257,12 +257,12 @@ void AddSC_boss_elder_nadox()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_elder_nadox";
+    newscript->Name = "boss_elder_nadox";
     newscript->GetAI = &GetAI_boss_elder_nadox;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_ahnkahar_nerubian";
+    newscript->Name = "mob_ahnkahar_nerubian";
     newscript->GetAI = &GetAI_mob_ahnkahar_nerubian;
     newscript->RegisterSelf();
 }

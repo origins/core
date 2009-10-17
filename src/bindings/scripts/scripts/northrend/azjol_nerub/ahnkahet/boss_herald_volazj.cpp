@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CW <http://www.CWcore.org/>
+ * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -155,7 +155,7 @@ void AddSC_boss_volazj()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_volazj";
+    newscript->Name = "boss_volazj";
     newscript->GetAI = &GetAI_boss_volazj;
     newscript->RegisterSelf();
 }
