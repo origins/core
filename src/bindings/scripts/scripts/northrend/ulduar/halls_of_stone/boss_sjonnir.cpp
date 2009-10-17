@@ -45,6 +45,11 @@ enum Creatures
     CREATURE_FORGED_IRON_DWARF              = 27982
 };
 
+enum Misc
+{
+    DATA_TIME_BEFORE_OOZE                   = 150000 //2min 30 secs
+};
+
 struct Locations
 {
     float x, y, z;
@@ -71,6 +76,7 @@ struct CW_DLL_DECL boss_sjonnirAI : public ScriptedAI
     uint32 uiLightningRingTimer;
     uint32 uiSummonTimer;
     uint32 uiFrenzyTimer;
+    uint32 uiEncounterTimer;
     
     ScriptedInstance* pInstance;
 
@@ -78,6 +84,7 @@ struct CW_DLL_DECL boss_sjonnirAI : public ScriptedAI
     {
         bIsFrenzy = false;
         
+        uiEncounterTimer = 0;
         uiChainLightningTimer = 3000 + rand()%5000;
         uiLightningShieldTimer = 20000 + rand()%5000;
         uiStaticChargeTimer = 20000 + rand()%5000;
@@ -92,6 +99,8 @@ struct CW_DLL_DECL boss_sjonnirAI : public ScriptedAI
     void EnterCombat(Unit* who)
     {
         DoScriptText(SAY_AGGRO, m_creature);
+        
+        uiEncounterTimer = 0;
         
         if (pInstance)
             pInstance->SetData(DATA_SJONNIR_EVENT, IN_PROGRESS);
@@ -136,7 +145,8 @@ struct CW_DLL_DECL boss_sjonnirAI : public ScriptedAI
         if (uiSummonTimer < diff)
         {
             uint32 uiSummonPipe = rand()%2;
-            m_creature->SummonCreature(RAND(CREATURE_FORGED_IRON_DWARF,CREATURE_FORGED_IRON_TROGG,CREATURE_MALFORMED_OOZE),
+            m_creature->SummonCreature(uiEncounterTimer > DATA_TIME_BEFORE_OOZE ? CREATURE_MALFORMED_OOZE : 
+                                       RAND(CREATURE_FORGED_IRON_DWARF,CREATURE_FORGED_IRON_TROGG),
                                        PipeLocations[uiSummonPipe].x, PipeLocations[uiSummonPipe].y, PipeLocations[uiSummonPipe].z, 0.0f,
                                        TEMPSUMMON_CORPSE_TIMED_DESPAWN, 30000);
             uiSummonTimer = 20000;
@@ -151,17 +161,20 @@ struct CW_DLL_DECL boss_sjonnirAI : public ScriptedAI
           }
           else uiFrenzyTimer -= diff;
         }
+        
+        uiEncounterTimer +=diff;
 
         DoMeleeAttackIfReady();
     }
     
     void JustSummoned(Creature* summon)
     {
+        summon->GetMotionMaster()->MovePoint(0, CenterPoint.x, CenterPoint.y, CenterPoint.z);
         Unit* pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
-        while (pTarget && pTarget->GetTypeId() != TYPEID_PLAYER)
+        /*while (pTarget && pTarget->GetTypeId() != TYPEID_PLAYER)
             pTarget = SelectUnit(SELECT_TARGET_RANDOM, 0);
         if (pTarget)
-            summon->AI()->AttackStart(pTarget);
+            summon->AI()->AttackStart(pTarget);*/
     }
     
     void JustDied(Unit* killer)
