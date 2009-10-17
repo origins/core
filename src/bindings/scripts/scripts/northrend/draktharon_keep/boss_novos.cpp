@@ -59,6 +59,28 @@ struct CW_DLL_DECL boss_novosAI : public ScriptedAI
         DoScriptText(SAY_KILL, m_creature);
     }
 };
+enum Achievement
+{
+    ACHIEVEMENT_OH_NOVOS                   = 2057
+};
+
+struct CW_DLL_DECL mob_novos_minionAI : public ScriptedAI
+{
+    mob_novos_minionAI(Creature *c) : ScriptedAI(c)
+    {
+        pInstance = c->GetInstanceData();
+    }
+    
+    ScriptedInstance *pInstance;
+    
+    void MovementInform(uint32 type, uint32 id)
+    {
+        if(type != POINT_MOTION_TYPE)
+            return;
+        if (Creature* pNovos = Unit::GetCreature(*m_creature, pInstance ? pInstance->GetData64(DATA_NOVOS) : 0))
+            CAST_AI(boss_novosAI, pNovos->AI())->bAchiev = false;
+    }
+};
 
 CreatureAI* GetAI_boss_novos(Creature* pCreature)
 {
@@ -68,6 +90,11 @@ CreatureAI* GetAI_boss_novos(Creature* pCreature)
 CreatureAI* GetAI_mob_crystal_handler(Creature* pCreature)
 {
     return new mob_crystal_handlerAI (pCreature);
+}
+
+CreatureAI* GetAI_mob_novos_minion(Creature* pCreature)
+{
+    return new mob_novos_minionAI (pCreature);
 }
 
 void AddSC_boss_novos()
@@ -82,5 +109,10 @@ void AddSC_boss_novos()
     newscript = new Script;
     newscript->Name="mob_crystal_handler";
     newscript->GetAI = &GetAI_mob_crystal_handler;
+    newscript->RegisterSelf();
+
+    newscript = new Script;
+    newscript->Name="mob_novos_minion";
+    newscript->GetAI = &GetAI_mob_novos_minion;
     newscript->RegisterSelf();
 }
