@@ -50,7 +50,7 @@ struct CW_DLL_DECL boss_xevozzAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    
+
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);

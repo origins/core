@@ -53,7 +53,7 @@ struct CW_DLL_DECL boss_zuramatAI : public ScriptedAI
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
-        
+
         if (pInstance)
         {
             if (pInstance->GetData(DATA_WAVE_COUNT) == 6)
@@ -68,12 +68,12 @@ struct CW_DLL_DECL boss_zuramatAI : public ScriptedAI
             }
         }
     }
-    
+
     void KilledUnit(Unit *victim)
     {
         if (victim == m_creature)
             return;
-        
+
         DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2,SAY_SLAY_3), m_creature);
     }
 };

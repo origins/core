@@ -78,27 +78,27 @@ struct CW_DLL_DECL mob_erekem_guardAI : public ScriptedAI
     {
         pInstance = c->GetInstanceData();
     }
-    
+
     uint32 uiEarthShieldTimer;
     uint32 uiLightningBoltTimer;
     uint32 uiBloodlustTimer;
-    
+
     ScriptedInstance* pInstance;
-    
+
     void Reset()
     {
         uiEarthShieldTimer = 20000;
         uiLightningBoltTimer = urand(0,5000);
         uiBloodlustTimer = urand(8000,18000);
     }
-    
+
     void EnterCombat(Unit* who)
     {
         DoCast(m_creature, H_SPELL_EARTH_SHIELD);
     }
-    
+
     void MoveInLineOfSight(Unit* who) {}
-        
+
     void UpdateAI(const uint32 diff)
     {
         if (uiEarthShieldTimer < diff)
@@ -106,14 +106,14 @@ struct CW_DLL_DECL mob_erekem_guardAI : public ScriptedAI
             DoCast(m_creature, H_SPELL_EARTH_SHIELD);
             uiEarthShieldTimer = 20000;
         } else uiEarthShieldTimer -= diff;
-        
+
         if (uiLightningBoltTimer < diff)
         {
             if (Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                 DoCast(pTarget, SPELL_LIGHTNING_BOLT);
             uiLightningBoltTimer = urand(18000,24000);
         } else uiLightningBoltTimer -= diff;
-        
+
         if (uiBloodlustTimer < diff)
         {
             DoCast(m_creature,SPELL_BLOODLUST);

@@ -71,16 +71,16 @@ struct CW_DLL_DECL boss_slad_ranAI : public ScriptedAI
     {
         pInstance = c->GetInstanceData();
     }
-    
+
     uint32 uiPoisonNovaTimer;
     uint32 uiPowerfullBiteTimer;
     uint32 uiVenomBoltTimer;
     uint32 uiSpawnTimer;
-    
+
     uint8 uiPhase;
 
     ScriptedInstance* pInstance;
-    
+
     void Reset()
     {
         uiPoisonNovaTimer = 10000;
@@ -88,43 +88,43 @@ struct CW_DLL_DECL boss_slad_ranAI : public ScriptedAI
         uiVenomBoltTimer = 15000;
         uiSpawnTimer = 5000;
         uiPhase = 0;
-        
+
         if (pInstance)
             pInstance->SetData(DATA_SLAD_RAN_EVENT, NOT_STARTED);
     }
-    
+
     void EnterCombat(Unit* who)
     {
         DoScriptText(SAY_AGGRO, m_creature);
-        
+
         if (pInstance)
             pInstance->SetData(DATA_SLAD_RAN_EVENT, IN_PROGRESS);
     }
-    
+
     void UpdateAI(const uint32 diff)
     {
         //Return since we have no target
         if (!UpdateVictim())
             return;
-        
+
         if (uiPoisonNovaTimer < diff)
         {
             DoCast(m_creature->getVictim(), HEROIC(SPELL_POISON_NOVA, H_SPELL_POISON_NOVA));
             uiPoisonNovaTimer = 15000;
         } else uiPoisonNovaTimer -= diff;
-        
+
         if (uiPowerfullBiteTimer < diff)
         {
             DoCast(m_creature->getVictim(), HEROIC(SPELL_POWERFULL_BITE, H_SPELL_POWERFULL_BITE));
             uiPowerfullBiteTimer = 10000;
         } else uiPowerfullBiteTimer -= diff;
-        
+
         if (uiVenomBoltTimer < diff)
         {
             DoCast(m_creature->getVictim(), HEROIC(SPELL_VENOM_BOLT, H_SPELL_VENOM_BOLT));
             uiVenomBoltTimer = 10000;
         } else uiVenomBoltTimer -= diff;
-        
+
         if (uiPhase)
         {
             if(uiSpawnTimer < diff)
@@ -152,15 +152,15 @@ struct CW_DLL_DECL boss_slad_ranAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    
+
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
-        
+
         if (pInstance)
             pInstance->SetData(DATA_SLAD_RAN_EVENT, DONE);
     }
-    
+
     void KilledUnit(Unit *victim)
     {
         DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2,SAY_SLAY_3), m_creature);

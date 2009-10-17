@@ -70,9 +70,9 @@ struct CW_DLL_DECL mob_novos_minionAI : public ScriptedAI
     {
         pInstance = c->GetInstanceData();
     }
-    
+
     ScriptedInstance *pInstance;
-    
+
     void MovementInform(uint32 type, uint32 id)
     {
         if(type != POINT_MOTION_TYPE)
@@ -105,7 +105,7 @@ void AddSC_boss_novos()
     newscript->Name="boss_novos";
     newscript->GetAI = &GetAI_boss_novos;
     newscript->RegisterSelf();
-    
+
     newscript = new Script;
     newscript->Name="mob_crystal_handler";
     newscript->GetAI = &GetAI_mob_crystal_handler;

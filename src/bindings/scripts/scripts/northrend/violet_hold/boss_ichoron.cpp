@@ -49,11 +49,11 @@ struct CW_DLL_DECL boss_ichoronAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    
+
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
-        
+
         if (pInstance)
         {
             if (pInstance->GetData(DATA_WAVE_COUNT) == 6)
@@ -68,7 +68,7 @@ struct CW_DLL_DECL boss_ichoronAI : public ScriptedAI
             }
         }
     }
-    
+
     void KilledUnit(Unit *victim)
     {
         if (victim == m_creature)

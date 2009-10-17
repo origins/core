@@ -67,16 +67,16 @@ struct CW_DLL_DECL boss_tharon_jaAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    
+
     void KilledUnit(Unit *victim)
     {
         DoScriptText(RAND(SAY_KILL_1,SAY_KILL_2),m_creature);
     }
-    
+
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH,m_creature);
-        
+
         if (pInstance)
             pInstance->SetData(DATA_THARON_JA_EVENT, DONE);
     }

@@ -37,7 +37,7 @@ struct CW_DLL_DECL boss_dredAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    
+
     void JustDied(Unit* killer)
     {
         if (pInstance)
