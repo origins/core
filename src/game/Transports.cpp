@@ -475,6 +475,11 @@ void Transport::TeleportTransport(uint32 newMapid, float x, float y, float z)
 
 bool Transport::AddPassenger(Player* passenger)
 {
+	if(passenger->IsMounted()){
+		passenger->RemoveAurasByType(SPELL_AURA_MOUNTED);
+		passenger->Unmount();
+	}
+
     if(m_passengers.insert(passenger).second)
         sLog.outDetail("Player %s boarded transport %s.", passenger->GetName(), GetName());
     return true;

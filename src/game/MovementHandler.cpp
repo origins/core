@@ -454,9 +454,15 @@ void WorldSession::HandleMovementOpcodes( WorldPacket & recv_data )
         recv_data.rpos(recv_data.wpos());                   // prevent warnings spam
         return;
     }
-
     /* handle special cases */
-    if (movementInfo.flags & MOVEMENTFLAG_ONTRANSPORT)
+	if((movementInfo.flags & MOVEMENTFLAG_ONTRANSPORT) && (movementInfo.flags  & MOVEMENTFLAG_ROOT) && (recv_data.size()==52))
+	{
+		if(plMover->GetVehicle() && plMover->GetVehicle()->GetBase()->GetTypeId()==TYPEID_PLAYER)
+		{
+			_player->ExitVehicle();
+		}
+		//return;
+	}else if (movementInfo.flags & MOVEMENTFLAG_ONTRANSPORT)
     {
         // transports size limited
         // (also received at zeppelin leave by some reason with t_* as absolute in continent coordinates, can be safely skipped)
@@ -664,7 +670,6 @@ void WorldSession::HandleMovementOpcodes( WorldPacket & recv_data )
     GetPlayer()->SendMessageToSet(&data, false);
 
     mover->m_movementInfo = movementInfo;
-
     if(mover->GetVehicle())
     {
         mover->SetOrientation(movementInfo.o);

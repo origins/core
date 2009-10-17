@@ -62,6 +62,8 @@ class CW_DLL_SPEC Vehicle
         void RemovePassenger(Unit *passenger);
         void RemoveAllPassengers();
         void Dismiss();
+		void UpdatePassengers();
+		bool HaveSpace() {return m_usableSeatNum;}
 
         SeatMap m_Seats;
 

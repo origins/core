@@ -23,7 +23,7 @@
 #include "Unit.h"
 #include "Util.h"
 #include "WorldPacket.h"
-
+#include "World.h"
 #include "CreatureAI.h"
 #include "ZoneScript.h"
 
@@ -349,4 +349,35 @@ void Vehicle::Dismiss()
     me->SendObjectDeSpawnAnim(me->GetGUID());
     me->CombatStop();
     me->AddObjectToRemoveList();
+}
+
+void Vehicle::UpdatePassengers()
+{
+	    for(SeatMap::iterator itr = m_Seats.begin(); itr != m_Seats.end(); ++itr)
+        if(Unit *passenger = itr->second.passenger)
+        {
+            if(passenger->GetVehicle() != this)
+					continue;
+            if(itr->second.passenger && passenger->GetTypeId()==TYPEID_PLAYER)
+            {
+				Player* pl= ((Player*)passenger);
+				if( me->GetDistance(passenger) > (World::GetMaxVisibleDistanceOnContinents()/2))
+				{
+					pl->SetPosition(
+					me->GetPositionX()-pl->GetTransOffsetX(),
+					me->GetPositionY()-pl->GetTransOffsetY(),
+					me->GetPositionZ()-pl->GetTransOffsetZ(),
+					pl->GetOrientation());
+
+					pl->m_movementInfo.x=me->GetPositionX()-pl->GetTransOffsetX();
+					pl->m_movementInfo.y=me->GetPositionY()-pl->GetTransOffsetY();
+					pl->m_movementInfo.z=me->GetPositionZ()-pl->GetTransOffsetZ();
+
+					WorldPacket data(MSG_MOVE_HEARTBEAT, 32);
+						data.append(pl->GetPackGUID());
+						pl->BuildMovementPacket(&data);
+						pl->GetSession()->SendPacket(&data);
+				}
+            }
+        }
 }
