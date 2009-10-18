@@ -247,9 +247,28 @@ struct CW_DLL_DECL mob_ahnkahar_nerubianAI : public ScriptedAI
     }
 };
 
+struct CW_DLL_DECL mob_nadox_eggsAI : public Scripted_NoMovementAI
+{
+    mob_nadox_eggsAI(Creature* c) : Scripted_NoMovementAI(c)
+    {
+        c->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE | UNIT_FLAG_NON_ATTACKABLE);
+        c->UpdateAllStats();
+    }
+    void Reset() { }
+    void EnterCombat(Unit* who) { }
+    void AttackStart(Unit* victim) { }
+    void MoveInLineOfSight(Unit* who) { }
+    void UpdateAI(const uint32 diff) { }
+};
+
 CreatureAI* GetAI_mob_ahnkahar_nerubian(Creature* pCreature)
 {
     return new mob_ahnkahar_nerubianAI(pCreature);
+}
+
+CreatureAI* GetAI_mob_nadox_eggs(Creature* _Creature)
+{
+    return new mob_nadox_eggsAI(_Creature);
 }
 
 void AddSC_boss_elder_nadox()
@@ -264,5 +283,10 @@ void AddSC_boss_elder_nadox()
     newscript = new Script;
     newscript->Name = "mob_ahnkahar_nerubian";
     newscript->GetAI = &GetAI_mob_ahnkahar_nerubian;
+    newscript->RegisterSelf();
+
+    newscript = new Script;
+    newscript->Name="mob_nadox_eggs";
+    newscript->GetAI = &GetAI_mob_nadox_eggs;
     newscript->RegisterSelf();
 }
