@@ -1330,6 +1330,10 @@
 							>
 						</File>
 						<File
+							RelativePath="..\scripts\kalimdor\caverns_of_time\culling_of_stratholme\boss_infinite.cpp"
+							>
+						</File>
+						<File
 							RelativePath="..\scripts\kalimdor\caverns_of_time\culling_of_stratholme\boss_mal_ganis.cpp"
 							>
 						</File>
