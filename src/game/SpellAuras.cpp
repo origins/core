@@ -5556,7 +5556,7 @@ void AuraEffect::HandleAuraUntrackable(bool apply, bool Real, bool /*changeAmoun
 
 void AuraEffect::HandleAuraModPacify(bool apply, bool Real, bool /*changeAmount*/)
 {
-    if(!Real || m_target->GetTypeId() != TYPEID_PLAYER)
+    if(!Real)
         return;
 
     if(apply)
