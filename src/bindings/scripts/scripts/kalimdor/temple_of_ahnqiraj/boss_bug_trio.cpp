@@ -235,7 +235,7 @@ struct CW_DLL_DECL boss_yaujAI : public ScriptedAI
             pInstance->SetData(DATA_BUG_TRIO_DEATH, 1);
         }
 
-        for(uint8 i = 0; i < 10; ++i)
+        for (uint8 i = 0; i < 10; ++i)
         {
             Unit* target = SelectUnit(SELECT_TARGET_RANDOM,0);
             Creature* Summoned = m_creature->SummonCreature(15621,m_creature->GetPositionX(), m_creature->GetPositionY(), m_creature->GetPositionZ(),0,TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN,90000);
@@ -329,17 +329,17 @@ void AddSC_bug_trio()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_kri";
+    newscript->Name = "boss_kri";
     newscript->GetAI = &GetAI_boss_kri;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_vem";
+    newscript->Name = "boss_vem";
     newscript->GetAI = &GetAI_boss_vem;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_yauj";
+    newscript->Name = "boss_yauj";
     newscript->GetAI = &GetAI_boss_yauj;
     newscript->RegisterSelf();
 }

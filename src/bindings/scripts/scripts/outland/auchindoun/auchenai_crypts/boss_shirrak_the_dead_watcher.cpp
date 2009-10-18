@@ -86,7 +86,7 @@ struct CW_DLL_DECL boss_shirrak_the_dead_watcherAI : public ScriptedAI
             float dist;
             Map* pMap = m_creature->GetMap();
             Map::PlayerList const &PlayerList = pMap->GetPlayers();
-            for(Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
+            for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                 if (Player* i_pl = i->getSource())
                     if (i_pl->isAlive() && (dist = i_pl->IsWithinDist(m_creature, 45)))
                     {
@@ -202,12 +202,12 @@ void AddSC_boss_shirrak_the_dead_watcher()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_shirrak_the_dead_watcher";
+    newscript->Name = "boss_shirrak_the_dead_watcher";
     newscript->GetAI = &GetAI_boss_shirrak_the_dead_watcher;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_focus_fire";
+    newscript->Name = "mob_focus_fire";
     newscript->GetAI = &GetAI_mob_focus_fire;
     newscript->RegisterSelf();
 }

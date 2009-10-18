@@ -120,8 +120,6 @@ struct CW_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
 
         BlessingOfTides = false;
 
-
-
         if (pInstance)
         {
             uint64 RAdvisors[3];
@@ -130,7 +128,7 @@ struct CW_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
             RAdvisors[2] = pInstance->GetData64(DATA_CARIBDIS);
             //Respawn of the 3 Advisors
             Creature* pAdvisor = NULL;
-            for(int i=0; i<3; ++i)
+            for (int i=0; i<3; ++i)
 
             if (RAdvisors[i])
             {
@@ -144,7 +142,6 @@ struct CW_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
             }
             pInstance->SetData(DATA_KARATHRESSEVENT, NOT_STARTED);
         }
-
 
     }
 
@@ -192,12 +189,7 @@ struct CW_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-            case 2: DoScriptText(SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), m_creature);
     }
 
     void JustDied(Unit *killer)
@@ -276,7 +268,7 @@ struct CW_DLL_DECL boss_fathomlord_karathressAI : public ScriptedAI
             BlessingOfTides = true;
             bool continueTriggering;
             Creature* Advisor;
-            for(uint8 i = 0; i < 4; ++i)
+            for (uint8 i = 0; i < 4; ++i)
                 if (Advisors[i])
                 {
                     Advisor = (Unit::GetCreature(*m_creature, Advisors[i]));
@@ -319,7 +311,6 @@ struct CW_DLL_DECL boss_fathomguard_sharkkisAI : public ScriptedAI
     bool pet;
 
     uint64 SummonedPet;
-
 
     void Reset()
     {
@@ -737,22 +728,22 @@ void AddSC_boss_fathomlord_karathress()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_fathomlord_karathress";
+    newscript->Name = "boss_fathomlord_karathress";
     newscript->GetAI = &GetAI_boss_fathomlord_karathress;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_fathomguard_sharkkis";
+    newscript->Name = "boss_fathomguard_sharkkis";
     newscript->GetAI = &GetAI_boss_fathomguard_sharkkis;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_fathomguard_tidalvess";
+    newscript->Name = "boss_fathomguard_tidalvess";
     newscript->GetAI = &GetAI_boss_fathomguard_tidalvess;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_fathomguard_caribdis";
+    newscript->Name = "boss_fathomguard_caribdis";
     newscript->GetAI = &GetAI_boss_fathomguard_caribdis;
     newscript->RegisterSelf();
 }

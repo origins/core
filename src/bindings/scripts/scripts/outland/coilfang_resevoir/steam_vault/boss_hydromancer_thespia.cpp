@@ -76,21 +76,12 @@ struct CW_DLL_DECL boss_thespiaAI : public ScriptedAI
 
     void KilledUnit(Unit* victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_SLAY_1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2), m_creature);
     }
 
     void EnterCombat(Unit *who)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_AGGRO_1, m_creature); break;
-            case 1: DoScriptText(SAY_AGGRO_2, m_creature); break;
-            case 2: DoScriptText(SAY_AGGRO_3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_AGGRO_1,SAY_AGGRO_2,SAY_AGGRO_3), m_creature);
 
         if (pInstance)
             pInstance->SetData(TYPE_HYDROMANCER_THESPIA, IN_PROGRESS);
@@ -185,12 +176,12 @@ void AddSC_boss_hydromancer_thespia()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_hydromancer_thespia";
+    newscript->Name = "boss_hydromancer_thespia";
     newscript->GetAI = &GetAI_boss_thespiaAI;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_coilfang_waterelemental";
+    newscript->Name = "mob_coilfang_waterelemental";
     newscript->GetAI = &GetAI_mob_coilfang_waterelementalAI;
     newscript->RegisterSelf();
 }

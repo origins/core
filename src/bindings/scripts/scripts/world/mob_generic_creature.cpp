@@ -144,7 +144,6 @@ struct CW_DLL_DECL generic_creatureAI : public ScriptedAI
                     //Set our global cooldown
                     GlobalCooldown = GENERIC_CREATURE_COOLDOWN;
 
-
                 }//If no spells available and we arn't moving run to target
                 else if (IsSelfRooted)
                 {
@@ -238,22 +237,22 @@ void AddSC_generic_creature()
 {
     Script *newscript;
     /*newscript = new Script;
-    newscript->Name="generic_creature";
+    newscript->Name = "generic_creature";
     newscript->GetAI = &GetAI_generic_creature;
     newscript->RegisterSelf();*/
 
     newscript = new Script;
-    newscript->Name="trigger_periodic";
+    newscript->Name = "trigger_periodic";
     newscript->GetAI = &GetAI_trigger_periodic;
     newscript->RegisterSelf();
 
     /*newscript = new Script;
-    newscript->Name="trigger_death";
+    newscript->Name = "trigger_death";
     newscript->GetAI = &GetAI_trigger_death;
     newscript->RegisterSelf();*/
 
     newscript = new Script;
-    newscript->Name="mob_webwrap";
+    newscript->Name = "mob_webwrap";
     newscript->GetAI = &GetAI_mob_webwrap;
     newscript->RegisterSelf();
 }

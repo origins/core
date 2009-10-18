@@ -341,7 +341,7 @@ bool GossipSelect_npc_stone_watcher_of_norgannon(Player* pPlayer, Creature* pCre
 ## npc_OOX17
 ######*/
 
-enum
+enum e00X17
 {
     //texts are signed for 7806
     SAY_OOX_START           = -1000287,
@@ -433,7 +433,7 @@ CreatureAI* GetAI_npc_OOX17(Creature* pCreature)
 # npc_tooga
 ####*/
 
-enum e00X17
+enum eTooga
 {
     SAY_TOOG_THIRST             = -1000391,
     SAY_TOOG_WORRIED            = -1000392,
@@ -591,30 +591,30 @@ void AddSC_tanaris()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="mob_aquementas";
+    newscript->Name = "mob_aquementas";
     newscript->GetAI = &GetAI_mob_aquementas;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_custodian_of_time";
+    newscript->Name = "npc_custodian_of_time";
     newscript->GetAI = &GetAI_npc_custodian_of_time;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_marin_noggenfogger";
+    newscript->Name = "npc_marin_noggenfogger";
     newscript->pGossipHello =  &GossipHello_npc_marin_noggenfogger;
     newscript->pGossipSelect = &GossipSelect_npc_marin_noggenfogger;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_steward_of_time";
+    newscript->Name = "npc_steward_of_time";
     newscript->pGossipHello =  &GossipHello_npc_steward_of_time;
     newscript->pGossipSelect = &GossipSelect_npc_steward_of_time;
     newscript->pQuestAccept =  &QuestAccept_npc_steward_of_time;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_stone_watcher_of_norgannon";
+    newscript->Name = "npc_stone_watcher_of_norgannon";
     newscript->pGossipHello =  &GossipHello_npc_stone_watcher_of_norgannon;
     newscript->pGossipSelect = &GossipSelect_npc_stone_watcher_of_norgannon;
     newscript->RegisterSelf();

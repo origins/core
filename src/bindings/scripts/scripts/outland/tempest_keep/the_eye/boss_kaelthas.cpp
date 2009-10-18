@@ -332,7 +332,7 @@ struct CW_DLL_DECL boss_kaelthasAI : public ScriptedAI
 
     void PrepareAdvisors()
     {
-        for(uint8 i = 0; i < MAX_ADVISORS; ++i)
+        for (uint8 i = 0; i < MAX_ADVISORS; ++i)
         {
             if (Creature *pCreature = Unit::GetCreature((*m_creature), m_auiAdvisorGuid[i]))
             {
@@ -451,7 +451,7 @@ struct CW_DLL_DECL boss_kaelthasAI : public ScriptedAI
         if (m_pInstance)
             m_pInstance->SetData(DATA_KAELTHASEVENT, 0);
 
-        for(uint8 i = 0; i < MAX_ADVISORS; ++i)
+        for (uint8 i = 0; i < MAX_ADVISORS; ++i)
         {
             if (Unit* pAdvisor = Unit::GetUnit((*m_creature), m_auiAdvisorGuid[i]))
                 pAdvisor->Kill(pAdvisor);
@@ -1478,7 +1478,7 @@ void AddSC_boss_kaelthas()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name= "mob_kael_flamestrike";
+    newscript->Name = "mob_kael_flamestrike";
     newscript->GetAI = &GetAI_mob_kael_flamestrike;
     newscript->RegisterSelf();
 

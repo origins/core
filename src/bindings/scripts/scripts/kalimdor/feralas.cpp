@@ -58,7 +58,7 @@ bool GossipSelect_npc_gregan_brewspewer(Player* pPlayer, Creature* pCreature, ui
 ## npc_oox22fe
 ######*/
 
-enum
+enum eOOX
 {
     //signed for 7806
     SAY_OOX_START           = -1000287,
@@ -187,7 +187,7 @@ void AddSC_feralas()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_gregan_brewspewer";
+    newscript->Name = "npc_gregan_brewspewer";
     newscript->pGossipHello = &GossipHello_npc_gregan_brewspewer;
     newscript->pGossipSelect = &GossipSelect_npc_gregan_brewspewer;
     newscript->RegisterSelf();
@@ -199,7 +199,7 @@ void AddSC_feralas()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_screecher_spirit";
+    newscript->Name = "npc_screecher_spirit";
     newscript->pGossipHello = &GossipHello_npc_screecher_spirit;
     newscript->RegisterSelf();
 }

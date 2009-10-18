@@ -62,47 +62,37 @@ struct CW_DLL_DECL boss_the_makerAI : public ScriptedAI
 
         if (!pInstance)
             return;
-            
+
         pInstance->SetData(TYPE_THE_MAKER_EVENT, NOT_STARTED);
         pInstance->HandleGameObject(pInstance->GetData64(DATA_DOOR2), true);
     }
-    
+
     void EnterCombat(Unit *who)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_AGGRO_1, m_creature); break;
-            case 1: DoScriptText(SAY_AGGRO_2, m_creature); break;
-            case 2: DoScriptText(SAY_AGGRO_3, m_creature); break;
-        }
-        
+        DoScriptText(RAND(SAY_AGGRO_1,SAY_AGGRO_2,SAY_AGGRO_3), m_creature);
+
         if (!pInstance)
             return;
-            
+
         pInstance->SetData(TYPE_THE_MAKER_EVENT, IN_PROGRESS);
         pInstance->HandleGameObject(pInstance->GetData64(DATA_DOOR2), false);
     }
 
     void KilledUnit(Unit* victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_KILL_1, m_creature); break;
-            case 1: DoScriptText(SAY_KILL_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KILL_1,SAY_KILL_2), m_creature);
     }
 
     void JustDied(Unit* Killer)
     {
         DoScriptText(SAY_DIE, m_creature);
-        
+
         if (!pInstance)
             return;
-            
+
         pInstance->SetData(TYPE_THE_MAKER_EVENT, DONE);
         pInstance->HandleGameObject(pInstance->GetData64(DATA_DOOR2), true);
         pInstance->HandleGameObject(pInstance->GetData64(DATA_DOOR3), true);
-        
 
      }
 

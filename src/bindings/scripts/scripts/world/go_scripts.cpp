@@ -47,7 +47,7 @@ EndContentData */
 ## go_cat_figurine
 ######*/
 
-enum
+enum eCatFigurine
 {
     SPELL_SUMMON_GHOST_SABER    = 5968,
 };
@@ -134,7 +134,7 @@ bool GOHello_go_field_repair_bot_74A(Player* pPlayer, GameObject* pGo)
 ## go_gilded_brazier
 ######*/
 
-enum
+enum eGildedBrazier
 {
     NPC_STILLBLADE  = 17716,
 };
@@ -142,10 +142,8 @@ enum
 bool GOHello_go_gilded_brazier(Player* pPlayer, GameObject* pGO)
 {
     if (pGO->GetGoType() == GAMEOBJECT_TYPE_GOOBER)
-    {
         if (Creature* pCreature = pPlayer->SummonCreature(NPC_STILLBLADE, 8087.632, -7542.740, 151.568, 0.122, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 5000))
             pCreature->AI()->AttackStart(pPlayer);
-    }
 
     return true;
 }
@@ -207,7 +205,7 @@ bool GOHello_go_jump_a_tron(Player* pPlayer, GameObject* pGo)
 ## go_ethereum_prison
 ######*/
 
-enum
+enum eEthereumPrison
 {
     SPELL_REP_LC        = 39456,
     SPELL_REP_SHAT      = 39457,
@@ -282,7 +280,7 @@ bool GOHello_go_ethereum_stasis(Player* pPlayer, GameObject* pGo)
 ## go_resonite_cask
 ######*/
 
-enum
+enum eResoniteCask
 {
     NPC_GOGGEROC    = 11920
 };
@@ -313,7 +311,7 @@ bool GOHello_go_sacred_fire_of_life(Player* pPlayer, GameObject* pGO)
 ## go_shrine_of_the_birds
 ######*/
 
-enum
+enum eShrineOfTheBirds
 {
     NPC_HAWK_GUARD      = 22992,
     NPC_EAGLE_GUARD     = 22993,
@@ -353,7 +351,7 @@ bool GOHello_go_shrine_of_the_birds(Player* pPlayer, GameObject* pGo)
 ## go_southfury_moonstone
 ######*/
 
-enum
+enum eSouthfury
 {
     NPC_RIZZLE                  = 23002,
     SPELL_BLACKJACK             = 39865, //stuns player
@@ -376,7 +374,7 @@ bool GOHello_go_southfury_moonstone(Player* pPlayer, GameObject* pGo)
 ## go_tele_to_dalaran_crystal
 ######*/
 
-enum
+enum eDalaranCrystal
 {
     QUEST_LEARN_LEAVE_RETURN    = 12790,
     QUEST_TELE_CRYSTAL_FLAG     = 12845
@@ -413,7 +411,7 @@ bool GOHello_go_tele_to_violet_stand(Player* pPlayer, GameObject* pGo)
 #define GOSSIP_FEL_CRYSTALFORGE_ITEM_5 "Purchase 5 Unstable Flask of the Beast for the cost of 50 Apexis Shards"
 #define GOSSIP_FEL_CRYSTALFORGE_ITEM_RETURN "Use the fel crystalforge to make another purchase."
 
-enum
+enum eFelCrystalforge
 {
     SPELL_CREATE_1_FLASK_OF_BEAST   = 40964,
     SPELL_CREATE_5_FLASK_OF_BEAST   = 40965,
@@ -459,7 +457,7 @@ bool GOSelect_go_fel_crystalforge(Player* pPlayer, GameObject* pGO, uint32 uiSen
 ## go_bashir_crystalforge
 ######*/
 
-enum
+enum eBashirCrystalforge
 {
     SPELL_CREATE_1_FLASK_OF_SORCERER   = 40968,
     SPELL_CREATE_5_FLASK_OF_SORCERER   = 40970,
@@ -483,7 +481,7 @@ bool GOHello_go_wg2voa_portal(Player* pPlayer, GameObject* pGO)
 ## matrix_punchograph
 ######*/
 
-enum
+enum eMatrixPunchograph
 {
     ITEM_WHITE_PUNCH_CARD = 9279,
     ITEM_YELLOW_PUNCH_CARD = 9280,
@@ -505,7 +503,7 @@ bool GOHello_go_matrix_punchograph(Player* pPlayer, GameObject* pGo)
     switch(pGo->GetEntry())
     {
         case MATRIX_PUNCHOGRAPH_3005_A:
-            if(pPlayer->HasItemCount(ITEM_WHITE_PUNCH_CARD, 1))    
+            if(pPlayer->HasItemCount(ITEM_WHITE_PUNCH_CARD, 1))
             {
                 pPlayer->DestroyItemCount(ITEM_WHITE_PUNCH_CARD, 1, true);
                 pPlayer->CastSpell(pPlayer,SPELL_YELLOW_PUNCH_CARD,true);
@@ -548,27 +546,27 @@ void AddSC_go_scripts()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_northern_crystal_pylon";
+    newscript->Name = "go_northern_crystal_pylon";
     newscript->pGOHello =           &GOHello_go_northern_crystal_pylon;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_eastern_crystal_pylon";
+    newscript->Name = "go_eastern_crystal_pylon";
     newscript->pGOHello =           &GOHello_go_eastern_crystal_pylon;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_western_crystal_pylon";
+    newscript->Name = "go_western_crystal_pylon";
     newscript->pGOHello =           &GOHello_go_western_crystal_pylon;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_barov_journal";
+    newscript->Name = "go_barov_journal";
     newscript->pGOHello =           &GOHello_go_barov_journal;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_field_repair_bot_74A";
+    newscript->Name = "go_field_repair_bot_74A";
     newscript->pGOHello =           &GOHello_go_field_repair_bot_74A;
     newscript->RegisterSelf();
 
@@ -578,7 +576,7 @@ void AddSC_go_scripts()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_orb_of_command";
+    newscript->Name = "go_orb_of_command";
     newscript->pGOHello =           &GOHello_go_orb_of_command;
     newscript->RegisterSelf();
 
@@ -593,22 +591,22 @@ void AddSC_go_scripts()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_tablet_of_madness";
+    newscript->Name = "go_tablet_of_madness";
     newscript->pGOHello =           &GOHello_go_tablet_of_madness;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_tablet_of_the_seven";
+    newscript->Name = "go_tablet_of_the_seven";
     newscript->pGOHello =           &GOHello_go_tablet_of_the_seven;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_jump_a_tron";
+    newscript->Name = "go_jump_a_tron";
     newscript->pGOHello =           &GOHello_go_jump_a_tron;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_ethereum_prison";
+    newscript->Name = "go_ethereum_prison";
     newscript->pGOHello =           &GOHello_go_ethereum_prison;
     newscript->RegisterSelf();
 

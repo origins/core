@@ -122,7 +122,7 @@ bool GossipSelect_npcs_ashyen_and_keleth(Player* pPlayer, Creature* pCreature, u
 
 #define GOSSIP_COOSH            "You owe Sim'salabim money. Hand them over or die!"
 
-enum
+enum eCooshhooosh
 {
     SPELL_LIGHTNING_BOLT    = 9532,
     QUEST_CRACK_SKULLS      = 10009,
@@ -265,7 +265,7 @@ bool GossipSelect_npc_mortog_steamhead(Player* pPlayer, Creature* pCreature, uin
 ## npc_kayra_longmane
 ######*/
 
-enum
+enum eKayra
 {
     SAY_START           = -1000360,
     SAY_AMBUSH1         = -1000361,
@@ -343,7 +343,7 @@ CreatureAI* GetAI_npc_kayra_longmaneAI(Creature* pCreature)
 #define GOSSIP_TIMOTHY_DANIELS_ITEM1    "Specialist, eh? Just what kind of specialist are you, anyway?"
 #define GOSSIP_TEXT_BROWSE_POISONS      "Let me browse your reagents and poison supplies."
 
-enum
+enum eTimothy
 {
     GOSSIP_TEXTID_TIMOTHY_DANIELS1      = 9239
 };
@@ -385,32 +385,32 @@ void AddSC_zangarmarsh()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npcs_ashyen_and_keleth";
+    newscript->Name = "npcs_ashyen_and_keleth";
     newscript->pGossipHello =  &GossipHello_npcs_ashyen_and_keleth;
     newscript->pGossipSelect = &GossipSelect_npcs_ashyen_and_keleth;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_cooshcoosh";
+    newscript->Name = "npc_cooshcoosh";
     newscript->GetAI = &GetAI_npc_cooshcoosh;
     newscript->pGossipHello =  &GossipHello_npc_cooshcoosh;
     newscript->pGossipSelect = &GossipSelect_npc_cooshcoosh;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_elder_kuruti";
+    newscript->Name = "npc_elder_kuruti";
     newscript->pGossipHello =  &GossipHello_npc_elder_kuruti;
     newscript->pGossipSelect = &GossipSelect_npc_elder_kuruti;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_mortog_steamhead";
+    newscript->Name = "npc_mortog_steamhead";
     newscript->pGossipHello =  &GossipHello_npc_mortog_steamhead;
     newscript->pGossipSelect = &GossipSelect_npc_mortog_steamhead;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_kayra_longmane";
+    newscript->Name = "npc_kayra_longmane";
     newscript->GetAI = &GetAI_npc_kayra_longmaneAI;
     newscript->pQuestAccept = &QuestAccept_npc_kayra_longmane;
     newscript->RegisterSelf();

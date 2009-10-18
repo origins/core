@@ -204,7 +204,7 @@ bool GossipSelect_npcs_rutgar_and_frankal(Player* pPlayer, Creature* pCreature, 
 /*####
 # quest_a_pawn_on_the_eternal_board (Defines)
 ####*/
-enum
+enum eEternalBoard
 {
     QUEST_A_PAWN_ON_THE_ETERNAL_BOARD = 8519,
 
@@ -919,7 +919,7 @@ struct CW_DLL_DECL npc_anachronos_quest_triggerAI : public ScriptedAI
         uint8 KaldoreiSoldierCount = 0;
         uint8 AnubisathConquerorCount = 0;
         uint8 QirajiWaspCount = 0;
-        for(uint8 i = 0; i < 67; ++i)
+        for (uint8 i = 0; i < 67; ++i)
         {
             Creature* Spawn = NULL;
             float X = SpawnLocation[locIndex + i].x;
@@ -967,7 +967,7 @@ struct CW_DLL_DECL npc_anachronos_quest_triggerAI : public ScriptedAI
 
             const Group::MemberSlotList members = EventGroup->GetMemberSlots();
 
-            for(Group::member_citerator itr = members.begin(); itr!= members.end(); itr++)
+            for (Group::member_citerator itr = members.begin(); itr!= members.end(); itr++)
             {
                 GroupMember = (Unit::GetPlayer(itr->guid));
                 if(!GroupMember)
@@ -1126,7 +1126,7 @@ void AddSC_silithus()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npcs_rutgar_and_frankal";
+    newscript->Name = "npcs_rutgar_and_frankal";
     newscript->pGossipHello =   &GossipHello_npcs_rutgar_and_frankal;
     newscript->pGossipSelect =  &GossipSelect_npcs_rutgar_and_frankal;
     newscript->RegisterSelf();

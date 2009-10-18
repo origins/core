@@ -30,7 +30,6 @@ struct CW_DLL_DECL instance_mechanar : public ScriptedInstance
 {
     instance_mechanar(Map* pMap) : ScriptedInstance(pMap) {Initialize();};
 
-
     uint32 m_auiEncounter[MAX_ENCOUNTER];
 
     void Initialize()
@@ -40,7 +39,7 @@ struct CW_DLL_DECL instance_mechanar : public ScriptedInstance
 
     bool IsEncounterInProgress() const
     {
-        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+        for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
             if (m_auiEncounter[i] == IN_PROGRESS)
                 return true;
 

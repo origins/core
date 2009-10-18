@@ -157,7 +157,7 @@ struct CW_DLL_DECL aqsentinelAI : public ScriptedAI
         if (assistList.empty())
             return;
 
-        for(std::list<Creature*>::iterator iter = assistList.begin(); iter != assistList.end(); ++iter)
+        for (std::list<Creature*>::iterator iter = assistList.begin(); iter != assistList.end(); ++iter)
             AddBuddyToList((*iter));
     }
 
@@ -263,7 +263,7 @@ struct CW_DLL_DECL aqsentinelAI : public ScriptedAI
     Unit *GetHatedManaUser()
     {
         std::list<HostilReference*>::iterator i;
-        for (i = m_creature->getThreatManager().getThreatList().begin();i != m_creature->getThreatManager().getThreatList().end(); ++i)
+        for (i = m_creature->getThreatManager().getThreatList().begin(); i != m_creature->getThreatManager().getThreatList().end(); ++i)
         {
             Unit* pUnit = Unit::GetUnit((*m_creature), (*i)->getUnitGuid());
             if (pUnit->getPowerType()==POWER_MANA)
@@ -281,7 +281,7 @@ void AddSC_mob_anubisath_sentinel()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="mob_anubisath_sentinel";
+    newscript->Name = "mob_anubisath_sentinel";
     newscript->GetAI = &GetAI_mob_anubisath_sentinelAI;
     newscript->RegisterSelf();
 }

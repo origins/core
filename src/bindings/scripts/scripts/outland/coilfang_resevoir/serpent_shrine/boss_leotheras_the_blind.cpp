@@ -130,7 +130,6 @@ struct CW_DLL_DECL mob_inner_demonAI : public ScriptedAI
             Link_Timer = 1000;
         }else Link_Timer -= diff;
 
-
         if (!m_creature->HasAura(AURA_DEMONIC_ALIGNMENT))
             DoCast(m_creature, AURA_DEMONIC_ALIGNMENT,true);
 
@@ -152,7 +151,7 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
         pInstance = c->GetInstanceData();
         Demon = 0;
 
-        for(uint8 i = 0; i < 3; ++i)//clear guids
+        for (uint8 i = 0; i < 3; ++i)//clear guids
             SpellBinderGUID[i] = 0;
     }
 
@@ -207,7 +206,7 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
 
     void CheckChannelers(bool DoEvade = true)
     {
-        for(uint8 i = 0; i < 3; ++i)
+        for (uint8 i = 0; i < 3; ++i)
         {
             if (Creature *add = Unit::GetCreature(*m_creature,SpellBinderGUID[i]))
                 add->DisappearAndDie();
@@ -256,7 +255,7 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
     void CheckBanish()
     {
         uint8 AliveChannelers = 0;
-        for(uint8 i = 0; i < 3; ++i)
+        for (uint8 i = 0; i < 3; ++i)
         {
             Unit *add = Unit::GetUnit(*m_creature,SpellBinderGUID[i]);
             if (add && add->isAlive())
@@ -306,7 +305,7 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
     //Despawn all Inner Demon summoned
     void DespawnDemon()
     {
-        for(uint8 i=0; i<5; ++i)
+        for (uint8 i=0; i<5; ++i)
         {
             if (InnderDemon[i])
             {
@@ -325,7 +324,7 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
 
     void CastConsumingMadness() //remove this once SPELL_INSIDIOUS_WHISPER is supported by core
     {
-        for(uint8 i=0; i<5; ++i)
+        for (uint8 i=0; i<5; ++i)
         {
             if (InnderDemon[i] > 0)
             {
@@ -350,21 +349,11 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
 
         if (DemonForm)
         {
-            switch(rand()%3)
-            {
-                case 0: DoScriptText(SAY_DEMON_SLAY1, m_creature); break;
-                case 1: DoScriptText(SAY_DEMON_SLAY2, m_creature); break;
-                case 2: DoScriptText(SAY_DEMON_SLAY3, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_DEMON_SLAY1,SAY_DEMON_SLAY2,SAY_DEMON_SLAY3), m_creature);
         }
         else
         {
-            switch(rand()%3)
-            {
-                case 0: DoScriptText(SAY_NIGHTELF_SLAY1, m_creature); break;
-                case 1: DoScriptText(SAY_NIGHTELF_SLAY2, m_creature); break;
-                case 2: DoScriptText(SAY_NIGHTELF_SLAY3, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_NIGHTELF_SLAY1,SAY_NIGHTELF_SLAY2,SAY_NIGHTELF_SLAY3), m_creature);
         }
     }
 
@@ -491,14 +480,14 @@ struct CW_DLL_DECL boss_leotheras_the_blindAI : public ScriptedAI
             {
                 std::list<HostilReference *>& ThreatList = m_creature->getThreatManager().getThreatList();
                 std::vector<Unit *> TargetList;
-                for(std::list<HostilReference *>::iterator itr = ThreatList.begin(); itr != ThreatList.end(); ++itr)
+                for (std::list<HostilReference *>::iterator itr = ThreatList.begin(); itr != ThreatList.end(); ++itr)
                 {
                     Unit *tempTarget = Unit::GetUnit(*m_creature, (*itr)->getUnitGuid());
                     if (tempTarget && tempTarget->GetTypeId() == TYPEID_PLAYER && tempTarget->GetGUID() != m_creature->getVictim()->GetGUID() && TargetList.size()<5)
                         TargetList.push_back(tempTarget);
                 }
                 SpellEntry *spell = GET_SPELL(SPELL_INSIDIOUS_WHISPER);
-                for(std::vector<Unit *>::iterator itr = TargetList.begin(); itr != TargetList.end(); ++itr)
+                for (std::vector<Unit *>::iterator itr = TargetList.begin(); itr != TargetList.end(); ++itr)
                 {
                     if ((*itr) && (*itr)->isAlive())
                     {
@@ -596,12 +585,7 @@ struct CW_DLL_DECL boss_leotheras_the_blind_demonformAI : public ScriptedAI
         if (victim->GetTypeId() != TYPEID_PLAYER)
             return;
 
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_DEMON_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_DEMON_SLAY2, m_creature); break;
-            case 2: DoScriptText(SAY_DEMON_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_DEMON_SLAY1,SAY_DEMON_SLAY2,SAY_DEMON_SLAY3), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -739,12 +723,12 @@ struct CW_DLL_DECL mob_greyheart_spellbinderAI : public ScriptedAI
         {
             Map* pMap = m_creature->GetMap();
             Map::PlayerList const &PlayerList = pMap->GetPlayers();
-            for(Map::PlayerList::const_iterator itr = PlayerList.begin();itr != PlayerList.end(); ++itr)
+            for (Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
             {
                 if (Player* i_pl = itr->getSource())
                 {
                     bool isCasting = false;
-                    for(uint8 i = 0; i < CURRENT_MAX_SPELL; ++i)
+                    for (uint8 i = 0; i < CURRENT_MAX_SPELL; ++i)
                         if (i_pl->GetCurrentSpell(i))
                             isCasting = true;
 
@@ -786,22 +770,22 @@ void AddSC_boss_leotheras_the_blind()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_leotheras_the_blind";
+    newscript->Name = "boss_leotheras_the_blind";
     newscript->GetAI = &GetAI_boss_leotheras_the_blind;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_leotheras_the_blind_demonform";
+    newscript->Name = "boss_leotheras_the_blind_demonform";
     newscript->GetAI = &GetAI_boss_leotheras_the_blind_demonform;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_greyheart_spellbinder";
+    newscript->Name = "mob_greyheart_spellbinder";
     newscript->GetAI = &GetAI_mob_greyheart_spellbinder;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_inner_demon";
+    newscript->Name = "mob_inner_demon";
     newscript->GetAI = &GetAI_mob_inner_demon;
     newscript->RegisterSelf();
 }

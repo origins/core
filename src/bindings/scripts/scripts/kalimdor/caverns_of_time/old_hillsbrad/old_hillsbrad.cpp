@@ -346,7 +346,7 @@ struct CW_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI
                     Map::PlayerList const& players = pMap->GetPlayers();
                     if (!players.isEmpty() && pMap->IsDungeon())
                     {
-                        for(Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+                        for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                         {
                             if (Player* pPlayer = itr->getSource())
                                 pPlayer->KilledMonsterCredit(20156,m_creature->GetGUID());
@@ -363,7 +363,6 @@ struct CW_DLL_DECL npc_thrall_old_hillsbradAI : public npc_escortAI
                 break;
         }
     }
-
 
     void Reset()
     {
@@ -637,20 +636,20 @@ void AddSC_old_hillsbrad()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_erozion";
+    newscript->Name = "npc_erozion";
     newscript->pGossipHello =   &GossipHello_npc_erozion;
     newscript->pGossipSelect =  &GossipSelect_npc_erozion;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_thrall_old_hillsbrad";
+    newscript->Name = "npc_thrall_old_hillsbrad";
     newscript->pGossipHello =  &GossipHello_npc_thrall_old_hillsbrad;
     newscript->pGossipSelect = &GossipSelect_npc_thrall_old_hillsbrad;
     newscript->GetAI = &GetAI_npc_thrall_old_hillsbrad;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_taretha";
+    newscript->Name = "npc_taretha";
     newscript->pGossipHello =   &GossipHello_npc_taretha;
     newscript->pGossipSelect =  &GossipSelect_npc_taretha;
     newscript->GetAI = &GetAI_npc_taretha;

@@ -58,7 +58,7 @@ struct SpawnAssociation
     SpawnType m_SpawnType;
 };
 
-enum
+enum eEnums
 {
     SPELL_GUARDS_MARK               = 38067,
     AURA_DURATION_TIME_LEFT         = 5000
@@ -571,13 +571,9 @@ struct CW_DLL_DECL npc_injured_patientAI : public ScriptedAI
         if (caster->GetTypeId() == TYPEID_PLAYER && m_creature->isAlive() && spell->Id == 20804)
         {
             if ((CAST_PLR(caster)->GetQuestStatus(6624) == QUEST_STATUS_INCOMPLETE) || (CAST_PLR(caster)->GetQuestStatus(6622) == QUEST_STATUS_INCOMPLETE))
-            {
                 if (Doctorguid)
-                {
                     if (Creature* Doctor = Unit::GetCreature(*m_creature, Doctorguid))
                         CAST_AI(npc_doctorAI, Doctor->AI())->PatientSaved(m_creature, CAST_PLR(caster), Coord);
-                }
-            }
 
             //make not selectable
             m_creature->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
@@ -588,12 +584,7 @@ struct CW_DLL_DECL npc_injured_patientAI : public ScriptedAI
             //stand up
             m_creature->SetUInt32Value(UNIT_FIELD_BYTES_1, UNIT_STAND_STATE_STAND);
 
-            switch(rand()%3)
-            {
-                case 0: DoScriptText(SAY_DOC1,m_creature); break;
-                case 1: DoScriptText(SAY_DOC2,m_creature); break;
-                case 2: DoScriptText(SAY_DOC3,m_creature); break;
-            }
+            DoScriptText(RAND(SAY_DOC1,SAY_DOC2,SAY_DOC3), m_creature);
 
             uint32 mobId = m_creature->GetEntry();
             m_creature->RemoveUnitMovementFlag(MOVEMENTFLAG_WALK_MODE);
@@ -659,11 +650,11 @@ void npc_doctorAI::BeginEvent(Player* pPlayer)
     switch(m_creature->GetEntry())
     {
         case DOCTOR_ALLIANCE:
-            for(uint8 i = 0; i < ALLIANCE_COORDS; ++i)
+            for (uint8 i = 0; i < ALLIANCE_COORDS; ++i)
                 Coordinates.push_back(&AllianceCoords[i]);
             break;
         case DOCTOR_HORDE:
-            for(uint8 i = 0; i < HORDE_COORDS; ++i)
+            for (uint8 i = 0; i < HORDE_COORDS; ++i)
                 Coordinates.push_back(&HordeCoords[i]);
             break;
     }
@@ -710,7 +701,7 @@ void npc_doctorAI::PatientSaved(Creature* soldier, Player* pPlayer, Location* Po
                 if (!Patients.empty())
                 {
                     std::list<uint64>::iterator itr;
-                    for(itr = Patients.begin(); itr != Patients.end(); ++itr)
+                    for (itr = Patients.begin(); itr != Patients.end(); ++itr)
                     {
                         if (Creature* Patient = Unit::GetCreature((*m_creature), *itr))
                             Patient->setDeathState(JUST_DIED);
@@ -803,7 +794,7 @@ CreatureAI* GetAI_npc_doctor(Creature* pCreature)
 
 //TODO: get text for each NPC
 
-enum
+enum eGarments
 {
     SPELL_LESSER_HEAL_R2    = 2052,
     SPELL_FORTITUDE_R1      = 1243,
@@ -1051,7 +1042,7 @@ CreatureAI* GetAI_npc_guardian(Creature* pCreature)
 ## npc_kingdom_of_dalaran_quests
 ######*/
 
-enum
+enum eKingdomDalaran
 {
     SPELL_TELEPORT_DALARAN  = 53360,
     ITEM_KT_SIGNET          = 39740,
@@ -1734,7 +1725,7 @@ struct CW_DLL_DECL npc_ebon_gargoyleAI : CasterAI
         CW::AnyUnfriendlyUnitInObjectRangeCheck u_check(m_creature, m_creature, 30);
         CW::UnitListSearcher<CW::AnyUnfriendlyUnitInObjectRangeCheck> searcher(m_creature, targets, u_check);
         m_creature->VisitNearbyObject(30, searcher);
-        for(std::list<Unit*>::iterator iter = targets.begin(); iter != targets.end(); ++iter)
+        for (std::list<Unit*>::iterator iter = targets.begin(); iter != targets.end(); ++iter)
             if((*iter)->GetAura(49206,owner->GetGUID()))
             {
                 me->Attack((*iter),false);
@@ -1867,24 +1858,24 @@ void AddSC_npcs_special()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_chicken_cluck";
+    newscript->Name = "npc_chicken_cluck";
     newscript->GetAI = &GetAI_npc_chicken_cluck;
     newscript->pQuestAccept =   &QuestAccept_npc_chicken_cluck;
     newscript->pQuestComplete = &QuestComplete_npc_chicken_cluck;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_dancing_flames";
+    newscript->Name = "npc_dancing_flames";
     newscript->GetAI = &GetAI_npc_dancing_flames;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_injured_patient";
+    newscript->Name = "npc_injured_patient";
     newscript->GetAI = &GetAI_npc_injured_patient;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_doctor";
+    newscript->Name = "npc_doctor";
     newscript->GetAI = &GetAI_npc_doctor;
     newscript->pQuestAccept = &QuestAccept_npc_doctor;
     newscript->RegisterSelf();
@@ -1895,81 +1886,81 @@ void AddSC_npcs_special()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_guardian";
+    newscript->Name = "npc_guardian";
     newscript->GetAI = &GetAI_npc_guardian;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_kingdom_of_dalaran_quests";
+    newscript->Name = "npc_kingdom_of_dalaran_quests";
     newscript->pGossipHello =  &GossipHello_npc_kingdom_of_dalaran_quests;
     newscript->pGossipSelect = &GossipSelect_npc_kingdom_of_dalaran_quests;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_mount_vendor";
+    newscript->Name = "npc_mount_vendor";
     newscript->pGossipHello =  &GossipHello_npc_mount_vendor;
     newscript->pGossipSelect = &GossipSelect_npc_mount_vendor;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_rogue_trainer";
+    newscript->Name = "npc_rogue_trainer";
     newscript->pGossipHello =  &GossipHello_npc_rogue_trainer;
     newscript->pGossipSelect = &GossipSelect_npc_rogue_trainer;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_sayge";
+    newscript->Name = "npc_sayge";
     newscript->pGossipHello = &GossipHello_npc_sayge;
     newscript->pGossipSelect = &GossipSelect_npc_sayge;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_steam_tonk";
+    newscript->Name = "npc_steam_tonk";
     newscript->GetAI = &GetAI_npc_steam_tonk;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_tonk_mine";
+    newscript->Name = "npc_tonk_mine";
     newscript->GetAI = &GetAI_npc_tonk_mine;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_winter_reveler";
+    newscript->Name = "npc_winter_reveler";
     //newscript->pReceiveEmote =  &ReceiveEmote_npc_winter_reveler;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_brewfest_reveler";
+    newscript->Name = "npc_brewfest_reveler";
     //newscript->pReceiveEmote =  &ReceiveEmote_npc_brewfest_reveler;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_snake_trap_serpents";
+    newscript->Name = "npc_snake_trap_serpents";
     newscript->GetAI = &GetAI_npc_snake_trap_serpents;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_mirror_image";
+    newscript->Name = "npc_mirror_image";
     newscript->GetAI = &GetAI_npc_mirror_image;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_ebon_gargoyle";
+    newscript->Name = "npc_ebon_gargoyle";
     newscript->GetAI = &GetAI_npc_ebon_gargoyle;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_lightwell";
+    newscript->Name = "npc_lightwell";
     newscript->GetAI = &GetAI_npc_lightwellAI;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_mojo";
+    newscript->Name = "mob_mojo";
     newscript->GetAI = &GetAI_mob_mojo;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_training_dummy";
+    newscript->Name = "npc_training_dummy";
     newscript->GetAI = &GetAI_npc_training_dummy;
     newscript->RegisterSelf();
 }

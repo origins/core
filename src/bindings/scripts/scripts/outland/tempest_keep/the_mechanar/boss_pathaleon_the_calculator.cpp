@@ -86,11 +86,7 @@ struct CW_DLL_DECL boss_pathaleon_the_calculatorAI : public ScriptedAI
 
     void KilledUnit(Unit* victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_SLAY_1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY_1,SAY_SLAY_2), m_creature);
     }
 
     void JustDied(Unit* Killer)
@@ -111,7 +107,7 @@ struct CW_DLL_DECL boss_pathaleon_the_calculatorAI : public ScriptedAI
 
         if (Summon_Timer < diff)
         {
-            for(uint8 i = 0; i < 3; ++i)
+            for (uint8 i = 0; i < 3; ++i)
             {
                 Unit* target = SelectUnit(SELECT_TARGET_RANDOM,0);
                 Creature* Wraith = m_creature->SummonCreature(21062,m_creature->GetPositionX(), m_creature->GetPositionY(), m_creature->GetPositionZ(),0, TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
@@ -138,11 +134,7 @@ struct CW_DLL_DECL boss_pathaleon_the_calculatorAI : public ScriptedAI
         {
             if (Unit* target = SelectUnit(SELECT_TARGET_RANDOM,1))
             {
-                switch(rand()%2)
-                {
-                case 0: DoScriptText(SAY_DOMINATION_1, m_creature); break;
-                case 1: DoScriptText(SAY_DOMINATION_2, m_creature); break;
-                }
+                DoScriptText(RAND(SAY_DOMINATION_1,SAY_DOMINATION_2), m_creature);
 
                 DoCast(target,SPELL_DOMINATION);
             }
@@ -243,12 +235,12 @@ void AddSC_boss_pathaleon_the_calculator()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_pathaleon_the_calculator";
+    newscript->Name = "boss_pathaleon_the_calculator";
     newscript->GetAI = &GetAI_boss_pathaleon_the_calculator;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_nether_wraith";
+    newscript->Name = "mob_nether_wraith";
     newscript->GetAI = &GetAI_mob_nether_wraith;
     newscript->RegisterSelf();
 }

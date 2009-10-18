@@ -257,7 +257,7 @@ struct CW_DLL_DECL boss_magtheridonAI : public ScriptedAI
         uint32 ClickerNum = 0;
         // now checking if every clicker has debuff from manticron(it is dispelable atm rev 6110 : S)
         // if not - apply mind exhaustion and delete from clicker's list
-        for(CubeMap::iterator i = Cube.begin(); i != Cube.end(); ++i)
+        for (CubeMap::iterator i = Cube.begin(); i != Cube.end(); ++i)
         {
             Unit *clicker = Unit::GetUnit(*m_creature, (*i).second);
             if (!clicker || !clicker->HasAura(SPELL_SHADOW_GRASP))
@@ -547,22 +547,22 @@ void AddSC_boss_magtheridon()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_magtheridon";
+    newscript->Name = "boss_magtheridon";
     newscript->GetAI = &GetAI_boss_magtheridon;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_hellfire_channeler";
+    newscript->Name = "mob_hellfire_channeler";
     newscript->GetAI = &GetAI_mob_hellfire_channeler;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_manticron_cube";
+    newscript->Name = "go_manticron_cube";
     newscript->pGOHello = &GOHello_go_Manticron_Cube;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_abyssal";
+    newscript->Name = "mob_abyssal";
     newscript->GetAI = &GetAI_mob_abyssalAI;
     newscript->RegisterSelf();
 

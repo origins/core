@@ -84,7 +84,7 @@ struct CW_DLL_DECL mob_unkor_the_ruthlessAI : public ScriptedAI
         {
             if (Group* pGroup = CAST_PLR(done_by)->GetGroup())
             {
-                for(GroupReference *itr = pGroup->GetFirstMember(); itr != NULL; itr = itr->next())
+                for (GroupReference *itr = pGroup->GetFirstMember(); itr != NULL; itr = itr->next())
                 {
                     Player *pGroupie = itr->getSource();
                     if (pGroupie &&
@@ -167,7 +167,6 @@ CreatureAI* GetAI_mob_infested_root_walker(Creature* pCreature)
 {
     return new mob_infested_root_walkerAI (pCreature);
 }
-
 
 /*######
 ## mob_skywing
@@ -301,7 +300,7 @@ CreatureAI* GetAI_mob_netherweb_victim(Creature* pCreature)
 #define GOSSIP_FLOON1           "You owe Sim'salabim money. Hand them over or die!"
 #define GOSSIP_FLOON2           "Hand over the money or die...again!"
 
-enum
+enum eFloon
 {
     SAY_FLOON_ATTACK        = -1000352,
 
@@ -531,7 +530,7 @@ bool GossipSelect_go_skull_pile(Player* pPlayer, GameObject* pGo, uint32 uiSende
 ## npc_slim
 ######*/
 
-enum
+enum eSlim
 {
     FACTION_CONSORTIUM  = 933
 };
@@ -580,7 +579,6 @@ struct CW_DLL_DECL npc_akunoAI : public npc_escortAI
         if(IsWalking && !m_creature->HasUnitMovementFlag(MOVEMENTFLAG_WALK_MODE))
             m_creature->AddUnitMovementFlag(MOVEMENTFLAG_WALK_MODE);
 
-
         switch(i)
         {
         case 0: m_creature->setFaction(5); break;
@@ -627,46 +625,46 @@ void AddSC_terokkar_forest()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="mob_unkor_the_ruthless";
+    newscript->Name = "mob_unkor_the_ruthless";
     newscript->GetAI = &GetAI_mob_unkor_the_ruthless;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_infested_root_walker";
+    newscript->Name = "mob_infested_root_walker";
     newscript->GetAI = &GetAI_mob_infested_root_walker;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_rotting_forest_rager";
+    newscript->Name = "mob_rotting_forest_rager";
     newscript->GetAI = &GetAI_mob_rotting_forest_rager;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_netherweb_victim";
+    newscript->Name = "mob_netherweb_victim";
     newscript->GetAI = &GetAI_mob_netherweb_victim;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_floon";
+    newscript->Name = "npc_floon";
     newscript->GetAI = &GetAI_npc_floon;
     newscript->pGossipHello =  &GossipHello_npc_floon;
     newscript->pGossipSelect = &GossipSelect_npc_floon;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name= "npc_isla_starmane";
+    newscript->Name = "npc_isla_starmane";
     newscript->GetAI = &GetAI_npc_isla_starmaneAI;
     newscript->pQuestAccept = &QuestAccept_npc_isla_starmane;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_skull_pile";
+    newscript->Name = "go_skull_pile";
     newscript->pGOHello  = &GossipHello_go_skull_pile;
     newscript->pGOSelect = &GossipSelect_go_skull_pile;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_skywing";
+    newscript->Name = "npc_skywing";
     newscript->GetAI = &GetAI_npc_skywingAI;
     newscript->RegisterSelf();
 
@@ -677,7 +675,7 @@ void AddSC_terokkar_forest()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_akuno";
+    newscript->Name = "npc_akuno";
     newscript->GetAI = &GetAI_npc_akuno;
     newscript->pQuestAccept = &QuestAccept_npc_akuno;
     newscript->RegisterSelf();

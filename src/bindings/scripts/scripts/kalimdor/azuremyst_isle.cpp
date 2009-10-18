@@ -323,7 +323,6 @@ struct CW_DLL_DECL npc_magwinAI : public npc_escortAI
 {
     npc_magwinAI(Creature *c) : npc_escortAI(c) {}
 
-
     void WaypointReached(uint32 i)
     {
         Player* pPlayer = GetPlayerForEscort();
@@ -487,7 +486,7 @@ struct CW_DLL_DECL npc_geezleAI : public ScriptedAI
         CW::PlayerListSearcher<CW::AnyPlayerInObjectRangeCheck> searcher(m_creature, players, checker);
         m_creature->VisitNearbyWorldObject(radius, searcher);
 
-        for(std::list<Player*>::iterator itr = players.begin(); itr != players.end(); ++itr)
+        for (std::list<Player*>::iterator itr = players.begin(); itr != players.end(); ++itr)
         {
             if((*itr)->GetQuestStatus(QUEST_TREES_COMPANY)==QUEST_STATUS_INCOMPLETE
                 &&(*itr)->HasAuraEffect(SPELL_TREE_DISGUISE,3) )
@@ -504,7 +503,7 @@ struct CW_DLL_DECL npc_geezleAI : public ScriptedAI
 
         if (!FlagList.empty())
         {
-            for(std::list<GameObject*>::iterator itr = FlagList.begin(); itr != FlagList.end(); ++itr)
+            for (std::list<GameObject*>::iterator itr = FlagList.begin(); itr != FlagList.end(); ++itr)
             {
                 if (despawn)
                 {
@@ -604,19 +603,19 @@ void AddSC_azuremyst_isle()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_draenei_survivor";
+    newscript->Name = "npc_draenei_survivor";
     newscript->GetAI = &GetAI_npc_draenei_survivor;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_engineer_spark_overgrind";
+    newscript->Name = "npc_engineer_spark_overgrind";
     newscript->GetAI = &GetAI_npc_engineer_spark_overgrind;
     newscript->pGossipHello =  &GossipHello_npc_engineer_spark_overgrind;
     newscript->pGossipSelect = &GossipSelect_npc_engineer_spark_overgrind;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_injured_draenei";
+    newscript->Name = "npc_injured_draenei";
     newscript->GetAI = &GetAI_npc_injured_draenei;
     newscript->RegisterSelf();
 
@@ -627,12 +626,12 @@ void AddSC_azuremyst_isle()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_geezle";
+    newscript->Name = "npc_geezle";
     newscript->GetAI = &GetAI_npc_geezleAI;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_nestlewood_owlkin";
+    newscript->Name = "npc_nestlewood_owlkin";
     newscript->GetAI = &GetAI_npc_nestlewood_owlkinAI;
     newscript->pEffectDummyCreature = &EffectDummyCreature_npc_nestlewood_owlkin;
     newscript->RegisterSelf();

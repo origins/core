@@ -144,7 +144,7 @@ struct CW_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
     }
     void DeSummonBeams()
     {
-        for(uint8 i=0;i<2; ++i)
+        for (uint8 i=0; i<2; ++i)
         {
             Creature* mob = Unit::GetCreature(*m_creature,beams[i]);
             if (mob)
@@ -166,19 +166,11 @@ struct CW_DLL_DECL boss_hydross_the_unstableAI : public ScriptedAI
     {
         if (CorruptedForm)
         {
-            switch(rand()%2)
-            {
-                case 0: DoScriptText(SAY_CORRUPT_SLAY1, m_creature); break;
-                case 1: DoScriptText(SAY_CORRUPT_SLAY2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_CORRUPT_SLAY1,SAY_CORRUPT_SLAY2), m_creature);
         }
         else
         {
-            switch(rand()%2)
-            {
-                case 0: DoScriptText(SAY_CLEAN_SLAY1, m_creature); break;
-                case 1: DoScriptText(SAY_CLEAN_SLAY2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_CLEAN_SLAY1,SAY_CLEAN_SLAY2), m_creature);
         }
     }
 
@@ -380,7 +372,7 @@ void AddSC_boss_hydross_the_unstable()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_hydross_the_unstable";
+    newscript->Name = "boss_hydross_the_unstable";
     newscript->GetAI = &GetAI_boss_hydross_the_unstable;
     newscript->RegisterSelf();
 }

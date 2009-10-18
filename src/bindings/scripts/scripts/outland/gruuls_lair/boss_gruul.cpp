@@ -94,12 +94,7 @@ struct CW_DLL_DECL boss_gruulAI : public ScriptedAI
 
     void KilledUnit()
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-            case 2: DoScriptText(SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), m_creature);
     }
 
     void JustDied(Unit* Killer)
@@ -253,7 +248,7 @@ void AddSC_boss_gruul()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_gruul";
+    newscript->Name = "boss_gruul";
     newscript->GetAI = &GetAI_boss_gruul;
     newscript->RegisterSelf();
 }

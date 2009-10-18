@@ -32,7 +32,7 @@ EndContentData */
 ## npc_disciple_of_naralex
 ######*/
 
-enum
+enum eEnums
 {
     //say
     SAY_MAKE_PREPARATIONS         = -1043001,
@@ -261,7 +261,7 @@ struct CW_DLL_DECL npc_disciple_of_naralexAI : public npc_escortAI
                                     if (pMap && pMap->IsDungeon())
                                     {
                                         Map::PlayerList const &players = pMap->GetPlayers();
-                                        for(Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+                                        for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                                             itr->getSource()->CompletedAchievement(AchievWC);
                                     }
                                 }

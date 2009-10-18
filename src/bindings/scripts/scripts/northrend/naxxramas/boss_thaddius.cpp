@@ -24,22 +24,19 @@
 #define SAY_STAL_SLAY           -1533024 //not used
 #define SAY_STAL_DEATH          -1533025 //not used
 
-#define SPELL_POWERSURGE        28134
+#define SPELL_POWERSURGE         54529
+#define SPELL_POWERSURGE_H       28134
 
 //Feugen
 #define SAY_FEUG_AGGRO          -1533026 //not used
 #define SAY_FEUG_SLAY           -1533027 //not used
 #define SAY_FEUG_DEATH          -1533028 //not used
 
-#define SPELL_MANABURN          28135
+#define SPELL_STATICFIELD       28135
+#define SPELL_STATICFIELD_H     54528
 
-//both
-#define SPELL_WARSTOMP          28125
-
-
- //generic
-#define C_TESLA_COIL                        16218           //the coils (emotes "Tesla Coil overloads!")
-
+//generic
+#define C_TESLA_COIL            16218           //the coils (emotes "Tesla Coil overloads!")
 
 //Thaddus
 #define SAY_GREET               -1533029 //not used

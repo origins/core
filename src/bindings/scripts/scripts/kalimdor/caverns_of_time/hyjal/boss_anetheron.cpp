@@ -167,7 +167,7 @@ struct CW_DLL_DECL boss_anetheronAI : public hyjal_trashAI
 
         if (SleepTimer < diff)
         {
-            for(uint8 i=0;i<3; ++i)
+            for (uint8 i=0; i<3; ++i)
             {
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM,0,100,true))
                     target->CastSpell(target,SPELL_SLEEP,true);
@@ -301,12 +301,12 @@ void AddSC_boss_anetheron()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_anetheron";
+    newscript->Name = "boss_anetheron";
     newscript->GetAI = &GetAI_boss_anetheron;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_towering_infernal";
+    newscript->Name = "mob_towering_infernal";
     newscript->GetAI = &GetAI_mob_towering_infernal;
     newscript->RegisterSelf();
 }

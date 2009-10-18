@@ -146,12 +146,7 @@ struct CW_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%3)
-        {
-        case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        case 2: DoScriptText(SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -197,13 +192,9 @@ struct CW_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
             }
             else
             {
-                switch(rand()%2)
-                {
-                    case 0: DoScriptText(SAY_SUMMON1, m_creature); break;
-                    case 1: DoScriptText(SAY_SUMMON2, m_creature); break;
-                }
+                DoScriptText(RAND(SAY_SUMMON1,SAY_SUMMON2), m_creature);
 
-                for(uint8 i = 0; i < 10; ++i)
+                for (uint8 i = 0; i < 10; ++i)
                 {
                     Unit* target = SelectUnit(SELECT_TARGET_RANDOM, 0);
                     Creature* Murloc = m_creature->SummonCreature(MurlocCords[i][0],MurlocCords[i][1],MurlocCords[i][2],MurlocCords[i][3],MurlocCords[i][4], TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 10000);
@@ -233,7 +224,7 @@ struct CW_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
                 using std::set;
                 set<int>list;
                 set<int>::iterator itr;
-                for(uint8 i = 0; i < 4; ++i)
+                for (uint8 i = 0; i < 4; ++i)
                 {
                     counter = 0;
                     do{target = SelectTarget(SELECT_TARGET_RANDOM, 1, 50, true);    //target players only
@@ -247,11 +238,7 @@ struct CW_DLL_DECL boss_morogrim_tidewalkerAI : public ScriptedAI
                     }
                 }
 
-                switch(rand()%2)
-                {
-                    case 0: DoScriptText(SAY_SUMMON_BUBL1, m_creature); break;
-                    case 1: DoScriptText(SAY_SUMMON_BUBL2, m_creature); break;
-                }
+                DoScriptText(RAND(SAY_SUMMON_BUBL1,SAY_SUMMON_BUBL2), m_creature);
 
                 DoScriptText(EMOTE_WATERY_GRAVE, m_creature);
                 WateryGrave_Timer = 30000;
@@ -361,12 +348,12 @@ void AddSC_boss_morogrim_tidewalker()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_morogrim_tidewalker";
+    newscript->Name = "boss_morogrim_tidewalker";
     newscript->GetAI = &GetAI_boss_morogrim_tidewalker;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_water_globule";
+    newscript->Name = "mob_water_globule";
     newscript->GetAI = &GetAI_mob_water_globule;
     newscript->RegisterSelf();
 }

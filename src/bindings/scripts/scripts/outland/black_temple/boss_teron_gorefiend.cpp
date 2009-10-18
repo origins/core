@@ -147,7 +147,7 @@ struct CW_DLL_DECL mob_shadowy_constructAI : public ScriptedAI
             return;                                         // No threat list. Don't continue.
         std::list<HostilReference*>::iterator itr = m_threatlist.begin();
         std::list<Unit*> targets;
-        for(; itr != m_threatlist.end(); ++itr)
+        for (; itr != m_threatlist.end(); ++itr)
         {
             Unit* pUnit = Unit::GetUnit((*m_creature), (*itr)->getUnitGuid());
             if (pUnit && pUnit->isAlive())
@@ -252,11 +252,7 @@ struct CW_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -288,7 +284,7 @@ struct CW_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
 
         std::list<HostilReference*>& m_threatlist = m_creature->getThreatManager().getThreatList();
         std::list<HostilReference*>::iterator i = m_threatlist.begin();
-        for(i = m_threatlist.begin(); i != m_threatlist.end(); ++i)
+        for (i = m_threatlist.begin(); i != m_threatlist.end(); ++i)
         {
             Unit* pUnit = Unit::GetUnit((*m_creature), (*i)->getUnitGuid());
             if (pUnit && pUnit->isAlive())
@@ -322,7 +318,7 @@ struct CW_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
                 Ghost->DealDamage(Ghost, Ghost->GetHealth(), NULL, DIRECT_DAMAGE, SPELL_SCHOOL_MASK_NORMAL, NULL,
             false);
             }*/
-            for(uint8 i = 0; i < 4; ++i)
+            for (uint8 i = 0; i < 4; ++i)
             {
                 Creature* Construct = NULL;
                 float X = CalculateRandomLocation(Ghost->GetPositionX(), 10);
@@ -378,7 +374,7 @@ struct CW_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
         {
             //MindControlGhost();
 
-            for(uint8 i = 0; i < 2; ++i)
+            for (uint8 i = 0; i < 2; ++i)
             {
                 Creature* Shadow = NULL;
                 float X = CalculateRandomLocation(m_creature->GetPositionX(), 10);
@@ -426,11 +422,7 @@ struct CW_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
 
             if (target)
             {
-                switch(rand()%2)
-                {
-                case 0: DoScriptText(SAY_SPECIAL1, m_creature); break;
-                case 1: DoScriptText(SAY_SPECIAL2, m_creature); break;
-                }
+                DoScriptText(RAND(SAY_SPECIAL1,SAY_SPECIAL2), m_creature);
                 DoCast(target, SPELL_INCINERATE);
                 IncinerateTimer = 20000 + rand()%31 * 1000;
             }
@@ -463,11 +455,7 @@ struct CW_DLL_DECL boss_teron_gorefiendAI : public ScriptedAI
 
         if (RandomYellTimer < diff)
         {
-            switch(rand()%2)
-            {
-            case 0: DoScriptText(SAY_SPELL1, m_creature); break;
-            case 1: DoScriptText(SAY_SPELL2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_SPELL1,SAY_SPELL2), m_creature);
             RandomYellTimer = 50000 + rand()%51 * 1000;
         }else RandomYellTimer -= diff;
 
@@ -513,7 +501,7 @@ void AddSC_boss_teron_gorefiend()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_teron_gorefiend";
+    newscript->Name = "boss_teron_gorefiend";
     newscript->GetAI = &GetAI_boss_teron_gorefiend;
     newscript->RegisterSelf();
 }

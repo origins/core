@@ -80,7 +80,7 @@ bool GossipSelect_npc_braug_dimspirit(Player* pPlayer, Creature* pCreature, uint
 ## npc_kaya_flathoof
 ######*/
 
-enum
+enum eKaya
 {
     FACTION_ESCORTEE_H          = 775,
 
@@ -158,13 +158,13 @@ void AddSC_stonetalon_mountains()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_braug_dimspirit";
+    newscript->Name = "npc_braug_dimspirit";
     newscript->pGossipHello = &GossipHello_npc_braug_dimspirit;
     newscript->pGossipSelect = &GossipSelect_npc_braug_dimspirit;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_kaya_flathoof";
+    newscript->Name = "npc_kaya_flathoof";
     newscript->GetAI = &GetAI_npc_kaya_flathoofAI;
     newscript->pQuestAccept = &QuestAccept_npc_kaya_flathoof;
     newscript->RegisterSelf();

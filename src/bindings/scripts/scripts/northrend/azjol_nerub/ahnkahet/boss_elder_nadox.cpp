@@ -69,7 +69,6 @@ struct CW_DLL_DECL boss_elder_nadoxAI : public ScriptedAI
     uint32 guard_spawn_Timer;
     uint32 enrage_Timer;
 
-
     ScriptedInstance *pInstance;
 
     void Reset()
@@ -116,7 +115,7 @@ struct CW_DLL_DECL boss_elder_nadoxAI : public ScriptedAI
                 if (pMap && pMap->IsDungeon())
                 {
                     Map::PlayerList const &players = pMap->GetPlayers();
-                    for(Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+                    for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
                         itr->getSource()->CompletedAchievement(AchievRespectYourElders);
                 }
             }
@@ -243,7 +242,7 @@ struct CW_DLL_DECL mob_ahnkahar_nerubianAI : public ScriptedAI
     }
 };
 
-struct CW_DLL_DECL mob_nadox_eggsAI : public Scripted_NoMovementAI
+struct MANGOS_DLL_DECL mob_nadox_eggsAI : public Scripted_NoMovementAI
 {
     mob_nadox_eggsAI(Creature* c) : Scripted_NoMovementAI(c)
     {

@@ -190,7 +190,7 @@ struct CW_DLL_DECL boss_reliquary_of_soulsAI : public ScriptedAI
 
         std::list<HostilReference*>& m_threatlist = target->getThreatManager().getThreatList();
         std::list<HostilReference*>::iterator itr = m_threatlist.begin();
-        for(; itr != m_threatlist.end(); itr++)
+        for (; itr != m_threatlist.end(); itr++)
         {
             Unit* pUnit = Unit::GetUnit((*m_creature), (*itr)->getUnitGuid());
             if (pUnit)
@@ -380,12 +380,7 @@ struct CW_DLL_DECL boss_essence_of_sufferingAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SUFF_SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SUFF_SAY_SLAY2, m_creature); break;
-            case 2: DoScriptText(SUFF_SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SUFF_SAY_SLAY1,SUFF_SAY_SLAY2,SUFF_SAY_SLAY3), m_creature);
     }
 
     void CastFixate()
@@ -395,7 +390,7 @@ struct CW_DLL_DECL boss_essence_of_sufferingAI : public ScriptedAI
             return; // No point continuing if empty threatlist.
         std::list<Unit*> targets;
         std::list<HostilReference*>::iterator itr = m_threatlist.begin();
-        for(; itr != m_threatlist.end(); ++itr)
+        for (; itr != m_threatlist.end(); ++itr)
         {
             Unit* pUnit = Unit::GetUnit((*m_creature), (*itr)->getUnitGuid());
             if (pUnit && pUnit->isAlive() && (pUnit->GetTypeId() == TYPEID_PLAYER)) // Only alive players
@@ -486,7 +481,7 @@ struct CW_DLL_DECL boss_essence_of_desireAI : public ScriptedAI
     void SpellHit(Unit *caster, const SpellEntry *spell)
     {
         if (m_creature->GetCurrentSpell(CURRENT_GENERIC_SPELL))
-            for(uint8 i = 0; i < 3; ++i)
+            for (uint8 i = 0; i < 3; ++i)
                 if (spell->Effect[i] == SPELL_EFFECT_INTERRUPT_CAST)
                     if (m_creature->GetCurrentSpell(CURRENT_GENERIC_SPELL)->m_spellInfo->Id == SPELL_SOUL_SHOCK
                         || m_creature->GetCurrentSpell(CURRENT_GENERIC_SPELL)->m_spellInfo->Id == SPELL_DEADEN)
@@ -502,12 +497,7 @@ struct CW_DLL_DECL boss_essence_of_desireAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%3)
-        {
-        case 0: DoScriptText(DESI_SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(DESI_SAY_SLAY2, m_creature); break;
-        case 2: DoScriptText(DESI_SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(DESI_SAY_SLAY1,DESI_SAY_SLAY2,DESI_SAY_SLAY3), m_creature);
     }
 
     void UpdateAI(const uint32 diff)
@@ -574,11 +564,7 @@ struct CW_DLL_DECL boss_essence_of_angerAI : public ScriptedAI
 
     void EnterCombat(Unit *who)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(ANGER_SAY_FREED, m_creature); break;
-        case 1: DoScriptText(ANGER_SAY_FREED2, m_creature); break;
-        }
+        DoScriptText(RAND(ANGER_SAY_FREED,ANGER_SAY_FREED2), m_creature);
 
         DoZoneInCombat();
         DoCast(m_creature, AURA_OF_ANGER, true);
@@ -591,11 +577,7 @@ struct CW_DLL_DECL boss_essence_of_angerAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(ANGER_SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(ANGER_SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(ANGER_SAY_SLAY1,ANGER_SAY_SLAY2), m_creature);
     }
 
     void UpdateAI(const uint32 diff)
@@ -682,27 +664,27 @@ void AddSC_boss_reliquary_of_souls()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_reliquary_of_souls";
+    newscript->Name = "boss_reliquary_of_souls";
     newscript->GetAI = &GetAI_boss_reliquary_of_souls;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_essence_of_suffering";
+    newscript->Name = "boss_essence_of_suffering";
     newscript->GetAI = &GetAI_boss_essence_of_suffering;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_essence_of_desire";
+    newscript->Name = "boss_essence_of_desire";
     newscript->GetAI = &GetAI_boss_essence_of_desire;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_essence_of_anger";
+    newscript->Name = "boss_essence_of_anger";
     newscript->GetAI = &GetAI_boss_essence_of_anger;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_enslaved_soul";
+    newscript->Name = "npc_enslaved_soul";
     newscript->GetAI = &GetAI_npc_enslaved_soul;
     newscript->RegisterSelf();
 }

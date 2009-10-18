@@ -109,7 +109,7 @@ struct CW_DLL_DECL boss_high_king_maulgarAI : public ScriptedAI
     boss_high_king_maulgarAI(Creature *c) : ScriptedAI(c)
     {
         pInstance = c->GetInstanceData();
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
             Council[i] = 0;
     }
 
@@ -138,7 +138,7 @@ struct CW_DLL_DECL boss_high_king_maulgarAI : public ScriptedAI
         Phase2 = false;
 
         Creature *pCreature = NULL;
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
         {
             if (Council[i])
             {
@@ -158,12 +158,7 @@ struct CW_DLL_DECL boss_high_king_maulgarAI : public ScriptedAI
 
     void KilledUnit()
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-            case 2: DoScriptText(SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), m_creature);
     }
 
     void JustDied(Unit* Killer)
@@ -176,15 +171,8 @@ struct CW_DLL_DECL boss_high_king_maulgarAI : public ScriptedAI
 
        void AddDeath()
        {
-            switch(rand()%4)
-            {
-                case 0: DoScriptText(SAY_OGRE_DEATH1, m_creature);break;
-                case 1: DoScriptText(SAY_OGRE_DEATH2, m_creature);break;
-                case 2: DoScriptText(SAY_OGRE_DEATH3, m_creature);break;
-                case 3: DoScriptText(SAY_OGRE_DEATH4, m_creature);break;
-            }
+            DoScriptText(RAND(SAY_OGRE_DEATH1,SAY_OGRE_DEATH2,SAY_OGRE_DEATH3,SAY_OGRE_DEATH4), m_creature);
        }
-
 
     void EnterCombat(Unit *who)
     {
@@ -413,7 +401,6 @@ struct CW_DLL_DECL boss_olm_the_summonerAI : public ScriptedAI
                 DoCast(target, SPELL_DEATH_COIL);
             DeathCoil_Timer = 20000;
         }else DeathCoil_Timer -= diff;
-
 
         DoMeleeAttackIfReady();
     }
@@ -721,7 +708,7 @@ struct CW_DLL_DECL boss_krosh_firehandAI : public ScriptedAI
             Unit *target;
             std::list<HostilReference *> t_list = m_creature->getThreatManager().getThreatList();
             std::vector<Unit *> target_list;
-            for(std::list<HostilReference *>::iterator itr = t_list.begin(); itr!= t_list.end(); ++itr)
+            for (std::list<HostilReference *>::iterator itr = t_list.begin(); itr!= t_list.end(); ++itr)
             {
                 target = Unit::GetUnit(*m_creature, (*itr)->getUnitGuid());
                                                             //15 yard radius minimum
@@ -769,27 +756,27 @@ void AddSC_boss_high_king_maulgar()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_high_king_maulgar";
+    newscript->Name = "boss_high_king_maulgar";
     newscript->GetAI = &GetAI_boss_high_king_maulgar;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_kiggler_the_crazed";
+    newscript->Name = "boss_kiggler_the_crazed";
     newscript->GetAI = &GetAI_boss_kiggler_the_crazed;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_blindeye_the_seer";
+    newscript->Name = "boss_blindeye_the_seer";
     newscript->GetAI = &GetAI_boss_blindeye_the_seer;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_olm_the_summoner";
+    newscript->Name = "boss_olm_the_summoner";
     newscript->GetAI = &GetAI_boss_olm_the_summoner;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_krosh_firehand";
+    newscript->Name = "boss_krosh_firehand";
     newscript->GetAI = &GetAI_boss_krosh_firehand;
     newscript->RegisterSelf();
 }

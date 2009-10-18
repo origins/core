@@ -105,7 +105,7 @@ struct CW_DLL_DECL boss_shahrazAI : public ScriptedAI
         if (pInstance)
             pInstance->SetData(DATA_MOTHERSHAHRAZEVENT, NOT_STARTED);
 
-        for(uint8 i = 0; i<3; ++i)
+        for (uint8 i = 0; i<3; ++i)
             TargetGUID[i] = 0;
 
         BeamTimer = 20000; // Timers may be incorrect
@@ -134,11 +134,7 @@ struct CW_DLL_DECL boss_shahrazAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -155,7 +151,7 @@ struct CW_DLL_DECL boss_shahrazAI : public ScriptedAI
         float X = TeleportPoint[random].x;
         float Y = TeleportPoint[random].y;
         float Z = TeleportPoint[random].z;
-        for(uint8 i = 0; i < 3; ++i)
+        for (uint8 i = 0; i < 3; ++i)
         {
             Unit* pUnit = SelectUnit(SELECT_TARGET_RANDOM, 1);
             if (pUnit && pUnit->isAlive() && (pUnit->GetTypeId() == TYPEID_PLAYER))
@@ -227,11 +223,7 @@ struct CW_DLL_DECL boss_shahrazAI : public ScriptedAI
 
             TeleportPlayers();
 
-            switch(rand()%2)
-            {
-            case 0: DoScriptText(SAY_SPELL2, m_creature); break;
-            case 1: DoScriptText(SAY_SPELL3, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_SPELL2,SAY_SPELL3), m_creature);
             FatalAttractionExplodeTimer = 2000;
             FatalAttractionTimer = 40000 + rand()%31 * 1000;
         }else FatalAttractionTimer -= diff;
@@ -241,7 +233,7 @@ struct CW_DLL_DECL boss_shahrazAI : public ScriptedAI
             // Just make them explode three times... they're supposed to keep exploding while they are in range, but it'll take too much code. I'll try to think of an efficient way for it later.
             if (ExplosionCount < 3)
             {
-                for(uint8 i = 0; i < 3; ++i)
+                for (uint8 i = 0; i < 3; ++i)
                 {
                     Unit* pUnit = NULL;
                     if (TargetGUID[i])
@@ -286,12 +278,7 @@ struct CW_DLL_DECL boss_shahrazAI : public ScriptedAI
         //Random taunts
         if (RandomYellTimer < diff)
         {
-            switch(rand()%3)
-            {
-            case 0: DoScriptText(SAY_TAUNT1, m_creature); break;
-            case 1: DoScriptText(SAY_TAUNT2, m_creature); break;
-            case 2: DoScriptText(SAY_TAUNT3, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_TAUNT1,SAY_TAUNT2,SAY_TAUNT3), m_creature);
             RandomYellTimer = 60000 + rand()%91 * 1000;
         }else RandomYellTimer -= diff;
 
@@ -308,7 +295,7 @@ void AddSC_boss_mother_shahraz()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_mother_shahraz";
+    newscript->Name = "boss_mother_shahraz";
     newscript->GetAI = &GetAI_boss_shahraz;
     newscript->RegisterSelf();
 }

@@ -111,7 +111,7 @@ struct CW_DLL_DECL mob_blood_elf_council_voice_triggerAI : public ScriptedAI
 {
     mob_blood_elf_council_voice_triggerAI(Creature* c) : ScriptedAI(c)
     {
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
             Council[i] = 0;
     }
 
@@ -195,7 +195,7 @@ struct CW_DLL_DECL mob_illidari_councilAI : public ScriptedAI
     mob_illidari_councilAI(Creature *c) : ScriptedAI(c)
     {
         pInstance = c->GetInstanceData();
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
             Council[i] = 0;
     }
 
@@ -218,7 +218,7 @@ struct CW_DLL_DECL mob_illidari_councilAI : public ScriptedAI
         DeathCount = 0;
 
         Creature* pMember = NULL;
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
         {
             if (pMember = (Unit::GetCreature((*m_creature), Council[i])))
             {
@@ -268,7 +268,7 @@ struct CW_DLL_DECL mob_illidari_councilAI : public ScriptedAI
                 CAST_AI(mob_blood_elf_council_voice_triggerAI, VoiceTrigger->AI())->EventStarted = true;
             }
 
-            for(uint8 i = 0; i < 4; ++i)
+            for (uint8 i = 0; i < 4; ++i)
             {
                 Unit* Member = NULL;
                 if (Council[i])
@@ -319,7 +319,7 @@ struct CW_DLL_DECL mob_illidari_councilAI : public ScriptedAI
             if (CheckTimer <= diff)
             {
                 uint8 EvadeCheck = 0;
-                for(uint8 i = 0; i < 4; ++i)
+                for (uint8 i = 0; i < 4; ++i)
                 {
                     if (Council[i])
                     {
@@ -353,7 +353,7 @@ struct CW_DLL_DECL boss_illidari_councilAI : public ScriptedAI
     boss_illidari_councilAI(Creature* c) : ScriptedAI(c)
     {
         pInstance = c->GetInstanceData();
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
             Council[i] = 0;
         LoadedGUIDs = false;
     }
@@ -389,7 +389,7 @@ struct CW_DLL_DECL boss_illidari_councilAI : public ScriptedAI
 
     void EnterEvadeMode()
     {
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
         {
             if (Unit* pUnit = Unit::GetUnit(*m_creature, Council[i]))
                 if (pUnit != m_creature && pUnit->getVictim())
@@ -407,7 +407,7 @@ struct CW_DLL_DECL boss_illidari_councilAI : public ScriptedAI
             return;
 
         damage /= 4;
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
         {
             if (Creature* pUnit = Unit::GetCreature(*m_creature, Council[i]))
                 if (pUnit != m_creature && damage < pUnit->GetHealth())
@@ -485,7 +485,7 @@ struct CW_DLL_DECL boss_gathios_the_shattererAI : public boss_illidari_councilAI
             case 0: spellid = SPELL_DEVOTION_AURA;   break;
             case 1: spellid = SPELL_CHROMATIC_AURA;  break;
         }
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
         {
             Unit* pUnit = Unit::GetUnit((*m_creature), Council[i]);
             if (pUnit)
@@ -841,7 +841,7 @@ void AddSC_boss_illidari_council()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="mob_illidari_council";
+    newscript->Name = "mob_illidari_council";
     newscript->GetAI = &GetAI_mob_illidari_council;
     newscript->RegisterSelf();
 
@@ -851,22 +851,22 @@ void AddSC_boss_illidari_council()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_gathios_the_shatterer";
+    newscript->Name = "boss_gathios_the_shatterer";
     newscript->GetAI = &GetAI_boss_gathios_the_shatterer;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_lady_malande";
+    newscript->Name = "boss_lady_malande";
     newscript->GetAI = &GetAI_boss_lady_malande;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_veras_darkshadow";
+    newscript->Name = "boss_veras_darkshadow";
     newscript->GetAI = &GetAI_boss_veras_darkshadow;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_high_nethermancer_zerevor";
+    newscript->Name = "boss_high_nethermancer_zerevor";
     newscript->GetAI = &GetAI_boss_high_nethermancer_zerevor;
     newscript->RegisterSelf();
 }

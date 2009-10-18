@@ -71,12 +71,7 @@ struct CW_DLL_DECL boss_void_reaverAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%3)
-        {
-        case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        case 2: DoScriptText(SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -106,11 +101,7 @@ struct CW_DLL_DECL boss_void_reaverAI : public ScriptedAI
         {
             DoCast(m_creature->getVictim(),SPELL_POUNDING);
 
-            switch(rand()%2)
-            {
-            case 0: DoScriptText(SAY_POUNDING1, m_creature); break;
-            case 1: DoScriptText(SAY_POUNDING2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_POUNDING1,SAY_POUNDING2), m_creature);
              Pounding_Timer = 15000;                         //cast time(3000) + cooldown time(12000)
         }else Pounding_Timer -= diff;
 
@@ -120,7 +111,7 @@ struct CW_DLL_DECL boss_void_reaverAI : public ScriptedAI
             Unit *target = NULL;
             std::list<HostilReference *> t_list = m_creature->getThreatManager().getThreatList();
             std::vector<Unit *> target_list;
-            for(std::list<HostilReference *>::iterator itr = t_list.begin(); itr!= t_list.end(); ++itr)
+            for (std::list<HostilReference *>::iterator itr = t_list.begin(); itr!= t_list.end(); ++itr)
             {
                 target = Unit::GetUnit(*m_creature, (*itr)->getUnitGuid());
                 if (!target)
@@ -181,7 +172,7 @@ void AddSC_boss_void_reaver()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_void_reaver";
+    newscript->Name = "boss_void_reaver";
     newscript->GetAI = &GetAI_boss_void_reaver;
     newscript->RegisterSelf();
 }

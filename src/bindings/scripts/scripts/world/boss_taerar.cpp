@@ -23,7 +23,7 @@ EndScriptData */
 
 #include "precompiled.h"
 
-enum
+enum eEnums
 {
     SAY_AGGRO               = -1000399, //signed for 20021
     SAY_SUMMONSHADE         = -1000400, //signed for 20021
@@ -182,7 +182,7 @@ struct CW_DLL_DECL boss_taerarAI : public ScriptedAI
 
                 int iSize = sizeof(m_auiSpellSummonShade) / sizeof(uint32);
 
-                for(int i = 0; i < iSize; ++i)
+                for (int i = 0; i < iSize; ++i)
                     m_creature->CastSpell(pTarget, m_auiSpellSummonShade[i], true);
 
                 ++m_uiShadesSummoned;                       // prevent casting twice at same health
@@ -251,12 +251,12 @@ void AddSC_boss_taerar()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_taerar";
+    newscript->Name = "boss_taerar";
     newscript->GetAI = &GetAI_boss_taerar;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_shade_of_taerar";
+    newscript->Name = "boss_shade_of_taerar";
     newscript->GetAI = &GetAI_boss_shadeoftaerar;
     newscript->RegisterSelf();
 }

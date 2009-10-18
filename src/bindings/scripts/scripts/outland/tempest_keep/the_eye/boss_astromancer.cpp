@@ -133,12 +133,7 @@ struct CW_DLL_DECL boss_high_astromancer_solarianAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%3)
-        {
-        case 0: DoScriptText(SAY_KILL1, m_creature); break;
-        case 1: DoScriptText(SAY_KILL2, m_creature); break;
-        case 2: DoScriptText(SAY_KILL3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KILL1,SAY_KILL2,SAY_KILL3), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -268,7 +263,7 @@ struct CW_DLL_DECL boss_high_astromancer_solarianAI : public ScriptedAI
                 //After these 50 seconds she portals to the middle of the room and disappears, leaving 3 light portals behind.
                 m_creature->GetMotionMaster()->Clear();
                 m_creature->GetMap()->CreatureRelocation(m_creature, CENTER_X, CENTER_Y, CENTER_Z, CENTER_O);
-                for(uint8 i=0; i<=2; ++i)
+                for (uint8 i=0; i<=2; ++i)
                 {
                     if (!i)
                     {
@@ -462,12 +457,12 @@ void AddSC_boss_high_astromancer_solarian()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_high_astromancer_solarian";
+    newscript->Name = "boss_high_astromancer_solarian";
     newscript->GetAI = &GetAI_boss_high_astromancer_solarian;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_solarium_priest";
+    newscript->Name = "mob_solarium_priest";
     newscript->GetAI = &GetAI_mob_solarium_priest;
     newscript->RegisterSelf();
 }

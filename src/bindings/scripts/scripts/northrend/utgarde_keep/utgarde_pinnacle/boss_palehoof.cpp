@@ -679,7 +679,7 @@ CreatureAI* GetAI_mob_massive_jormungar(Creature* pCreature)
     return new mob_massive_jormungarAI (pCreature);
 }
 
-struct TRINITY_DLL_DECL mob_palehoof_orbAI : public ScriptedAI
+struct CW_DLL_DECL mob_palehoof_orbAI : public ScriptedAI
 {
     mob_palehoof_orbAI(Creature *c) : ScriptedAI(c)
     {

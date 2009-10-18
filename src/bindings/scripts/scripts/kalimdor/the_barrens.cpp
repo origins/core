@@ -39,7 +39,7 @@ EndContentData */
 
 #define GOSSIP_CORPSE "Examine corpse in detail..."
 
-enum
+enum eQuests
 {
     QUEST_LOST_IN_BATTLE    = 4921
 };
@@ -67,7 +67,7 @@ bool GossipSelect_npc_beaten_corpse(Player* pPlayer, Creature* pCreature, uint32
 # npc_gilthares
 ######*/
 
-enum eEnums
+enum eGilthares
 {
     SAY_GIL_START               = -1000370,
     SAY_GIL_AT_LAST             = -1000371,
@@ -190,7 +190,7 @@ bool GossipSelect_npc_sputtervalve(Player* pPlayer, Creature* pCreature, uint32 
 ## npc_taskmaster_fizzule
 ######*/
 
-enum
+enum eEnums
 {
     FACTION_FRIENDLY_F  = 35,
     SPELL_FLARE         = 10113,
@@ -327,7 +327,7 @@ struct CW_DLL_DECL npc_twiggy_flatheadAI : public ScriptedAI
         Wave = 0;
         PlayerGUID = 0;
 
-        for(uint8 i = 0; i < 6; ++i)
+        for (uint8 i = 0; i < 6; ++i)
         {
             AffrayChallenger[i] = 0;
             Challenger_down[i] = false;
@@ -366,7 +366,7 @@ struct CW_DLL_DECL npc_twiggy_flatheadAI : public ScriptedAI
                 DoScriptText(SAY_TWIGGY_FLATHEAD_DOWN, m_creature);
                 pWarrior->FailQuest(1719);
 
-                for(uint8 i = 0; i < 6; ++i)
+                for (uint8 i = 0; i < 6; ++i)
                 {
                     if (AffrayChallenger[i])
                     {
@@ -407,7 +407,7 @@ struct CW_DLL_DECL npc_twiggy_flatheadAI : public ScriptedAI
                     pWarrior->AreaExploredOrEventHappens(1719);
                     DoScriptText(SAY_TWIGGY_FLATHEAD_BEGIN, m_creature);
 
-                    for(uint8 i = 0; i < 6; ++i)
+                    for (uint8 i = 0; i < 6; ++i)
                     {
                         Creature* pCreature = m_creature->SummonCreature(AFFRAY_CHALLENGER, AffrayChallengerLoc[i][0], AffrayChallengerLoc[i][1], AffrayChallengerLoc[i][2], AffrayChallengerLoc[i][3], TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 600000);
                         if (!pCreature)
@@ -427,7 +427,7 @@ struct CW_DLL_DECL npc_twiggy_flatheadAI : public ScriptedAI
             {
                 if (Challenger_checker < diff)
                 {
-                    for(uint8 i = 0; i < 6; ++i)
+                    for (uint8 i = 0; i < 6; ++i)
                     {
                         if (AffrayChallenger[i])
                         {
@@ -499,7 +499,7 @@ CreatureAI* GetAI_npc_twiggy_flathead(Creature* pCreature)
 ## npc_wizzlecrank_shredder
 #####*/
 
-enum
+enum eEnums_Wizzlecrank
 {
     SAY_START           = -1000272,
     SAY_STARTUP1        = -1000273,
@@ -661,7 +661,7 @@ void AddSC_the_barrens()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_beaten_corpse";
+    newscript->Name = "npc_beaten_corpse";
     newscript->pGossipHello = &GossipHello_npc_beaten_corpse;
     newscript->pGossipSelect = &GossipSelect_npc_beaten_corpse;
     newscript->RegisterSelf();
@@ -673,23 +673,23 @@ void AddSC_the_barrens()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_sputtervalve";
+    newscript->Name = "npc_sputtervalve";
     newscript->pGossipHello = &GossipHello_npc_sputtervalve;
     newscript->pGossipSelect = &GossipSelect_npc_sputtervalve;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_taskmaster_fizzule";
+    newscript->Name = "npc_taskmaster_fizzule";
     newscript->GetAI = &GetAI_npc_taskmaster_fizzule;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_twiggy_flathead";
+    newscript->Name = "npc_twiggy_flathead";
     newscript->GetAI = &GetAI_npc_twiggy_flathead;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_wizzlecrank_shredder";
+    newscript->Name = "npc_wizzlecrank_shredder";
     newscript->GetAI = &GetAI_npc_wizzlecrank_shredderAI;
     newscript->pQuestAccept = &QuestAccept_npc_wizzlecrank_shredder;
     newscript->RegisterSelf();

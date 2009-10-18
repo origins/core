@@ -81,7 +81,7 @@ struct CW_DLL_DECL instance_ulduar : public ScriptedInstance
 
     bool IsEncounterInProgress() const
     {
-        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+        for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
         {
             if (m_auiEncounter[i] == IN_PROGRESS)
                 return true;
@@ -204,7 +204,7 @@ struct CW_DLL_DECL instance_ulduar : public ScriptedInstance
 
             std::ostringstream saveStream;
 
-            for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+            for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
                 saveStream << m_auiEncounter[i] << " ";
 
             m_strInstData = saveStream.str();
@@ -306,11 +306,11 @@ struct CW_DLL_DECL instance_ulduar : public ScriptedInstance
         }
 
         OUT_LOAD_INST_DATA(strIn);
-
-		char dataHead1, dataHead2;
+        
+        char dataHead1, dataHead2;
 
         std::istringstream loadStream(strIn);
-
+        
         if (dataHead1 == 'U' && dataHead2 == 'U')
         {
             for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
@@ -320,7 +320,6 @@ struct CW_DLL_DECL instance_ulduar : public ScriptedInstance
                 if (m_auiEncounter[i] == IN_PROGRESS)
                     m_auiEncounter[i] = NOT_STARTED;
             }
-
         }
 
         OUT_LOAD_INST_DATA_COMPLETE;

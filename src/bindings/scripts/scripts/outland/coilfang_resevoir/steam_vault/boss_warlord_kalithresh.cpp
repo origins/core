@@ -113,12 +113,7 @@ struct CW_DLL_DECL boss_warlord_kalithreshAI : public ScriptedAI
 
     void EnterCombat(Unit *who)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
-            case 1: DoScriptText(SAY_AGGRO2, m_creature); break;
-            case 2: DoScriptText(SAY_AGGRO3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_AGGRO1,SAY_AGGRO2,SAY_AGGRO3), m_creature);
 
         if (pInstance)
             pInstance->SetData(TYPE_WARLORD_KALITHRESH, IN_PROGRESS);
@@ -126,11 +121,7 @@ struct CW_DLL_DECL boss_warlord_kalithreshAI : public ScriptedAI
 
     void KilledUnit(Unit* victim)
     {
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void SpellHit(Unit *caster, const SpellEntry *spell)
@@ -201,12 +192,12 @@ void AddSC_boss_warlord_kalithresh()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="mob_naga_distiller";
+    newscript->Name = "mob_naga_distiller";
     newscript->GetAI = &GetAI_mob_naga_distiller;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_warlord_kalithresh";
+    newscript->Name = "boss_warlord_kalithresh";
     newscript->GetAI = &GetAI_boss_warlord_kalithresh;
     newscript->RegisterSelf();
 }

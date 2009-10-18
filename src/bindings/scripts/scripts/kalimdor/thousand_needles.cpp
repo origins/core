@@ -35,7 +35,7 @@ EndContentData */
 # npc_kanati
 ######*/
 
-enum
+enum eKanati
 {
     SAY_KAN_START              = -1000410,
 
@@ -68,7 +68,7 @@ struct CW_DLL_DECL npc_kanatiAI : public npc_escortAI
 
     void DoSpawnGalak()
     {
-        for(int i = 0; i < 3; ++i)
+        for (int i = 0; i < 3; ++i)
             m_creature->SummonCreature(NPC_GALAK_ASS,
             m_afGalakLoc[0], m_afGalakLoc[1], m_afGalakLoc[2], 0.0f,
             TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT, 25000);
@@ -99,7 +99,7 @@ bool QuestAccept_npc_kanati(Player* pPlayer, Creature* pCreature, const Quest* p
 # npc_lakota_windsong
 ######*/
 
-enum
+enum eLakota
 {
     SAY_LAKO_START              = -1000365,
     SAY_LAKO_LOOK_OUT           = -1000366,
@@ -157,7 +157,7 @@ struct CW_DLL_DECL npc_lakota_windsongAI : public npc_escortAI
 
     void DoSpawnBandits(int uiAmbushId)
     {
-        for(int i = 0; i < 2; ++i)
+        for (int i = 0; i < 2; ++i)
             m_creature->SummonCreature(NPC_GRIM_BANDIT,
             m_afBanditLoc[i+uiAmbushId][0], m_afBanditLoc[i+uiAmbushId][1], m_afBanditLoc[i+uiAmbushId][2], 0.0f,
             TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 60000);
@@ -186,7 +186,7 @@ bool QuestAccept_npc_lakota_windsong(Player* pPlayer, Creature* pCreature, const
 # npc_paoka_swiftmountain
 ######*/
 
-enum
+enum ePacka
 {
     SAY_START           = -1000147,
     SAY_WYVERN          = -1000148,
@@ -230,7 +230,7 @@ struct CW_DLL_DECL npc_paoka_swiftmountainAI : public npc_escortAI
 
     void DoSpawnWyvern()
     {
-        for(int i = 0; i < 3; ++i)
+        for (int i = 0; i < 3; ++i)
             m_creature->SummonCreature(NPC_WYVERN,
             m_afWyvernLoc[i][0], m_afWyvernLoc[i][1], m_afWyvernLoc[i][2], 0.0f,
             TEMPSUMMON_TIMED_OR_DEAD_DESPAWN, 60000);
@@ -261,7 +261,7 @@ bool QuestAccept_npc_paoka_swiftmountain(Player* pPlayer, Creature* pCreature, c
 
 #define GOSSIP_P    "Please tell me the Phrase.."
 
-enum
+enum ePlucky
 {
     FACTION_FRIENDLY        = 35,
     QUEST_SCOOP             = 1950,

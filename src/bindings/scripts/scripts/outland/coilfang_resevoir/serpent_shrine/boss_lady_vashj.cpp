@@ -190,7 +190,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
         }else CanAttack = true;
 
         Unit *remo;
-        for(uint8 i = 0; i < 4; ++i)
+        for (uint8 i = 0; i < 4; ++i)
         {
             remo = Unit::GetUnit(*m_creature, ShieldGeneratorChannel[i]);
             if (remo)
@@ -216,12 +216,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
     }
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-            case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-            case 2: DoScriptText(SAY_SLAY3, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2,SAY_SLAY3), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -234,13 +229,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
 
     void StartEvent()
     {
-        switch(rand()%4)
-        {
-            case 0: DoScriptText(SAY_AGGRO1, m_creature); break;
-            case 1: DoScriptText(SAY_AGGRO2, m_creature); break;
-            case 2: DoScriptText(SAY_AGGRO3, m_creature); break;
-            case 3: DoScriptText(SAY_AGGRO4, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_AGGRO1,SAY_AGGRO2,SAY_AGGRO3,SAY_AGGRO4), m_creature);
 
         Phase = 1;
 
@@ -255,7 +244,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
             //remove old tainted cores to prevent cheating in phase 2
             Map* pMap = m_creature->GetMap();
             Map::PlayerList const &PlayerList = pMap->GetPlayers();
-            for(Map::PlayerList::const_iterator i = PlayerList.begin();i != PlayerList.end(); ++i)
+            for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
             {
                 if (Player* i_pl = i->getSource())
                 {
@@ -315,11 +304,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
         }
         if (rand()%3)
         {
-            switch(rand()%2)
-            {
-                case 0: DoScriptText(SAY_BOWSHOT1, m_creature); break;
-                case 1: DoScriptText(SAY_BOWSHOT2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_BOWSHOT1,SAY_BOWSHOT2), m_creature);
         }
     }
 
@@ -408,7 +393,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                     DoTeleportTo(MIDDLE_X, MIDDLE_Y, MIDDLE_Z);
 
                     Creature *pCreature;
-                    for(uint8 i = 0; i < 4; ++i)
+                    for (uint8 i = 0; i < 4; ++i)
                     {
                         pCreature = m_creature->SummonCreature(SHIED_GENERATOR_CHANNEL, ShieldGeneratorChannelPos[i][0],  ShieldGeneratorChannelPos[i][1],  ShieldGeneratorChannelPos[i][2],  ShieldGeneratorChannelPos[i][3], TEMPSUMMON_CORPSE_DESPAWN, 0);
                         if (pCreature)
@@ -455,7 +440,7 @@ struct CW_DLL_DECL boss_lady_vashjAI : public ScriptedAI
                 bool InMeleeRange = false;
                 Unit *target;
                 std::list<HostilReference *> t_list = m_creature->getThreatManager().getThreatList();
-                for(std::list<HostilReference *>::iterator itr = t_list.begin(); itr!= t_list.end(); ++itr)
+                for (std::list<HostilReference *>::iterator itr = t_list.begin(); itr!= t_list.end(); ++itr)
                 {
                     target = Unit::GetUnit(*m_creature, (*itr)->getUnitGuid());
                                                             //if in melee range
@@ -599,7 +584,7 @@ struct CW_DLL_DECL mob_enchanted_elementalAI : public ScriptedAI
         phase = 1;
         Vashj = NULL;
 
-        for (int i = 0;i<8; ++i)//search for nearest waypoint (up on stairs)
+        for (int i = 0; i<8; ++i)//search for nearest waypoint (up on stairs)
         {
             if (!x || !y || !z)
             {
@@ -1023,42 +1008,42 @@ void AddSC_boss_lady_vashj()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_lady_vashj";
+    newscript->Name = "boss_lady_vashj";
     newscript->GetAI = &GetAI_boss_lady_vashj;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_enchanted_elemental";
+    newscript->Name = "mob_enchanted_elemental";
     newscript->GetAI = &GetAI_mob_enchanted_elemental;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_tainted_elemental";
+    newscript->Name = "mob_tainted_elemental";
     newscript->GetAI = &GetAI_mob_tainted_elemental;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_toxic_sporebat";
+    newscript->Name = "mob_toxic_sporebat";
     newscript->GetAI = &GetAI_mob_toxic_sporebat;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_coilfang_elite";
+    newscript->Name = "mob_coilfang_elite";
     newscript->GetAI = &GetAI_mob_coilfang_elite;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_coilfang_strider";
+    newscript->Name = "mob_coilfang_strider";
     newscript->GetAI = &GetAI_mob_coilfang_strider;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_shield_generator_channel";
+    newscript->Name = "mob_shield_generator_channel";
     newscript->GetAI = &GetAI_mob_shield_generator_channel;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="item_tainted_core";
+    newscript->Name = "item_tainted_core";
     newscript->pItemUse = &ItemUse_item_tainted_core;
     newscript->RegisterSelf();
 }

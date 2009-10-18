@@ -44,7 +44,7 @@ struct CW_DLL_DECL instance_black_temple : public ScriptedInstance
 
     uint32 m_auiEncounter[MAX_ENCOUNTER];
     std::string str_data;
-    
+
     uint64 Najentus;
     uint64 Akama;                                           // This is the Akama that starts the Illidan encounter.
     uint64 Akama_Shade;                                     // This is the Akama that starts the Shade of Akama encounter.
@@ -105,7 +105,7 @@ struct CW_DLL_DECL instance_black_temple : public ScriptedInstance
 
     bool IsEncounterInProgress() const
     {
-        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+        for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
             if (m_auiEncounter[i] == IN_PROGRESS) return true;
 
         return false;
@@ -117,7 +117,7 @@ struct CW_DLL_DECL instance_black_temple : public ScriptedInstance
 
         if (!players.isEmpty())
         {
-            for(Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
+            for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
             {
                 if (Player* plr = itr->getSource())
                     return plr;
@@ -322,7 +322,7 @@ struct CW_DLL_DECL instance_black_temple : public ScriptedInstance
         >> m_auiEncounter[3] >> m_auiEncounter[4] >> m_auiEncounter[5] >> m_auiEncounter[6]
         >> m_auiEncounter[7] >> m_auiEncounter[8];
 
-        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+        for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
             if (m_auiEncounter[i] == IN_PROGRESS)
                 m_auiEncounter[i] = NOT_STARTED;
 

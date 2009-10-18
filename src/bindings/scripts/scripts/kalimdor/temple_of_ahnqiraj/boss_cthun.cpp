@@ -567,7 +567,7 @@ struct CW_DLL_DECL cthunAI : public ScriptedAI
 
                 if (!PlayerList.isEmpty())
                 {
-                    for(Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
+                    for (Map::PlayerList::const_iterator itr = PlayerList.begin(); itr != PlayerList.end(); ++itr)
                     {
                         if (Player* pPlr = itr->getSource())
                             pPlr->PlayDirectSound(RANDOM_SOUND_WHISPER,pPlr);
@@ -1291,37 +1291,37 @@ void AddSC_boss_cthun()
 
     //Eye
     newscript = new Script;
-    newscript->Name="boss_eye_of_cthun";
+    newscript->Name = "boss_eye_of_cthun";
     newscript->GetAI = &GetAI_eye_of_cthun;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_cthun";
+    newscript->Name = "boss_cthun";
     newscript->GetAI = &GetAI_cthun;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_eye_tentacle";
+    newscript->Name = "mob_eye_tentacle";
     newscript->GetAI = &GetAI_eye_tentacle;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_claw_tentacle";
+    newscript->Name = "mob_claw_tentacle";
     newscript->GetAI = &GetAI_claw_tentacle;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_giant_claw_tentacle";
+    newscript->Name = "mob_giant_claw_tentacle";
     newscript->GetAI = &GetAI_giant_claw_tentacle;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_giant_eye_tentacle";
+    newscript->Name = "mob_giant_eye_tentacle";
     newscript->GetAI = &GetAI_giant_eye_tentacle;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_giant_flesh_tentacle";
+    newscript->Name = "mob_giant_flesh_tentacle";
     newscript->GetAI = &GetAI_flesh_tentacle;
     newscript->RegisterSelf();
 }

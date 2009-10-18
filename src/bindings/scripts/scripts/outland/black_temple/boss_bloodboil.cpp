@@ -115,11 +115,7 @@ struct CW_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_SLAY1, m_creature); break;
-        case 1: DoScriptText(SAY_SLAY2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_SLAY1,SAY_SLAY2), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -141,7 +137,7 @@ struct CW_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
 
         std::list<Unit *> targets;
         std::list<HostilReference *>::iterator itr = m_threatlist.begin();
-        for(; itr!= m_threatlist.end(); ++itr)             //store the threat list in a different container
+        for (; itr!= m_threatlist.end(); ++itr)             //store the threat list in a different container
         {
             Unit *target = Unit::GetUnit(*m_creature, (*itr)->getUnitGuid());
                                                             //only on alive players
@@ -158,11 +154,11 @@ struct CW_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
         /*SpellEntry const *spellInfo = GetSpellStore()->LookupEntry(SPELL_BLOODBOIL);
         if (spellInfo)
         {
-            for(std::list<Unit *>::iterator itr = targets.begin(); itr != targets.end(); ++itr)
+            for (std::list<Unit *>::iterator itr = targets.begin(); itr != targets.end(); ++itr)
             {
                 Unit* target = *itr;
                 if (!target) return;
-                for(uint32 i = 0;i<3; ++i)
+                for (uint32 i = 0; i<3; ++i)
                 {
                     uint8 eff = spellInfo->Effect[i];
                     if (eff>=TOTAL_SPELL_EFFECTS)
@@ -210,11 +206,7 @@ struct CW_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
             if (EnrageTimer < diff)
             {
                 DoCast(m_creature, SPELL_BERSERK);
-                switch(rand()%2)
-                {
-                case 0: DoScriptText(SAY_ENRAGE1, m_creature); break;
-                case 1: DoScriptText(SAY_ENRAGE2, m_creature); break;
-                }
+                DoScriptText(RAND(SAY_ENRAGE1,SAY_ENRAGE2), m_creature);
             }else EnrageTimer -= diff;
         }
 
@@ -297,11 +289,7 @@ struct CW_DLL_DECL boss_gurtogg_bloodboilAI : public ScriptedAI
                     //Cast this without triggered so that it appears in combat logs and shows visual.
                     DoCast(m_creature, SPELL_FEL_RAGE_SELF);
 
-                    switch(rand()%2)
-                    {
-                    case 0: DoScriptText(SAY_SPECIAL1, m_creature); break;
-                    case 1: DoScriptText(SAY_SPECIAL2, m_creature); break;
-                    }
+                    DoScriptText(RAND(SAY_SPECIAL1,SAY_SPECIAL2), m_creature);
 
                     AcidGeyserTimer = 1000;
                     PhaseChangeTimer = 30000;
@@ -337,7 +325,7 @@ void AddSC_boss_gurtogg_bloodboil()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_gurtogg_bloodboil";
+    newscript->Name = "boss_gurtogg_bloodboil";
     newscript->GetAI = &GetAI_boss_gurtogg_bloodboil;
     newscript->RegisterSelf();
 }

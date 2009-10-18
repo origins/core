@@ -147,7 +147,7 @@ void AddSC_boss_temporus()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_temporus";
+    newscript->Name = "boss_temporus";
     newscript->GetAI = &GetAI_boss_temporus;
     newscript->RegisterSelf();
 }

@@ -153,11 +153,7 @@ struct CW_DLL_DECL mob_lumpAI : public ScriptedAI
         if (!m_creature->IsStandState())
              m_creature->SetStandState(UNIT_STAND_STATE_STAND);
 
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(LUMP_SAY0, m_creature); break;
-            case 1: DoScriptText(LUMP_SAY1, m_creature); break;
-        }
+        DoScriptText(RAND(LUMP_SAY0,LUMP_SAY1), m_creature);
     }
 
     void UpdateAI(const uint32 diff)
@@ -527,7 +523,7 @@ bool GossipSelect_npc_lantresor_of_the_blade(Player* pPlayer, Creature* pCreatur
 ## npc_maghar_captive
 #####*/
 
-enum
+enum eMagharCaptive
 {
     SAY_MAG_START               = -1000482,
     SAY_MAG_NO_ESCAPE           = -1000483,
@@ -610,7 +606,7 @@ struct CW_DLL_DECL npc_maghar_captiveAI : public npc_escortAI
         pSummoned->RemoveUnitMovementFlag(MOVEMENTFLAG_WALK_MODE);
         pSummoned->GetMotionMaster()->MovePoint(0, m_creature->GetPositionX(), m_creature->GetPositionY(), m_creature->GetPositionZ());
         pSummoned->AI()->AttackStart(m_creature);
-    
+
     }
 
     void SpellHitTarget(Unit* pTarget, const SpellEntry* pSpell)
@@ -835,37 +831,37 @@ void AddSC_nagrand()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="mob_shattered_rumbler";
+    newscript->Name = "mob_shattered_rumbler";
     newscript->GetAI = &GetAI_mob_shattered_rumbler;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_lump";
+    newscript->Name = "mob_lump";
     newscript->GetAI = &GetAI_mob_lump;
     newscript->pGossipHello =  &GossipHello_mob_lump;
     newscript->pGossipSelect = &GossipSelect_mob_lump;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_sunspring_villager";
+    newscript->Name = "mob_sunspring_villager";
     newscript->GetAI = &GetAI_mob_sunspring_villager;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_altruis_the_sufferer";
+    newscript->Name = "npc_altruis_the_sufferer";
     newscript->pGossipHello =  &GossipHello_npc_altruis_the_sufferer;
     newscript->pGossipSelect = &GossipSelect_npc_altruis_the_sufferer;
     newscript->pQuestAccept =  &QuestAccept_npc_altruis_the_sufferer;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_greatmother_geyah";
+    newscript->Name = "npc_greatmother_geyah";
     newscript->pGossipHello =  &GossipHello_npc_greatmother_geyah;
     newscript->pGossipSelect = &GossipSelect_npc_greatmother_geyah;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_lantresor_of_the_blade";
+    newscript->Name = "npc_lantresor_of_the_blade";
     newscript->pGossipHello =  &GossipHello_npc_lantresor_of_the_blade;
     newscript->pGossipSelect = &GossipSelect_npc_lantresor_of_the_blade;
     newscript->RegisterSelf();
@@ -877,12 +873,12 @@ void AddSC_nagrand()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_creditmarker_visit_with_ancestors";
+    newscript->Name = "npc_creditmarker_visit_with_ancestors";
     newscript->GetAI = &GetAI_npc_creditmarker_visit_with_ancestors;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_sparrowhawk";
+    newscript->Name = "mob_sparrowhawk";
     newscript->GetAI = &GetAI_mob_sparrowhawk;
     newscript->RegisterSelf();
 }

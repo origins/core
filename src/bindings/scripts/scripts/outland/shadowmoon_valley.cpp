@@ -46,7 +46,7 @@ EndContentData */
 # mob_mature_netherwing_drake
 #####*/
 
-enum
+enum eMatureNetherwing
 {
     SAY_JUST_EATEN              = -1000222,
 
@@ -60,7 +60,6 @@ enum
     QUEST_KINDNESS              = 10804,
     NPC_EVENT_PINGER            = 22131
 };
-
 
 struct CW_DLL_DECL mob_mature_netherwing_drakeAI : public ScriptedAI
 {
@@ -623,7 +622,7 @@ bool GossipSelect_npc_oronok_tornheart(Player* pPlayer, Creature* pCreature, uin
 # npc_karynaku
 ####*/
 
-enum
+enum eKarynaku
 {
     QUEST_ALLY_OF_NETHER    = 10870,
 
@@ -852,7 +851,7 @@ bool QuestAccept_npc_overlord_morghor(Player* pPlayer, Creature* pCreature, cons
 # npc_earthmender_wilda
 ####*/
 
-enum eMatureNetherwing
+enum eEarthmender
 {
     SAY_WIL_START               = -1000381,
     SAY_WIL_AGGRO1              = -1000382,
@@ -956,12 +955,7 @@ struct CW_DLL_DECL npc_earthmender_wildaAI : public npc_escortAI
     //this is very unclear, random say without no real relevance to script/event
     void DoRandomSay()
     {
-        switch(rand()%3)
-        {
-            case 0: DoScriptText(SAY_WIL_PROGRESS2, m_creature); break;
-            case 1: DoScriptText(SAY_WIL_PROGRESS4, m_creature); break;
-            case 2: DoScriptText(SAY_WIL_PROGRESS5, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_WIL_PROGRESS2,SAY_WIL_PROGRESS4,SAY_WIL_PROGRESS5), m_creature);
     }
 
     void DoSpawnAssassin()
@@ -980,11 +974,8 @@ struct CW_DLL_DECL npc_earthmender_wildaAI : public npc_escortAI
         if (pWho->GetTypeId() != TYPEID_PLAYER)
         {
             //appears to be random
-            switch(rand()%4)
-            {
-                case 0: DoScriptText(SAY_WIL_AGGRO1, m_creature, pWho); break;
-                case 1: DoScriptText(SAY_WIL_AGGRO2, m_creature, pWho); break;
-            }
+            if (urand(0,1))
+                DoScriptText(RAND(SAY_WIL_AGGRO1, SAY_WIL_AGGRO2), pWho);
         }
     }
 
@@ -1422,7 +1413,7 @@ struct CW_DLL_DECL npc_lord_illidan_stormrageAI : public ScriptedAI
         uint8 FelguardCount = 0;
         uint8 DreadlordCount = 0;
 
-        for(uint8 i = 0; i < count; ++i)
+        for (uint8 i = 0; i < count; ++i)
         {
             Creature* Spawn = NULL;
             float X = SpawnLocation[locIndex + i].x;
@@ -1499,7 +1490,7 @@ struct CW_DLL_DECL npc_lord_illidan_stormrageAI : public ScriptedAI
 
             const Group::MemberSlotList members = EventGroup->GetMemberSlots();
 
-            for(Group::member_citerator itr = members.begin(); itr!= members.end(); itr++)
+            for (Group::member_citerator itr = members.begin(); itr!= members.end(); itr++)
             {
                 GroupMember = (Unit::GetPlayer(itr->guid));
                 if (!GroupMember)
@@ -1525,7 +1516,7 @@ struct CW_DLL_DECL npc_lord_illidan_stormrageAI : public ScriptedAI
 
             if (GroupMemberCount == DeadMemberCount)
             {
-                for(Group::member_citerator itr = members.begin(); itr!= members.end(); itr++)
+                for (Group::member_citerator itr = members.begin(); itr!= members.end(); itr++)
                 {
                     GroupMember = Unit::GetPlayer(itr->guid);
 
@@ -1757,25 +1748,25 @@ void AddSC_shadowmoon_valley()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_drake_dealer_hurlunk";
+    newscript->Name = "npc_drake_dealer_hurlunk";
     newscript->pGossipHello =  &GossipHello_npc_drake_dealer_hurlunk;
     newscript->pGossipSelect = &GossipSelect_npc_drake_dealer_hurlunk;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npcs_flanis_swiftwing_and_kagrosh";
+    newscript->Name = "npcs_flanis_swiftwing_and_kagrosh";
     newscript->pGossipHello =  &GossipHello_npcs_flanis_swiftwing_and_kagrosh;
     newscript->pGossipSelect = &GossipSelect_npcs_flanis_swiftwing_and_kagrosh;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_murkblood_overseer";
+    newscript->Name = "npc_murkblood_overseer";
     newscript->pGossipHello =  &GossipHello_npc_murkblood_overseer;
     newscript->pGossipSelect = &GossipSelect_npc_murkblood_overseer;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_neltharaku";
+    newscript->Name = "npc_neltharaku";
     newscript->pGossipHello =  &GossipHello_npc_neltharaku;
     newscript->pGossipSelect = &GossipSelect_npc_neltharaku;
     newscript->RegisterSelf();
@@ -1786,7 +1777,7 @@ void AddSC_shadowmoon_valley()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_oronok_tornheart";
+    newscript->Name = "npc_oronok_tornheart";
     newscript->pGossipHello =  &GossipHello_npc_oronok_tornheart;
     newscript->pGossipSelect = &GossipSelect_npc_oronok_tornheart;
     newscript->RegisterSelf();

@@ -364,11 +364,9 @@ struct CW_DLL_DECL npc_commander_dawnforgeAI : public ScriptedAI
 {
     npc_commander_dawnforgeAI(Creature *c) : ScriptedAI(c) { Reset (); }
 
-
     uint64 PlayerGUID;
     uint64 ardonisGUID;
     uint64 pathaleonGUID;
-
 
     uint32 Phase;
     uint32 PhaseSubphase;
@@ -878,12 +876,12 @@ void AddSC_netherstorm()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="go_manaforge_control_console";
+    newscript->Name = "go_manaforge_control_console";
     newscript->pGOHello = &GOHello_go_manaforge_control_console;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_manaforge_control_console";
+    newscript->Name = "npc_manaforge_control_console";
     newscript->GetAI = &GetAI_npc_manaforge_control_console;
     newscript->RegisterSelf();
 

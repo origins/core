@@ -36,7 +36,7 @@ EndContentData */
 ## npc_bunthen_plainswind
 ######*/
 
-enum
+enum eBunthen
 {
     QUEST_SEA_LION_HORDE        = 30,
     QUEST_SEA_LION_ALLY         = 272,
@@ -325,7 +325,7 @@ public:
             return;
         if (pPlayer->GetQuestStatus(10965) == QUEST_STATUS_INCOMPLETE)
         {
-            for(uint8 i = 0; i < 41; ++i)
+            for (uint8 i = 0; i < 41; ++i)
             {
                 AddWaypoint(i, Clintar_spirit_WP[i][0], Clintar_spirit_WP[i][1], Clintar_spirit_WP[i][2], (uint32)Clintar_spirit_WP[i][4]);
             }
@@ -541,30 +541,30 @@ void AddSC_moonglade()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_bunthen_plainswind";
+    newscript->Name = "npc_bunthen_plainswind";
     newscript->pGossipHello =  &GossipHello_npc_bunthen_plainswind;
     newscript->pGossipSelect = &GossipSelect_npc_bunthen_plainswind;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_great_bear_spirit";
+    newscript->Name = "npc_great_bear_spirit";
     newscript->pGossipHello =  &GossipHello_npc_great_bear_spirit;
     newscript->pGossipSelect = &GossipSelect_npc_great_bear_spirit;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_silva_filnaveth";
+    newscript->Name = "npc_silva_filnaveth";
     newscript->pGossipHello =  &GossipHello_npc_silva_filnaveth;
     newscript->pGossipSelect = &GossipSelect_npc_silva_filnaveth;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_clintar_dreamwalker";
+    newscript->Name = "npc_clintar_dreamwalker";
     newscript->pQuestAccept = &QuestAccept_npc_clintar_dreamwalker;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_clintar_spirit";
+    newscript->Name = "npc_clintar_spirit";
     newscript->GetAI = &GetAI_npc_clintar_spirit;
     newscript->RegisterSelf();
 }

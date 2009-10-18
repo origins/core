@@ -44,7 +44,6 @@ EndContentData */
 #define ENTRY_TARLORD1 6519
 #define ENTRY_STOMPER 6513
 
-
 struct CW_DLL_DECL npc_ameAI : public npc_escortAI
 {
     npc_ameAI(Creature *c) : npc_escortAI(c) {}
@@ -138,7 +137,7 @@ CreatureAI* GetAI_npc_ame(Creature* pCreature)
 # npc_ringo
 ####*/
 
-enum
+enum eRingo
 {
     SAY_RIN_START_1             = -1000416,
     SAY_RIN_START_2             = -1000417,

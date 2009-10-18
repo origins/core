@@ -183,7 +183,6 @@ struct CW_DLL_DECL boss_exarch_maladaarAI : public ScriptedAI
         ScriptedAI::MoveInLineOfSight(who);
     }
 
-
     void EnterCombat(Unit *who)
     {
         DoScriptText(RAND(SAY_AGGRO_1,SAY_AGGRO_2,SAY_AGGRO_3), m_creature);
@@ -332,17 +331,17 @@ void AddSC_boss_exarch_maladaar()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_exarch_maladaar";
+    newscript->Name = "boss_exarch_maladaar";
     newscript->GetAI = &GetAI_boss_exarch_maladaar;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_avatar_of_martyred";
+    newscript->Name = "mob_avatar_of_martyred";
     newscript->GetAI = &GetAI_mob_avatar_of_martyred;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_stolen_soul";
+    newscript->Name = "mob_stolen_soul";
     newscript->GetAI = &GetAI_mob_stolen_soul;
     newscript->RegisterSelf();
 }

@@ -23,7 +23,7 @@ EndScriptData */
 
 #include "precompiled.h"
 
-enum
+enum eEnums
 {
     SAY_AGGRO               = -1000401,
     SAY_CASTCORRUPTION      = -1000402, //signed for 6182
@@ -46,7 +46,6 @@ struct CW_DLL_DECL boss_emerissAI : public ScriptedAI
     //uint32 m_uiMarkOfNature_Timer;
     uint32 m_uiVolatileInfection_Timer;
     uint32 m_uiCorruptionsCasted;
-
 
     void Reset()
     {
@@ -107,7 +106,6 @@ struct CW_DLL_DECL boss_emerissAI : public ScriptedAI
         //else
         //    m_uiMarkOfNature_Timer -= uiDiff;
 
-
         //VolatileInfection_Timer
         if (m_uiVolatileInfection_Timer < uiDiff)
         {
@@ -139,7 +137,7 @@ void AddSC_boss_emeriss()
 {
     Script *newscript;
     newscript = new Script;
-    newscript->Name="boss_emeriss";
+    newscript->Name = "boss_emeriss";
     newscript->GetAI = &GetAI_boss_emeriss;
     newscript->RegisterSelf();
 }

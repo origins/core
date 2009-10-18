@@ -61,7 +61,7 @@ bool GossipSelect_npc_skorn_whitecloud(Player* pPlayer, Creature* pCreature, uin
 # npc_kyle_frenzied
 ######*/
 
-enum
+enum eKyleFrenzied
 {
     //emote signed for 7780 but propably thats wrong id.
     EMOTE_SEE_LUNCH         = -1000407,
@@ -298,13 +298,13 @@ void AddSC_mulgore()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_skorn_whitecloud";
+    newscript->Name = "npc_skorn_whitecloud";
     newscript->pGossipHello = &GossipHello_npc_skorn_whitecloud;
     newscript->pGossipSelect = &GossipSelect_npc_skorn_whitecloud;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_kyle_frenzied";
+    newscript->Name = "npc_kyle_frenzied";
     newscript->GetAI = &GetAI_npc_kyle_frenzied;
     newscript->RegisterSelf();
 

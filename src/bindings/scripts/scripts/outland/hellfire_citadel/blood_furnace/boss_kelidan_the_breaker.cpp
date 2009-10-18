@@ -42,13 +42,13 @@ enum eKelidan
 
     SPELL_CORRUPTION            = 30938,
     SPELL_EVOCATION             = 30935,
- 
+
     SPELL_FIRE_NOVA             = 33132,
     H_SPELL_FIRE_NOVA           = 37371,
- 
+
     SPELL_SHADOW_BOLT_VOLLEY    = 28599,
     H_SPELL_SHADOW_BOLT_VOLLEY  = 40070,
- 
+
     SPELL_BURNING_NOVA          = 30940,
     SPELL_VORTEX                = 37370,
 
@@ -71,7 +71,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
     {
         pInstance = c->GetInstanceData();
         HeroicMode = c->GetMap()->IsHeroic();
-        for(uint8 i=0; i<5; ++i)
+        for (uint8 i=0; i<5; ++i)
             Channelers[i] = 0;
     }
 
@@ -99,7 +99,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
         if (pInstance)
             pInstance->SetData(TYPE_KELIDAN_THE_BREAKER_EVENT, NOT_STARTED);
     }
-   
+
     void EnterCombat(Unit *who)
     {
         DoScriptText(SAY_WAKE, m_creature);
@@ -115,11 +115,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
         if (rand()%2)
             return;
 
-        switch(rand()%2)
-        {
-            case 0: DoScriptText(SAY_KILL_1, m_creature); break;
-            case 1: DoScriptText(SAY_KILL_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KILL_1,SAY_KILL_2), m_creature);
     }
 
     void ChannelerEngaged(Unit* who)
@@ -127,14 +123,9 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
         if (who && !addYell)
         {
             addYell = true;
-            switch(rand()%3)
-            {
-                case 0: DoScriptText(SAY_ADD_AGGRO_1, m_creature); break;
-                case 1: DoScriptText(SAY_ADD_AGGRO_2, m_creature); break;
-                default: DoScriptText(SAY_ADD_AGGRO_3, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_ADD_AGGRO_1,SAY_ADD_AGGRO_2,SAY_ADD_AGGRO_3), m_creature);
         }
-        for(uint8 i=0; i<5; ++i)
+        for (uint8 i=0; i<5; ++i)
         {
             Creature *channeler = Unit::GetCreature(*m_creature, Channelers[i]);
             if (who && channeler && !channeler->isInCombat())
@@ -144,7 +135,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
 
     void ChannelerDied(Unit* killer)
     {
-        for(uint8 i=0; i<5; ++i)
+        for (uint8 i=0; i<5; ++i)
         {
             Creature *channeler = Unit::GetCreature(*m_creature, Channelers[i]);
             if (channeler && channeler->isAlive())
@@ -160,7 +151,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
         SummonChannelers();
         if (!channeler1) return NULL;
         uint8 i;
-        for(i=0; i<5; ++i)
+        for (i=0; i<5; ++i)
         {
             Creature *channeler = Unit::GetCreature(*m_creature, Channelers[i]);
             if (channeler && channeler->GetGUID() == channeler1->GetGUID())
@@ -171,7 +162,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
 
     void SummonChannelers()
     {
-        for(uint8 i=0; i<5; ++i)
+        for (uint8 i=0; i<5; ++i)
         {
             Creature *channeler = Unit::GetCreature(*m_creature, Channelers[i]);
             if (!channeler || channeler->isDead())
@@ -189,7 +180,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
 
         if (!pInstance)
             return;
-            
+
         pInstance->SetData(TYPE_KELIDAN_THE_BREAKER_EVENT, DONE);
         pInstance->HandleGameObject(pInstance->GetData64(DATA_DOOR1), true);
         pInstance->HandleGameObject(pInstance->GetData64(DATA_DOOR6), true);
@@ -261,7 +252,7 @@ struct CW_DLL_DECL boss_kelidan_the_breakerAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    
+
 };
 
 CreatureAI* GetAI_boss_kelidan_the_breaker(Creature* pCreature)
@@ -273,11 +264,11 @@ CreatureAI* GetAI_boss_kelidan_the_breaker(Creature* pCreature)
 ## mob_shadowmoon_channeler
 ######*/
 
-enum
+enum eShadowmoon
 {
     SPELL_SHADOW_BOLT       = 12739,
     H_SPELL_SHADOW_BOLT     = 15472,
- 
+
     SPELL_MARK_OF_SHADOW    = 30937,
     SPELL_CHANNELING        = 39123
 };
@@ -364,12 +355,12 @@ void AddSC_boss_kelidan_the_breaker()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_kelidan_the_breaker";
+    newscript->Name = "boss_kelidan_the_breaker";
     newscript->GetAI = &GetAI_boss_kelidan_the_breaker;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_shadowmoon_channeler";
+    newscript->Name = "mob_shadowmoon_channeler";
     newscript->GetAI = &GetAI_mob_shadowmoon_channeler;
     newscript->RegisterSelf();
 }

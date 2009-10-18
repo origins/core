@@ -122,7 +122,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
 
     bool IsEncounterInProgress() const
     {
-        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+        for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
             if (m_auiEncounter[i] == IN_PROGRESS) return true;
 
         return false;
@@ -139,7 +139,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
                 SetData(DATA_STRANGE_POOL, IN_PROGRESS);//just fished, signal Lurker script to emerge and start fight, we use IN_PROGRESS so it won't get saved and lurker will be alway invis at start if server restarted
             }else FishingTimer -= diff;
         }
-        //Water checks    
+        //Water checks
         if(WaterCheckTimer < diff)
         {
             if(TrashCount >= MIN_KILLS)
@@ -176,11 +176,11 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
                                 DoSpawnFrenzy = false;
                             }
                         }
-                    }                
+                    }
                     if(!pPlayer->IsInWater())
                         pPlayer->RemoveAurasDueToSpell(SPELL_SCALDINGWATER);
                 }
-                                    
+
             }
             WaterCheckTimer = 500;//remove stress from core
         }else WaterCheckTimer -= diff;
@@ -214,7 +214,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
                 BridgePart[2] = pGo->GetGUID();
                 pGo->setActive(true);
             break;
-            case GAMEOBJECT_FISHINGNODE_ENTRY://no way checking if fish is hooked, so we create a timed event                
+            case GAMEOBJECT_FISHINGNODE_ENTRY://no way checking if fish is hooked, so we create a timed event
                 if(LurkerSubEvent == LURKER_NOT_STARTED)
                 {
                     FishingTimer = 10000+rand()%30000;//random time before lurker emerges
@@ -241,7 +241,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
                     TrashCount++;
                 break;*/
         }
-    }         
+    }
 
     void SetData64(uint32 type, uint64 data)
     {
@@ -272,7 +272,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
     {
         switch(type)
         {
-        case DATA_STRANGE_POOL: 
+        case DATA_STRANGE_POOL:
             {
                 StrangePool = data;
                 if(data == NOT_STARTED)
@@ -287,7 +287,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
                 HandleGameObject(BridgePart[0], true);
             }
             ControlConsole = data;break;
-        case DATA_TRASH : 
+        case DATA_TRASH :
             {
                 if(data == 1 && TrashCount < MIN_KILLS)
                     TrashCount++;//+1 died
@@ -369,7 +369,7 @@ struct CW_DLL_DECL instance_serpentshrine_cavern : public ScriptedInstance
         std::istringstream stream(in);
         stream >> m_auiEncounter[0] >> m_auiEncounter[1] >> m_auiEncounter[2] >> m_auiEncounter[3]
         >> m_auiEncounter[4] >> m_auiEncounter[5] >> TrashCount;
-        for(uint8 i = 0; i < MAX_ENCOUNTER; ++i)
+        for (uint8 i = 0; i < MAX_ENCOUNTER; ++i)
             if (m_auiEncounter[i] == IN_PROGRESS)                // Do not load an encounter as "In Progress" - reset it instead.
                 m_auiEncounter[i] = NOT_STARTED;
         OUT_LOAD_INST_DATA_COMPLETE;
@@ -391,7 +391,7 @@ void AddSC_instance_serpentshrine_cavern()
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="go_bridge_console";
+    newscript->Name = "go_bridge_console";
     newscript->pGOHello = &GOHello_go_bridge_console;
     newscript->RegisterSelf();
 }

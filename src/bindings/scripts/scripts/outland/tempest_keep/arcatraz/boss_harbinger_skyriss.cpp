@@ -129,11 +129,7 @@ struct CW_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
         if (victim->GetEntry() == 21436)
             return;
 
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_KILL_1, m_creature); break;
-        case 1: DoScriptText(SAY_KILL_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KILL_1,SAY_KILL_2), m_creature);
     }
 
     void DoSplit(uint32 val)
@@ -215,11 +211,7 @@ struct CW_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
             if (m_creature->IsNonMeleeSpellCasted(false))
                 return;
 
-            switch(rand()%2)
-            {
-            case 0: DoScriptText(SAY_FEAR_1, m_creature); break;
-            case 1: DoScriptText(SAY_FEAR_2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_FEAR_1,SAY_FEAR_2), m_creature);
 
             if (Unit* target = SelectUnit(SELECT_TARGET_RANDOM,1))
                 DoCast(target,SPELL_FEAR);
@@ -234,11 +226,7 @@ struct CW_DLL_DECL boss_harbinger_skyrissAI : public ScriptedAI
             if (m_creature->IsNonMeleeSpellCasted(false))
                 return;
 
-            switch(rand()%2)
-            {
-            case 0: DoScriptText(SAY_MIND_1, m_creature); break;
-            case 1: DoScriptText(SAY_MIND_2, m_creature); break;
-            }
+            DoScriptText(RAND(SAY_MIND_1,SAY_MIND_2), m_creature);
 
             if (Unit* target = SelectUnit(SELECT_TARGET_RANDOM,1))
                 DoCast(target,HEROIC(SPELL_DOMINATION, H_SPELL_DOMINATION));
@@ -298,12 +286,12 @@ void AddSC_boss_harbinger_skyriss()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_harbinger_skyriss";
+    newscript->Name = "boss_harbinger_skyriss";
     newscript->GetAI = &GetAI_boss_harbinger_skyriss;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="boss_harbinger_skyriss_illusion";
+    newscript->Name = "boss_harbinger_skyriss_illusion";
     newscript->GetAI = &GetAI_boss_harbinger_skyriss_illusion;
     newscript->RegisterSelf();
 }

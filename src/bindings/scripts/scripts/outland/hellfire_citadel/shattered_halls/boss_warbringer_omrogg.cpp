@@ -177,7 +177,6 @@ struct CW_DLL_DECL boss_warbringer_omroggAI : public ScriptedAI
             RightHeadGUID = 0;
         }
 
-
         AggroYell = false;
         ThreatYell = false;
         ThreatYell2 = false;
@@ -249,7 +248,6 @@ struct CW_DLL_DECL boss_warbringer_omroggAI : public ScriptedAI
     {
         Unit* pLeftHead  = Unit::GetUnit(*m_creature,LeftHeadGUID);
         Unit* pRightHead = Unit::GetUnit(*m_creature,RightHeadGUID);
-
 
         if (!pLeftHead || !pRightHead)
             return;
@@ -396,12 +394,12 @@ void AddSC_boss_warbringer_omrogg()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_warbringer_omrogg";
+    newscript->Name = "boss_warbringer_omrogg";
     newscript->GetAI = &GetAI_boss_warbringer_omrogg;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_omrogg_heads";
+    newscript->Name = "mob_omrogg_heads";
     newscript->GetAI = &GetAI_mob_omrogg_heads;
     newscript->RegisterSelf();
 }

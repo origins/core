@@ -176,7 +176,7 @@ struct CW_DLL_DECL boss_grand_warlock_nethekurseAI : public ScriptedAI
             {
             if (who->GetTypeId() != TYPEID_PLAYER)
                 return;
-    
+
                 DoScriptText(SAY_INTRO, m_creature);
                 IntroOnce = true;
                 IsIntroEvent = true;
@@ -201,7 +201,7 @@ struct CW_DLL_DECL boss_grand_warlock_nethekurseAI : public ScriptedAI
         summoned->setFaction(16);
         summoned->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
         summoned->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NOT_SELECTABLE);
-        
+
         //triggered spell of consumption does not properly show it's SpellVisual, wrong spellid?
         summoned->CastSpell(summoned,SPELL_TEMPORARY_VISUAL,true);
         summoned->CastSpell(summoned,SPELL_CONSUMPTION,false,0,0,m_creature->GetGUID());
@@ -381,17 +381,17 @@ void AddSC_boss_grand_warlock_nethekurse()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="boss_grand_warlock_nethekurse";
+    newscript->Name = "boss_grand_warlock_nethekurse";
     newscript->GetAI = &GetAI_boss_grand_warlock_nethekurse;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_fel_orc_convert";
+    newscript->Name = "mob_fel_orc_convert";
     newscript->GetAI = &GetAI_mob_fel_orc_convert;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_lesser_shadow_fissure";
+    newscript->Name = "mob_lesser_shadow_fissure";
     newscript->GetAI = &GetAI_mob_lesser_shadow_fissure;
     newscript->RegisterSelf();
 }

@@ -127,7 +127,6 @@ struct CW_DLL_DECL boss_erekemAI : public ScriptedAI
             uiBloodlustTimer = urand(35000,45000);
         } else uiBloodlustTimer -= diff;
 
-
         if (uiEarthShockTimer < diff)
         {
             DoCast(m_creature->getVictim(), SPELL_EARTH_SHOCK);
@@ -182,6 +181,13 @@ CreatureAI* GetAI_boss_erekem(Creature* pCreature)
     return new boss_erekemAI (pCreature);
 }
 
+enum GuardSpells
+{
+    SPELL_GUSHING_WOUND                   = 39215,
+    SPELL_HOWLING_SCREECH                 = 54462,
+    SPELL_STRIKE                          = 14516
+};
+
 struct CW_DLL_DECL mob_erekem_guardAI : public ScriptedAI
 {
     mob_erekem_guardAI(Creature *c) : ScriptedAI(c)
@@ -235,7 +241,6 @@ CreatureAI* GetAI_mob_erekem_guard(Creature* pCreature)
 {
     return new mob_erekem_guardAI (pCreature);
 }
-
 
 void AddSC_boss_erekem()
 {

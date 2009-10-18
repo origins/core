@@ -116,11 +116,7 @@ struct CW_DLL_DECL npc_millhouse_manastormAI : public ScriptedAI
 
     void KilledUnit(Unit *victim)
     {
-        switch(rand()%2)
-        {
-        case 0: DoScriptText(SAY_KILL_1, m_creature); break;
-        case 1: DoScriptText(SAY_KILL_2, m_creature); break;
-        }
+        DoScriptText(RAND(SAY_KILL_1,SAY_KILL_2), m_creature);
     }
 
     void JustDied(Unit *victim)
@@ -507,17 +503,17 @@ void AddSC_arcatraz()
     Script *newscript;
 
     newscript = new Script;
-    newscript->Name="npc_millhouse_manastorm";
+    newscript->Name = "npc_millhouse_manastorm";
     newscript->GetAI = &GetAI_npc_millhouse_manastorm;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="npc_warden_mellichar";
+    newscript->Name = "npc_warden_mellichar";
     newscript->GetAI = &GetAI_npc_warden_mellichar;
     newscript->RegisterSelf();
 
     newscript = new Script;
-    newscript->Name="mob_zerekethvoidzone";
+    newscript->Name = "mob_zerekethvoidzone";
     newscript->GetAI = &GetAI_mob_zerekethvoidzoneAI;
     newscript->RegisterSelf();
 }
