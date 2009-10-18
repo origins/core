@@ -92,7 +92,11 @@ struct CW_DLL_DECL boss_mal_ganisAI : public ScriptedAI
 
         DoMeleeAttackIfReady();
     }
-    void JustDied(Unit* killer)  {}
+    void JustDied(Unit* killer)
+    {
+        if (pInstance)
+             pInstance->SetData(DATA_MAL_GANIS_EVENT, NOT_STARTED);
+    }
     void KilledUnit(Unit *victim)
     {
         if (victim == m_creature)

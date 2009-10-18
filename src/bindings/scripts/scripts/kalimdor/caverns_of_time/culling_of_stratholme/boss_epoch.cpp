@@ -55,6 +55,9 @@ struct CW_DLL_DECL boss_epochAI : public ScriptedAI
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
+        
+        if (pInstance)
+            pInstance->SetData(DATA_EPOCH_EVENT, DONE);
     }
 
     void KilledUnit(Unit *victim)

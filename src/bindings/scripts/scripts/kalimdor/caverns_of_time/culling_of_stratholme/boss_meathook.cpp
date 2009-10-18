@@ -107,6 +107,9 @@ struct CW_DLL_DECL boss_meathookAI : public ScriptedAI
     void JustDied(Unit* killer)
     {
         DoScriptText(SAY_DEATH, m_creature);
+        
+        if (pInstance)
+            pInstance->SetData(DATA_MEATHOOK_EVENT, DONE);
     }
 
     void KilledUnit(Unit *victim)

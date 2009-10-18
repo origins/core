@@ -66,8 +66,6 @@ struct CW_DLL_DECL boss_salrammAI : public ScriptedAI
         if (!UpdateVictim())
             return;
 
-        Unit* random_target = SelectUnit(SELECT_TARGET_RANDOM, 0);
-
         //Curse of twisted flesh timer
         if (Curse_flesh_Timer < diff)
         {
@@ -78,27 +76,16 @@ struct CW_DLL_DECL boss_salrammAI : public ScriptedAI
         //Shadow bolt timer
         if (Shadow_bolt_Timer < diff)
         {
-            if (random_target)
-                DoCast(random_target,SPELL_SHADOW_BOLT_N);
-            Shadow_bolt_Timer = 8000 + rand()%4000;
+            if (Unit* random_target = SelectUnit(SELECT_TARGET_RANDOM, 0))
+                DoCast(random_target, HEROIC(SPELL_SHADOW_BOLT, H_SPELL_SHADOW_BOLT));
+            Shadow_bolt_Timer = urand(8000,12000);
         }else Shadow_bolt_Timer -= diff;
 
         //Steal Flesh timer
         if (Steal_flesh_Timer < diff)
         {
-            switch(rand()%3)
-            {
-                case 0:
-                    DoScriptText(SAY_STEAL_FLESH_1, m_creature);
-                    break;
-                case 1:
-                    DoScriptText(SAY_STEAL_FLESH_2, m_creature);
-                    break;
-                case 2:
-                    DoScriptText(SAY_STEAL_FLESH_3, m_creature);
-                    break;
-            }
-            if (random_target)
+            DoScriptText(RAND(SAY_STEAL_FLESH_1,SAY_STEAL_FLESH_2,SAY_STEAL_FLESH_3), m_creature);
+            if (Unit* random_target = SelectUnit(SELECT_TARGET_RANDOM, 0))
                 DoCast(random_target,SPELL_STEAL_FLESH);
             Steal_flesh_Timer = 10000;
         }else Steal_flesh_Timer -= diff;
@@ -106,16 +93,9 @@ struct CW_DLL_DECL boss_salrammAI : public ScriptedAI
         //Summon ghouls timer
         if (Summon_ghouls_Timer < diff)
         {
+            DoScriptText(RAND(SAY_SUMMON_GHOULS_1,SAY_SUMMON_GHOULS_2), m_creature);
             switch(rand()%2)
-            {
-                case 0:
-                    DoScriptText(SAY_SUMMON_GHOULS_1, m_creature);
-                    break;
-                case 1:
-                    DoScriptText(SAY_SUMMON_GHOULS_2, m_creature);
-                    break;
-            }
-            if (random_target)
+            if (Unit* random_target = SelectUnit(SELECT_TARGET_RANDOM, 0))
                 DoCast(random_target,SPELL_SUMMON_GHOULS);
             Summon_ghouls_Timer = 10000;
         }else Summon_ghouls_Timer -= diff;
@@ -124,7 +104,12 @@ struct CW_DLL_DECL boss_salrammAI : public ScriptedAI
     }
 
     void JustDied(Unit* killer)
-    {DoScriptText(SAY_DEATH, m_creature);}
+    {
+        DoScriptText(SAY_DEATH, m_creature);
+        
+        if (pInstance)
+            pInstance->SetData(DATA_SALRAMM_EVENT, DONE);
+    }
 
     void KilledUnit(Unit *victim)
     {
