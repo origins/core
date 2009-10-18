@@ -1127,8 +1127,10 @@ void OPvPWintergrasp::EndBattle()
             if (team == getDefenderTeam())
             {
                 if((*itr)->HasAura(SPELL_LIEUTENANT) || (*itr)->HasAura(SPELL_CORPORAL))
+                {
                     (*itr)->AreaExploredOrEventHappens(A_VICTORY_IN_WG);
                     (*itr)->AreaExploredOrEventHappens(H_VICTORY_IN_WG);
+                }
 
             }
             REMOVE_WARTIME_AURAS(*itr);
