@@ -268,8 +268,10 @@ extern void AddSC_boss_gal_darah();
 extern void AddSC_boss_eck();
 extern void AddSC_instance_gundrak();
 extern void AddSC_boss_krik_thir();             //Azjol-Nerub
+extern void AddSC_boss_hadronox();
 extern void AddSC_instance_azjol_nerub();
 extern void AddSC_instance_ahnkahet();          //Azjol-Nerub Ahn'kahet
+extern void AddSC_boss_amanitar();
 extern void AddSC_boss_taldaram();
 extern void AddSC_boss_elder_nadox();
 extern void AddSC_boss_volazj();
