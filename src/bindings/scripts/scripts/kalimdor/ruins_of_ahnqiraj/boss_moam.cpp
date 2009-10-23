@@ -16,94 +16,136 @@
 
 /* ScriptData
 SDName: Boss_Moam
-SD%Complete: 100
-SDComment: VERIFY SCRIPT AND SQL
+SD%Complete: 90
+SDComment: TODO: Adjust timer, correct Stone phase buff
 SDCategory: Ruins of Ahn'Qiraj
 EndScriptData */
 
 #include "precompiled.h"
+#include "ruins_of_ahnqiraj.h"
 
-#define EMOTE_AGGRO             -1509000
-#define EMOTE_MANA_FULL         -1509001
+enum Emotes
+{
+    EMOTE_AGGRO             = -1509000,
+    EMOTE_MANA_FULL         = -1509001
+};
 
-#define SPELL_TRAMPLE           15550
-#define SPELL_DRAINMANA         27256
-#define SPELL_ARCANEERUPTION    25672
-#define SPELL_SUMMONMANA        25681
-#define SPELL_GRDRSLEEP         24360                       //Greater Dreamless Sleep
+enum Spells
+{
+    SPELL_TRAMPLE           = 15550,
+    SPELL_DRAINMANA         = 27256,    //Doesn't exist ?
+    SPELL_ARCANEERUPTION    = 25672,
+    SPELL_SUMMONMANA        = 25681,    //Summon Mana fiend. It only summons one so exec it three times
+    SPELL_GRDRSLEEP         = 24360     //Greater Dreamless Sleep
+};
+
+enum Creatures
+{
+    CREATURE_MANA_FIEND     = 15527
+};
+
+enum CombatPhase
+{
+    NORMAL,
+    STONE
+};
 
 struct CW_DLL_DECL boss_moamAI : public ScriptedAI
 {
-    boss_moamAI(Creature *c) : ScriptedAI(c) {}
-
-    Unit *pTarget;
-    uint32 TRAMPLE_Timer;
-    uint32 DRAINMANA_Timer;
-    uint32 SUMMONMANA_Timer;
-    uint32 i;
-    uint32 j;
+    boss_moamAI(Creature *c) : ScriptedAI(c)
+    {
+        pInstance = c->GetInstanceData();
+    }
+    
+    uint32 uiTrampleTimer;
+    uint32 uiDrainManaTimer;
+    uint32 uiPhaseTimer;
+    CombatPhase Phase;
+    
+    ScriptedInstance *pInstance;
 
     void Reset()
     {
-        i=0;
-        j=0;
-        pTarget = NULL;
-        TRAMPLE_Timer = 30000;
-        DRAINMANA_Timer = 30000;
+        uiTrampleTimer = urand(3000,7000);
+        uiDrainManaTimer = urand(3000,7000);
+        uiPhaseTimer = 90000;
+        Phase = NORMAL;
+        m_creature->SetPower(POWER_MANA,0);
+        
+        if (pInstance)
+            pInstance->SetData(DATA_MOAM_EVENT, NOT_STARTED);
     }
 
     void EnterCombat(Unit *who)
     {
         DoScriptText(EMOTE_AGGRO, m_creature);
-        pTarget = who;
+        
+        if (pInstance)
+            pInstance->SetData(DATA_MOAM_EVENT, IN_PROGRESS);
+    }
+    
+    void JustDied(Unit *killer)
+    {
+        if (pInstance)
+            pInstance->SetData(DATA_MOAM_EVENT, DONE);
+    }
+    
+    void DrainMana()
+    {
+        for (uint8 i=0;i<6;++i)
+        {
+            if (Unit* pTarget = SelectTarget(SELECT_TARGET_RANDOM,0,100,true))
+            {
+                pTarget->ModifyPower(POWER_MANA, -500);
+                m_creature->ModifyPower(POWER_MANA, 1000);
+            }
+        }
     }
 
     void UpdateAI(const uint32 diff)
     {
-        if (!UpdateVictim())
-            return;
-
-        //If we are 100%MANA cast Arcane Erruption
-        //if (j==1 && m_creature->GetMana()*100 / m_creature->GetMaxMana() == 100 && !m_creature->IsNonMeleeSpellCasted(false))
+        if (Phase == NORMAL)
         {
-            DoCast(m_creature->getVictim(),SPELL_ARCANEERUPTION);
-            DoScriptText(EMOTE_MANA_FULL, m_creature);
+            if (!UpdateVictim())
+                return;
+            
+            //If we are 100%MANA cast Arcane Erruption
+            if (m_creature->GetPower(POWER_MANA) == m_creature->GetMaxPower(POWER_MANA))
+            {
+                DoCast(m_creature->getVictim(),SPELL_ARCANEERUPTION);
+                DoScriptText(EMOTE_MANA_FULL, m_creature);
+                m_creature->SetPower(POWER_MANA,0);
+            }
+            
+            //Trample Spell
+            if (uiTrampleTimer < diff)
+            {
+                DoCast(m_creature->getVictim(),SPELL_TRAMPLE);
+                uiTrampleTimer = urand(3000,7000);
+            } else uiTrampleTimer -= diff;
+            
+            //Drain Mana
+            if (uiDrainManaTimer < diff)
+            {
+                DrainMana();
+                uiDrainManaTimer = urand(3000,7000);
+            } else uiDrainManaTimer -= diff;
+            
+            DoMeleeAttackIfReady();
+            
+            //After 90secs change phase
+            if (uiPhaseTimer < diff)
+            {
+                Phase = STONE;
+                DoCast(m_creature,SPELL_SUMMONMANA);
+                DoCast(m_creature,SPELL_SUMMONMANA);
+                DoCast(m_creature,SPELL_SUMMONMANA);
+                DoCast(m_creature,SPELL_GRDRSLEEP);
+            } else uiPhaseTimer -= diff;
         }
-
-        //If we are <50%HP cast MANA FIEND (Summon Mana) and Sleep
-        //if (i==0 && m_creature->GetHealth()*100 / m_creature->GetMaxHealth() <= 50 && !m_creature->IsNonMeleeSpellCasted(false))
-        {
-            i=1;
-            DoCast(m_creature->getVictim(),SPELL_SUMMONMANA);
-            DoCast(m_creature->getVictim(),SPELL_GRDRSLEEP);
-        }
-
-        //SUMMONMANA_Timer
-        if (i==1 && SUMMONMANA_Timer < diff)
-        {
-            DoCast(m_creature->getVictim(),SPELL_SUMMONMANA);
-            SUMMONMANA_Timer = 90000;
-        }else SUMMONMANA_Timer -= diff;
-
-        //TRAMPLE_Timer
-        if (TRAMPLE_Timer < diff)
-        {
-            DoCast(m_creature->getVictim(),SPELL_TRAMPLE);
-            j=1;
-
-            TRAMPLE_Timer = 30000;
-        }else TRAMPLE_Timer -= diff;
-
-        //DRAINMANA_Timer
-        if (DRAINMANA_Timer < diff)
-        {
-            DoCast(m_creature->getVictim(),SPELL_DRAINMANA);
-            DRAINMANA_Timer = 30000;
-        }else DRAINMANA_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
+
 CreatureAI* GetAI_boss_moam(Creature* pCreature)
 {
     return new boss_moamAI (pCreature);

@@ -39,7 +39,7 @@ SystemMgr& SystemMgr::Instance()
 void SystemMgr::LoadVersion()
 {
     //Get Version information
-    QueryResult* pResult = TScriptDB.PQuery("SELECT script_version FROM core_version LIMIT 1");
+    QueryResult* pResult = TScriptDB.PQuery("SELECT script_version FROM version LIMIT 1");
 
     if (pResult)
     {
@@ -50,7 +50,7 @@ void SystemMgr::LoadVersion()
     }
     else
     {
-        error_log("TSCR: Missing `core_version`.`script_version` information.");
+        error_log("TSCR: Missing `version`.`script_version` information.");
         outstring_log("");
     }
 }
@@ -58,7 +58,7 @@ void SystemMgr::LoadVersion()
 void SystemMgr::LoadScriptTexts()
 {
     outstring_log("TSCR: Loading Script Texts...");
-    LoadCWStrings(TScriptDB,"script_texts",TEXT_SOURCE_RANGE,1+(TEXT_SOURCE_RANGE*2));
+    LoadTrinityStrings(TScriptDB,"script_texts",TEXT_SOURCE_RANGE,1+(TEXT_SOURCE_RANGE*2));
 
     QueryResult* pResult = TScriptDB.PQuery("SELECT entry, sound, type, language, emote FROM script_texts");
 
@@ -124,7 +124,7 @@ void SystemMgr::LoadScriptTexts()
 void SystemMgr::LoadScriptTextsCustom()
 {
     outstring_log("TSCR: Loading Custom Texts...");
-    LoadCWStrings(TScriptDB,"custom_texts",TEXT_SOURCE_RANGE*2,1+(TEXT_SOURCE_RANGE*3));
+    LoadTrinityStrings(TScriptDB,"custom_texts",TEXT_SOURCE_RANGE*2,1+(TEXT_SOURCE_RANGE*3));
 
     QueryResult* pResult = TScriptDB.PQuery("SELECT entry, sound, type, language, emote FROM custom_texts");
 

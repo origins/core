@@ -1355,7 +1355,7 @@ void Aura::HandleAuraSpecificMods(bool apply)
             {
                 if (Unit * caster = GetCaster())
                 {
-                    if (caster->GetTypeId()==TYPEID_PLAYER && ((Player*)caster)->isHonorOrXPTarget(m_target))
+                    if (caster->GetTypeId() == TYPEID_PLAYER && ((Player*)caster)->isHonorOrXPTarget(m_target))
                         caster->CastSpell(m_target, 18662, true, NULL, GetPartAura(0));
                 }
             }
@@ -2357,7 +2357,7 @@ void AuraEffect::TriggerSpell()
                     case 17949:
                     case 27252:
                     {
-                        if (caster->GetTypeId()!=TYPEID_PLAYER)
+                        if (caster->GetTypeId() != TYPEID_PLAYER)
                             return;
                         Item* item = ((Player*)caster)->GetWeaponForAttack(BASE_ATTACK);
                         if (!item)
@@ -2823,11 +2823,11 @@ void AuraEffect::HandleAuraDummy(bool apply, bool Real, bool changeAmount)
                 }
                 return;
             case 46699:                                     // Requires No Ammo
-                if(m_target->GetTypeId()==TYPEID_PLAYER)
+                if(m_target->GetTypeId() == TYPEID_PLAYER)
                     ((Player*)m_target)->RemoveAmmo();      // not use ammo and not allow use
                 return;
             case 52916:  // Honor Among Thieves
-                if(m_target->GetTypeId()==TYPEID_PLAYER)
+                if(m_target->GetTypeId() == TYPEID_PLAYER)
                     if (Unit * target = ObjectAccessor::GetUnit(*m_target,((Player*)m_target)->GetComboTarget()))
                         m_target->CastSpell(target, 51699, true);
                return;
@@ -3046,6 +3046,16 @@ void AuraEffect::HandleAuraDummy(bool apply, bool Real, bool changeAmount)
                     }
                     return;
                 }
+                case 57723: // Exhaustion
+                case 57724: // Sated
+                {
+                    switch(GetId())
+                    {
+                        case 57723: m_target->ApplySpellImmune(GetId(), IMMUNITY_ID, 32182, apply); break; // Heroism
+                        case 57724: m_target->ApplySpellImmune(GetId(), IMMUNITY_ID, 2825, apply);  break; // Bloodlust
+                    }
+                    return;
+                }
                 case 57819: // Argent Champion
                 case 57820: // Ebon Champion
                 case 57821: // Champion of the Kirin Tor
@@ -3108,7 +3118,7 @@ void AuraEffect::HandleAuraDummy(bool apply, bool Real, bool changeAmount)
             if (!Real && !changeAmount)
                 break;
             // Pain and Suffering
-            if( m_spellProto->SpellIconID == 2874 && m_target->GetTypeId()==TYPEID_PLAYER )
+            if( m_spellProto->SpellIconID == 2874 && m_target->GetTypeId() == TYPEID_PLAYER )
             {
                 if(apply)
                 {
@@ -3171,7 +3181,7 @@ void AuraEffect::HandleAuraDummy(bool apply, bool Real, bool changeAmount)
                 }
             }
             // Predatory Strikes
-            if(m_target->GetTypeId()==TYPEID_PLAYER && GetSpellProto()->SpellIconID == 1563)
+            if(m_target->GetTypeId() == TYPEID_PLAYER && GetSpellProto()->SpellIconID == 1563)
             {
                 ((Player*)m_target)->UpdateAttackPowerAndDamage();
                 return;
@@ -3242,7 +3252,7 @@ void AuraEffect::HandleAuraDummy(bool apply, bool Real, bool changeAmount)
             return;
         }
 
-        if(GetEffIndex()==0 && m_target->GetTypeId()==TYPEID_PLAYER)
+        if(GetEffIndex()==0 && m_target->GetTypeId() == TYPEID_PLAYER)
         {
             SpellAreaForAreaMapBounds saBounds = spellmgr.GetSpellAreaForAuraMapBounds(GetId());
             if(saBounds.first != saBounds.second)
@@ -3283,7 +3293,7 @@ void AuraEffect::HandleAuraMounted(bool apply, bool Real, bool /*changeAmount*/)
         }
 
         uint32 team = 0;
-        if (m_target->GetTypeId()==TYPEID_PLAYER)
+        if (m_target->GetTypeId() == TYPEID_PLAYER)
             team = ((Player*)m_target)->GetTeam();
 
         uint32 display_id = objmgr.ChooseDisplayId(team,ci);
@@ -3301,6 +3311,10 @@ void AuraEffect::HandleAuraMounted(bool apply, bool Real, bool /*changeAmount*/)
     else
     {
         m_target->Unmount();
+        //some mounts like Headless Horseman's Mount or broom stick are skill based spell
+        // need to remove ALL arura related to mounts, this will stop client crash with broom stick
+        // and never endless flying after using Headless Horseman's Mount
+        m_target->RemoveAurasByType(SPELL_AURA_MOUNTED);  
     }
 }
 
@@ -3359,7 +3373,7 @@ void AuraEffect::HandleAuraHover(bool apply, bool Real, bool /*changeAmount*/)
 void AuraEffect::HandleWaterBreathing(bool apply, bool Real, bool /*changeAmount*/)
 {
     // update timers in client
-    if(m_target->GetTypeId()==TYPEID_PLAYER)
+    if(m_target->GetTypeId() == TYPEID_PLAYER)
         ((Player*)m_target)->UpdateMirrorTimers();
 }
 
@@ -3590,7 +3604,7 @@ void AuraEffect::HandleAuraModShapeshift(bool apply, bool Real, bool changeAmoun
     // add/remove the shapeshift aura's boosts
     HandleShapeshiftBoosts(apply);
 
-    if(m_target->GetTypeId()==TYPEID_PLAYER)
+    if(m_target->GetTypeId() == TYPEID_PLAYER)
         ((Player*)m_target)->InitDataForForm();
 
     if(m_target->getClass() == CLASS_DRUID)
@@ -3614,7 +3628,7 @@ void AuraEffect::HandleAuraModShapeshift(bool apply, bool Real, bool changeAmoun
                 m_target->HandleAuraEffect(aurEff, false);
         }
     }
-    if (m_target->GetTypeId()==TYPEID_PLAYER)
+    if (m_target->GetTypeId() == TYPEID_PLAYER)
     {
         SpellShapeshiftEntry const *shapeInfo = sSpellShapeshiftStore.LookupEntry(form);
         // Learn spells for shapeshift form - no need to send action bars or add spells to spellbook
@@ -3638,7 +3652,7 @@ void AuraEffect::HandleAuraTransform(bool apply, bool Real, bool /*changeAmount*
         if(GetMiscValue()==0)
         {
             // player applied only
-            if (m_target->GetTypeId()!=TYPEID_PLAYER)
+            if (m_target->GetTypeId() != TYPEID_PLAYER)
                 return;
 
             switch (GetId())
@@ -3777,7 +3791,7 @@ void AuraEffect::HandleAuraTransform(bool apply, bool Real, bool /*changeAmount*
                 if(CreatureInfo const* ci = objmgr.GetCreatureTemplate(cr_id))
                 {
                     uint32 team = 0;
-                    if (m_target->GetTypeId()==TYPEID_PLAYER)
+                    if (m_target->GetTypeId() == TYPEID_PLAYER)
                         team = ((Player*)m_target)->GetTeam();
 
                     uint32 display_id = objmgr.ChooseDisplayId(team,ci);
@@ -3885,7 +3899,7 @@ void AuraEffect::HandleFarSight(bool apply, bool Real, bool /*changeAmount*/)
 
 void AuraEffect::HandleAuraTrackCreatures(bool apply, bool Real, bool /*changeAmount*/)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     m_target->SetUInt32Value(PLAYER_TRACK_CREATURES, apply ? ((uint32)1)<<(GetMiscValue()-1) : 0 );
@@ -3893,7 +3907,7 @@ void AuraEffect::HandleAuraTrackCreatures(bool apply, bool Real, bool /*changeAm
 
 void AuraEffect::HandleAuraTrackResources(bool apply, bool Real, bool /*changeAmount*/)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     m_target->SetUInt32Value(PLAYER_TRACK_RESOURCES, apply ? ((uint32)1)<<(GetMiscValue()-1): 0 );
@@ -3901,7 +3915,7 @@ void AuraEffect::HandleAuraTrackResources(bool apply, bool Real, bool /*changeAm
 
 void AuraEffect::HandleAuraTrackStealthed(bool apply, bool Real, bool /*changeAmount*/)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     m_target->ApplyModFlag(PLAYER_FIELD_BYTES,PLAYER_FIELD_BYTE_TRACK_STEALTHED,apply);
@@ -4080,7 +4094,7 @@ void AuraEffect::HandleModStealth(bool apply, bool Real, bool /*changeAmount*/)
         m_target->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_IMMUNE_OR_LOST_SELECTION);
 
         m_target->SetStandFlags(UNIT_STAND_FLAGS_CREEP);
-        if(m_target->GetTypeId()==TYPEID_PLAYER)
+        if(m_target->GetTypeId() == TYPEID_PLAYER)
             m_target->SetFlag(PLAYER_FIELD_BYTES2, 0x2000);
 
         // apply only if not in GM invisibility (and overwrite invisibility state)
@@ -4090,7 +4104,7 @@ void AuraEffect::HandleModStealth(bool apply, bool Real, bool /*changeAmount*/)
     else if(!m_target->HasAuraType(SPELL_AURA_MOD_STEALTH)) // if last SPELL_AURA_MOD_STEALTH
     {
         m_target->RemoveStandFlags(UNIT_STAND_FLAGS_CREEP);
-        if(m_target->GetTypeId()==TYPEID_PLAYER)
+        if(m_target->GetTypeId() == TYPEID_PLAYER)
             m_target->RemoveFlag(PLAYER_FIELD_BYTES2, 0x2000);
 
         if(m_target->GetVisibility() != VISIBILITY_OFF)
@@ -4109,7 +4123,7 @@ void AuraEffect::HandleInvisibility(bool apply, bool Real, bool /*changeAmount*/
             m_target->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_IMMUNE_OR_LOST_SELECTION);
 
             // apply glow vision
-            if(m_target->GetTypeId()==TYPEID_PLAYER)
+            if(m_target->GetTypeId() == TYPEID_PLAYER)
                 m_target->SetFlag(PLAYER_FIELD_BYTES2,PLAYER_FIELD_BYTE2_INVISIBILITY_GLOW);
 
             m_target->SetToNotify();
@@ -4149,7 +4163,7 @@ void AuraEffect::HandleInvisibilityDetect(bool apply, bool Real, bool /*changeAm
         for(Unit::AuraEffectList::const_iterator itr = auras.begin(); itr != auras.end(); ++itr)
             m_target->m_detectInvisibilityMask |= (1 << GetMiscValue());
     }
-    if(Real && m_target->GetTypeId()==TYPEID_PLAYER)
+    if(Real && m_target->GetTypeId() == TYPEID_PLAYER)
         m_target->SetToNotify();
 }
 
@@ -4316,7 +4330,7 @@ void AuraEffect::HandleAuraModIncreaseFlightSpeed(bool apply, bool Real, bool ch
         m_target->SendMessageToSet(&data, true);
 
         //Players on flying mounts must be immune to polymorph
-        if (m_target->GetTypeId()==TYPEID_PLAYER)
+        if (m_target->GetTypeId() == TYPEID_PLAYER)
             m_target->ApplySpellImmune(GetId(),IMMUNITY_MECHANIC,MECHANIC_POLYMORPH,apply);
 
         // Dragonmaw Illusion (overwrite mount model, mounted aura already applied)
@@ -4552,7 +4566,7 @@ void AuraEffect::HandleAuraProcTriggerSpell(bool apply, bool Real, bool /*change
     if(!Real)
         return;
     // Elemental oath - "while Clearcasting from Elemental Focus is active, you deal 5%/10% more spell damage."
-    if (m_target->GetTypeId()==TYPEID_PLAYER && (GetId() == 51466 || GetId() == 51470))
+    if (m_target->GetTypeId() == TYPEID_PLAYER && (GetId() == 51466 || GetId() == 51470))
     {
         if (apply)
         {
@@ -5088,7 +5102,7 @@ void AuraEffect::HandleAuraIncreaseBaseHealthPercent(bool apply, bool /*Real*/, 
 
 void AuraEffect::HandleAuraModParryPercent(bool /*apply*/, bool Real, bool /*changeAmount*/)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     ((Player*)m_target)->UpdateParryPercentage();
@@ -5096,7 +5110,7 @@ void AuraEffect::HandleAuraModParryPercent(bool /*apply*/, bool Real, bool /*cha
 
 void AuraEffect::HandleAuraModDodgePercent(bool /*apply*/, bool Real, bool /*changeAmount*/)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     ((Player*)m_target)->UpdateDodgePercentage();
@@ -5105,7 +5119,7 @@ void AuraEffect::HandleAuraModDodgePercent(bool /*apply*/, bool Real, bool /*cha
 
 void AuraEffect::HandleAuraModBlockPercent(bool /*apply*/, bool Real, bool /*changeAmount*/)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     ((Player*)m_target)->UpdateBlockPercentage();
@@ -5118,7 +5132,7 @@ void AuraEffect::HandleAuraModRegenInterrupt(bool /*apply*/, bool Real, bool cha
     if(!Real && !changeAmount)
         return;
 
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     ((Player*)m_target)->UpdateManaRegen();
@@ -5126,7 +5140,7 @@ void AuraEffect::HandleAuraModRegenInterrupt(bool /*apply*/, bool Real, bool cha
 
 void AuraEffect::HandleAuraModWeaponCritPercent(bool apply, bool Real, bool changeAmount)
 {
-    if(m_target->GetTypeId()!=TYPEID_PLAYER)
+    if(m_target->GetTypeId() != TYPEID_PLAYER)
         return;
 
     // apply item specific bonuses for already equipped weapon
@@ -5322,7 +5336,7 @@ void AuraEffect::HandleAuraModAttackPowerOfArmor(bool /*apply*/, bool Real, bool
 void AuraEffect::HandleModDamageDone(bool apply, bool Real, bool changeAmount)
 {
     // apply item specific bonuses for already equipped weapon
-    if((Real || changeAmount) && m_target->GetTypeId()==TYPEID_PLAYER)
+    if((Real || changeAmount) && m_target->GetTypeId() == TYPEID_PLAYER)
     {
         for(int i = 0; i < MAX_ATTACK; ++i)
             if(Item* pItem = ((Player*)m_target)->GetWeaponForAttack(WeaponAttackType(i)))
@@ -5404,7 +5418,7 @@ void AuraEffect::HandleModDamagePercentDone(bool apply, bool Real, bool changeAm
     sLog.outDebug("AURA MOD DAMAGE type:%u negative:%u", GetMiscValue(), m_amount > 0);
 
     // apply item specific bonuses for already equipped weapon
-    if((Real || changeAmount) && m_target->GetTypeId()==TYPEID_PLAYER)
+    if((Real || changeAmount) && m_target->GetTypeId() == TYPEID_PLAYER)
     {
         for(int i = 0; i < MAX_ATTACK; ++i)
             if(Item* pItem = ((Player*)m_target)->GetWeaponForAttack(WeaponAttackType(i)))
@@ -5525,7 +5539,7 @@ void AuraEffect::HandleAuraAllowOnlyAbility(bool apply, bool Real, bool /*change
     if(!apply && m_target->HasAuraType(SPELL_AURA_ALLOW_ONLY_ABILITY))
         return;
 
-    if(m_target->GetTypeId()==TYPEID_PLAYER)
+    if(m_target->GetTypeId() == TYPEID_PLAYER)
     {
         if (apply)
             m_target->SetFlag(PLAYER_FLAGS, PLAYER_ALLOW_ONLY_ABILITY);
@@ -5735,7 +5749,7 @@ void AuraEffect::HandleSpiritOfRedemption( bool apply, bool Real , bool /*change
     // prepare spirit state
     if(apply)
     {
-        if(m_target->GetTypeId()==TYPEID_PLAYER)
+        if(m_target->GetTypeId() == TYPEID_PLAYER)
         {
             // disable breath/etc timers
             ((Player*)m_target)->StopMirrorTimers();
@@ -6052,7 +6066,7 @@ void AuraEffect::PeriodicTick()
             if(m_target!=pCaster && GetSpellProto()->AttributesEx2 & SPELL_ATTR_EX2_HEALTH_FUNNEL)
             {
                 uint32 dmg = spellProto->manaPerSecond;
-                if(pCaster->GetHealth() <= dmg && pCaster->GetTypeId()==TYPEID_PLAYER)
+                if(pCaster->GetHealth() <= dmg && pCaster->GetTypeId() == TYPEID_PLAYER)
                 {
                     pCaster->RemoveAurasDueToSpell(GetId());
 
@@ -6932,7 +6946,7 @@ void AuraEffect::HandlePhase(bool apply, bool Real, bool /*changeAmount*/)
     // no-phase is also phase state so same code for apply and remove
 
     // phase auras normally not expected at BG but anyway better check
-    if(m_target->GetTypeId()==TYPEID_PLAYER)
+    if(m_target->GetTypeId() == TYPEID_PLAYER)
     {
         // drop flag at invisible in bg
         if(((Player*)m_target)->InBattleGround())

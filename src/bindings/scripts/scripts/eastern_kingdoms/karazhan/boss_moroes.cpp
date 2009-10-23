@@ -22,7 +22,7 @@ SDCategory: Karazhan
 EndScriptData */
 
 #include "precompiled.h"
-#include "def_karazhan.h"
+#include "karazhan.h"
 
 #define SAY_AGGRO           -1532011
 #define SAY_SPECIAL_1       -1532012
@@ -134,20 +134,7 @@ struct CW_DLL_DECL boss_moroesAI : public ScriptedAI
         DeSpawnAdds();
 
         //remove aura from spell Garrote when Moroes dies
-        Map* pMap = m_creature->GetMap();
-        if (pMap->IsDungeon())
-        {
-            Map::PlayerList const &PlayerList = pMap->GetPlayers();
-
-            if (PlayerList.isEmpty())
-                return;
-
-            for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
-            {
-                if (i->getSource()->isAlive() && i->getSource()->HasAura(SPELL_GARROTE,0))
-                    i->getSource()->RemoveAurasDueToSpell(SPELL_GARROTE);
-            }
-        }
+        pInstance->DoRemoveAurasDueToSpellOnPlayers(SPELL_GARROTE);
     }
 
     void SpawnAdds()

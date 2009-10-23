@@ -30,7 +30,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/blackrock_depths/boss_magmus.cpp
    scripts/eastern_kingdoms/blackrock_depths/boss_moira_bronzebeard.cpp
    scripts/eastern_kingdoms/blackrock_depths/boss_tomb_of_seven.cpp
-   scripts/eastern_kingdoms/blackrock_depths/def_blackrock_depths.h
+   scripts/eastern_kingdoms/blackrock_depths/blackrock_depths.h
    scripts/eastern_kingdoms/blackrock_depths/instance_blackrock_depths.cpp
    scripts/eastern_kingdoms/blackrock_spire/boss_drakkisath.cpp
    scripts/eastern_kingdoms/blackrock_spire/boss_gyth.cpp
@@ -54,7 +54,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/blackwing_lair/boss_vaelastrasz.cpp
    scripts/eastern_kingdoms/blackwing_lair/boss_victor_nefarius.cpp
    scripts/eastern_kingdoms/blackwing_lair/instance_blackwing_lair.cpp
-   scripts/eastern_kingdoms/deadmines/def_deadmines.h
+   scripts/eastern_kingdoms/deadmines/deadmines.h
    scripts/eastern_kingdoms/deadmines/deadmines.cpp
    scripts/eastern_kingdoms/karazhan/boss_curator.cpp
    scripts/eastern_kingdoms/karazhan/boss_maiden_of_virtue.cpp
@@ -66,14 +66,14 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/karazhan/boss_shade_of_aran.cpp
    scripts/eastern_kingdoms/karazhan/boss_terestian_illhoof.cpp
    scripts/eastern_kingdoms/karazhan/bosses_opera.cpp
-   scripts/eastern_kingdoms/karazhan/def_karazhan.h
+   scripts/eastern_kingdoms/karazhan/karazhan.h
    scripts/eastern_kingdoms/karazhan/instance_karazhan.cpp
    scripts/eastern_kingdoms/karazhan/karazhan.cpp
    scripts/eastern_kingdoms/magisters_terrace/boss_felblood_kaelthas.cpp
    scripts/eastern_kingdoms/magisters_terrace/boss_priestess_delrissa.cpp
    scripts/eastern_kingdoms/magisters_terrace/boss_selin_fireheart.cpp
    scripts/eastern_kingdoms/magisters_terrace/boss_vexallus.cpp
-   scripts/eastern_kingdoms/magisters_terrace/def_magisters_terrace.h
+   scripts/eastern_kingdoms/magisters_terrace/magisters_terrace.h
    scripts/eastern_kingdoms/magisters_terrace/instance_magisters_terrace.cpp
    scripts/eastern_kingdoms/magisters_terrace/magisters_terrace.cpp
    scripts/eastern_kingdoms/molten_core/boss_baron_geddon.cpp
@@ -86,7 +86,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/molten_core/boss_ragnaros.cpp
    scripts/eastern_kingdoms/molten_core/boss_shazzrah.cpp
    scripts/eastern_kingdoms/molten_core/boss_sulfuron_harbinger.cpp
-   scripts/eastern_kingdoms/molten_core/def_molten_core.h
+   scripts/eastern_kingdoms/molten_core/molten_core.h
    scripts/eastern_kingdoms/molten_core/instance_molten_core.cpp
    scripts/eastern_kingdoms/molten_core/molten_core.cpp
    scripts/eastern_kingdoms/scarlet_enclave/the_scarlet_enclave.cpp
@@ -104,7 +104,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/scarlet_monastery/boss_headless_horseman.cpp
    scripts/eastern_kingdoms/scarlet_monastery/boss_mograine_and_whitemane.cpp
    scripts/eastern_kingdoms/scarlet_monastery/instance_scarlet_monastery.cpp
-   scripts/eastern_kingdoms/scarlet_monastery/def_scarlet_monastery.h
+   scripts/eastern_kingdoms/scarlet_monastery/scarlet_monastery.h
    scripts/eastern_kingdoms/scholomance/boss_darkmaster_gandling.cpp
    scripts/eastern_kingdoms/scholomance/boss_death_knight_darkreaver.cpp
    scripts/eastern_kingdoms/scholomance/boss_doctor_theolen_krastinov.cpp
@@ -117,9 +117,9 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/scholomance/boss_ras_frostwhisper.cpp
    scripts/eastern_kingdoms/scholomance/boss_the_ravenian.cpp
    scripts/eastern_kingdoms/scholomance/boss_vectus.cpp
-   scripts/eastern_kingdoms/scholomance/def_scholomance.h
+   scripts/eastern_kingdoms/scholomance/scholomance.h
    scripts/eastern_kingdoms/scholomance/instance_scholomance.cpp
-   scripts/eastern_kingdoms/shadowfang_keep/def_shadowfang_keep.h
+   scripts/eastern_kingdoms/shadowfang_keep/shadowfang_keep.h
    scripts/eastern_kingdoms/shadowfang_keep/instance_shadowfang_keep.cpp
    scripts/eastern_kingdoms/shadowfang_keep/shadowfang_keep.cpp
    scripts/eastern_kingdoms/stratholme/boss_baron_rivendare.cpp
@@ -133,10 +133,10 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/stratholme/boss_postmaster_malown.cpp
    scripts/eastern_kingdoms/stratholme/boss_ramstein_the_gorger.cpp
    scripts/eastern_kingdoms/stratholme/boss_timmy_the_cruel.cpp
-   scripts/eastern_kingdoms/stratholme/def_stratholme.h
+   scripts/eastern_kingdoms/stratholme/stratholme.h
    scripts/eastern_kingdoms/stratholme/instance_stratholme.cpp
    scripts/eastern_kingdoms/stratholme/stratholme.cpp
-   scripts/eastern_kingdoms/sunken_temple/def_sunken_temple.h
+   scripts/eastern_kingdoms/sunken_temple/sunken_temple.h
    scripts/eastern_kingdoms/sunken_temple/instance_sunken_temple.cpp
    scripts/eastern_kingdoms/sunken_temple/sunken_temple.cpp
    scripts/eastern_kingdoms/sunwell_plateau/boss_kiljaeden.cpp
@@ -146,7 +146,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/sunwell_plateau/boss_brutallus.cpp
    scripts/eastern_kingdoms/sunwell_plateau/boss_kalecgos.cpp
    scripts/eastern_kingdoms/sunwell_plateau/sunwell_plateau.cpp
-   scripts/eastern_kingdoms/sunwell_plateau/def_sunwell_plateau.h
+   scripts/eastern_kingdoms/sunwell_plateau/sunwell_plateau.h
    scripts/eastern_kingdoms/sunwell_plateau/instance_sunwell_plateau.cpp
    scripts/eastern_kingdoms/uldaman/boss_archaedas.cpp
    scripts/eastern_kingdoms/uldaman/instance_uldaman.cpp
@@ -158,7 +158,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/zulaman/boss_janalai.cpp
    scripts/eastern_kingdoms/zulaman/boss_nalorakk.cpp
    scripts/eastern_kingdoms/zulaman/boss_zuljin.cpp
-   scripts/eastern_kingdoms/zulaman/def_zulaman.h
+   scripts/eastern_kingdoms/zulaman/zulaman.h
    scripts/eastern_kingdoms/zulaman/instance_zulaman.cpp
    scripts/eastern_kingdoms/zulaman/zulaman.cpp
    scripts/eastern_kingdoms/zulgurub/boss_arlokk.cpp
@@ -174,7 +174,7 @@ SET(cwscript_LIB_SRCS
    scripts/eastern_kingdoms/zulgurub/boss_thekal.cpp
    scripts/eastern_kingdoms/zulgurub/boss_venoxis.cpp
    scripts/eastern_kingdoms/zulgurub/boss_wushoolay.cpp
-   scripts/eastern_kingdoms/zulgurub/def_zulgurub.h
+   scripts/eastern_kingdoms/zulgurub/zulgurub.h
    scripts/eastern_kingdoms/zulgurub/instance_zulgurub.cpp
    scripts/eastern_kingdoms/alterac_mountains.cpp
    scripts/eastern_kingdoms/arathi_highlands.cpp
@@ -206,15 +206,15 @@ SET(cwscript_LIB_SRCS
    scripts/examples/example_gossip_codebox.cpp
    scripts/examples/example_misc.cpp
    scripts/kalimdor/blackfathom_depths/instance_blackfathom_deeps.cpp
-   scripts/kalimdor/blackfathom_depths/def_blackfathom_deeps.h
+   scripts/kalimdor/blackfathom_depths/blackfathom_deeps.h
    scripts/kalimdor/caverns_of_time/culling_of_stratholme/instance_culling_of_stratholme.cpp
    scripts/kalimdor/caverns_of_time/culling_of_stratholme/boss_meathook.cpp
    scripts/kalimdor/caverns_of_time/culling_of_stratholme/boss_epoch.cpp
    scripts/kalimdor/caverns_of_time/culling_of_stratholme/boss_mal_ganis.cpp
    scripts/kalimdor/caverns_of_time/culling_of_stratholme/boss_salramm.cpp
    scripts/kalimdor/caverns_of_time/culling_of_stratholme/boss_infinite.cpp
-   scripts/kalimdor/caverns_of_time/culling_of_stratholme/def_culling_of_stratholme.h
-   scripts/kalimdor/caverns_of_time/dark_portal/def_dark_portal.h
+   scripts/kalimdor/caverns_of_time/culling_of_stratholme/culling_of_stratholme.h
+   scripts/kalimdor/caverns_of_time/dark_portal/dark_portal.h
    scripts/kalimdor/caverns_of_time/dark_portal/instance_dark_portal.cpp
    scripts/kalimdor/caverns_of_time/dark_portal/dark_portal.cpp
    scripts/kalimdor/caverns_of_time/dark_portal/boss_aeonus.cpp
@@ -225,7 +225,7 @@ SET(cwscript_LIB_SRCS
    scripts/kalimdor/caverns_of_time/hyjal/boss_azgalor.cpp
    scripts/kalimdor/caverns_of_time/hyjal/boss_kazrogal.cpp
    scripts/kalimdor/caverns_of_time/hyjal/boss_rage_winterchill.cpp
-   scripts/kalimdor/caverns_of_time/hyjal/def_hyjal.h
+   scripts/kalimdor/caverns_of_time/hyjal/hyjal.h
    scripts/kalimdor/caverns_of_time/hyjal/hyjal.cpp
    scripts/kalimdor/caverns_of_time/hyjal/hyjal_trash.cpp
    scripts/kalimdor/caverns_of_time/hyjal/hyjal_trash.h
@@ -235,7 +235,7 @@ SET(cwscript_LIB_SRCS
    scripts/kalimdor/caverns_of_time/old_hillsbrad/boss_captain_skarloc.cpp
    scripts/kalimdor/caverns_of_time/old_hillsbrad/boss_epoch_hunter.cpp
    scripts/kalimdor/caverns_of_time/old_hillsbrad/boss_leutenant_drake.cpp
-   scripts/kalimdor/caverns_of_time/old_hillsbrad/def_old_hillsbrad.h
+   scripts/kalimdor/caverns_of_time/old_hillsbrad/old_hillsbrad.h
    scripts/kalimdor/caverns_of_time/old_hillsbrad/instance_old_hillsbrad.cpp
    scripts/kalimdor/caverns_of_time/old_hillsbrad/old_hillsbrad.cpp
    scripts/kalimdor/maraudon/boss_celebras_the_cursed.cpp
@@ -245,7 +245,7 @@ SET(cwscript_LIB_SRCS
    scripts/kalimdor/onyxias_lair/boss_onyxia.cpp
    scripts/kalimdor/razorfen_downs/boss_amnennar_the_coldbringer.cpp
    scripts/kalimdor/razorfen_downs/razorfen_downs.cpp
-   scripts/kalimdor/razorfen_kraul/def_razorfen_kraul.h
+   scripts/kalimdor/razorfen_kraul/razorfen_kraul.h
    scripts/kalimdor/razorfen_kraul/instance_razorfen_kraul.cpp
    scripts/kalimdor/razorfen_kraul/razorfen_kraul.cpp
    scripts/kalimdor/ruins_of_ahnqiraj/boss_ayamiss.cpp
@@ -254,6 +254,7 @@ SET(cwscript_LIB_SRCS
    scripts/kalimdor/ruins_of_ahnqiraj/boss_moam.cpp
    scripts/kalimdor/ruins_of_ahnqiraj/boss_ossirian.cpp
    scripts/kalimdor/ruins_of_ahnqiraj/boss_rajaxx.cpp
+   scripts/kalimdor/ruins_of_ahnqiraj/ruins_of_ahnqiraj.h
    scripts/kalimdor/ruins_of_ahnqiraj/instance_ruins_of_ahnqiraj.cpp
    scripts/kalimdor/temple_of_ahnqiraj/boss_bug_trio.cpp
    scripts/kalimdor/temple_of_ahnqiraj/boss_cthun.cpp
@@ -264,10 +265,10 @@ SET(cwscript_LIB_SRCS
    scripts/kalimdor/temple_of_ahnqiraj/boss_skeram.cpp
    scripts/kalimdor/temple_of_ahnqiraj/boss_twinemperors.cpp
    scripts/kalimdor/temple_of_ahnqiraj/boss_viscidus.cpp
-   scripts/kalimdor/temple_of_ahnqiraj/def_temple_of_ahnqiraj.h
+   scripts/kalimdor/temple_of_ahnqiraj/temple_of_ahnqiraj.h
    scripts/kalimdor/temple_of_ahnqiraj/instance_temple_of_ahnqiraj.cpp
    scripts/kalimdor/temple_of_ahnqiraj/mob_anubisath_sentinel.cpp
-   scripts/kalimdor/wailing_caverns/def_wailing_caverns.h
+   scripts/kalimdor/wailing_caverns/wailing_caverns.h
    scripts/kalimdor/wailing_caverns/instance_wailing_caverns.cpp
    scripts/kalimdor/wailing_caverns/wailing_caverns.cpp
    scripts/kalimdor/zulfarrak/zulfarrak.cpp
@@ -297,27 +298,27 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/azjol_nerub/azjol_nerub/boss_krikthir_the_gatewatcher.cpp
    scripts/northrend/azjol_nerub/azjol_nerub/boss_hadronox.cpp
    scripts/northrend/azjol_nerub/azjol_nerub/boss_anubarak.cpp
-   scripts/northrend/azjol_nerub/azjol_nerub/def_azjol_nerub.h
+   scripts/northrend/azjol_nerub/azjol_nerub/azjol_nerub.h
    scripts/northrend/azjol_nerub/ahnkahet/instance_ahnkahet.cpp
    scripts/northrend/azjol_nerub/ahnkahet/boss_prince_taldaram.cpp
    scripts/northrend/azjol_nerub/ahnkahet/boss_elder_nadox.cpp
    scripts/northrend/azjol_nerub/ahnkahet/boss_jedoga_shadowseeker.cpp
    scripts/northrend/azjol_nerub/ahnkahet/boss_herald_volazj.cpp
    scripts/northrend/azjol_nerub/ahnkahet/boss_amanitar.cpp
-   scripts/northrend/azjol_nerub/ahnkahet/def_ahnkahet.h
+   scripts/northrend/azjol_nerub/ahnkahet/ahnkahet.h
    scripts/northrend/draktharon_keep/instance_drak_tharon_keep.cpp
    scripts/northrend/draktharon_keep/boss_trollgore.cpp
    scripts/northrend/draktharon_keep/boss_novos.cpp
    scripts/northrend/draktharon_keep/boss_dred.cpp
    scripts/northrend/draktharon_keep/boss_tharon_ja.cpp
-   scripts/northrend/draktharon_keep/def_drak_tharon_keep.h
+   scripts/northrend/draktharon_keep/drak_tharon_keep.h
    scripts/northrend/gundrak/instance_gundrak.cpp
    scripts/northrend/gundrak/boss_slad_ran.cpp
    scripts/northrend/gundrak/boss_moorabi.cpp
    scripts/northrend/gundrak/boss_drakkari_colossus.cpp
    scripts/northrend/gundrak/boss_gal_darah.cpp
    scripts/northrend/gundrak/boss_eck.cpp
-   scripts/northrend/gundrak/def_gundrak.h
+   scripts/northrend/gundrak/gundrak.h
    scripts/northrend/naxxramas/boss_anubrekhan.cpp
    scripts/northrend/naxxramas/boss_faerlina.cpp
    scripts/northrend/naxxramas/boss_gluth.cpp
@@ -333,11 +334,11 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/naxxramas/boss_razuvious.cpp
    scripts/northrend/naxxramas/boss_sapphiron.cpp
    scripts/northrend/naxxramas/boss_thaddius.cpp
-   scripts/northrend/naxxramas/def_naxxramas.h
+   scripts/northrend/naxxramas/naxxramas.h
    scripts/northrend/naxxramas/instance_naxxramas.cpp
    scripts/northrend/nexus/eye_of_eternity/instance_eye_of_eternity.cpp
    scripts/northrend/nexus/eye_of_eternity/boss_malygos.cpp
-   scripts/northrend/nexus/eye_of_eternity/def_eye_of_eternity.h
+   scripts/northrend/nexus/eye_of_eternity/eye_of_eternity.h
    scripts/northrend/nexus/nexus/instance_nexus.cpp
    scripts/northrend/nexus/nexus/boss_magus_telestra.cpp
    scripts/northrend/nexus/nexus/boss_anomalus.cpp
@@ -345,28 +346,28 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/nexus/nexus/boss_keristrasza.cpp
    scripts/northrend/nexus/nexus/commander_stoutbeard.cpp
    scripts/northrend/nexus/nexus/commander_kolurg.cpp
-   scripts/northrend/nexus/nexus/def_nexus.h
+   scripts/northrend/nexus/nexus/nexus.h
    scripts/northrend/nexus/oculus/instance_oculus.cpp
    scripts/northrend/nexus/oculus/boss_drakos.cpp
    scripts/northrend/nexus/oculus/boss_urom.cpp
    scripts/northrend/nexus/oculus/boss_varos.cpp
    scripts/northrend/nexus/oculus/boss_eregos.cpp
-   scripts/northrend/nexus/oculus/def_oculus.h
+   scripts/northrend/nexus/oculus/oculus.h
    scripts/northrend/obsidian_sanctum/instance_obsidian_sanctum.cpp
    scripts/northrend/obsidian_sanctum/boss_sartharion.cpp
-   scripts/northrend/obsidian_sanctum/def_obsidian_sanctum.h
+   scripts/northrend/obsidian_sanctum/obsidian_sanctum.h
    scripts/northrend/ulduar/halls_of_stone/instance_halls_of_stone.cpp
    scripts/northrend/ulduar/halls_of_stone/boss_maiden_of_grief.cpp
    scripts/northrend/ulduar/halls_of_stone/boss_krystallus.cpp
    scripts/northrend/ulduar/halls_of_stone/boss_sjonnir.cpp
-   scripts/northrend/ulduar/halls_of_stone/def_halls_of_stone.h
+   scripts/northrend/ulduar/halls_of_stone/halls_of_stone.h
    scripts/northrend/ulduar/halls_of_stone/halls_of_stone.cpp
    scripts/northrend/ulduar/halls_of_lightning/instance_halls_of_lightning.cpp
    scripts/northrend/ulduar/halls_of_lightning/boss_bjarngrim.cpp
    scripts/northrend/ulduar/halls_of_lightning/boss_ionar.cpp
    scripts/northrend/ulduar/halls_of_lightning/boss_volkhan.cpp
    scripts/northrend/ulduar/halls_of_lightning/boss_loken.cpp
-   scripts/northrend/ulduar/halls_of_lightning/def_halls_of_lightning.h
+   scripts/northrend/ulduar/halls_of_lightning/halls_of_lightning.h
    scripts/northrend/ulduar/ulduar/boss_algalon.cpp
    scripts/northrend/ulduar/ulduar/boss_assembly_of_iron.cpp
    scripts/northrend/ulduar/ulduar/boss_auriaya.cpp
@@ -382,24 +383,24 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/ulduar/ulduar/boss_xt002.cpp
    scripts/northrend/ulduar/ulduar/boss_yoggsaron.cpp
    scripts/northrend/ulduar/ulduar/ulduar_teleporter.cpp
-   scripts/northrend/ulduar/ulduar/def_ulduar.h
+   scripts/northrend/ulduar/ulduar/ulduar.h
    scripts/northrend/ulduar/ulduar/instance_ulduar.cpp
    scripts/northrend/utgarde_keep/utgarde_keep/instance_utgarde_keep.cpp
    scripts/northrend/utgarde_keep/utgarde_keep/boss_keleseth.cpp
    scripts/northrend/utgarde_keep/utgarde_keep/boss_skarvald_dalronn.cpp
    scripts/northrend/utgarde_keep/utgarde_keep/boss_ingvar_the_plunderer.cpp
-   scripts/northrend/utgarde_keep/utgarde_keep/def_utgarde_keep.h
+   scripts/northrend/utgarde_keep/utgarde_keep/utgarde_keep.h
    scripts/northrend/utgarde_keep/utgarde_keep/utgarde_keep.cpp
    scripts/northrend/utgarde_keep/utgarde_pinnacle/instance_pinnacle.cpp
    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_skadi.cpp
    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_ymiron.cpp
    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_palehoof.cpp
    scripts/northrend/utgarde_keep/utgarde_pinnacle/boss_svala.cpp
-   scripts/northrend/utgarde_keep/utgarde_pinnacle/def_pinnacle.h
+   scripts/northrend/utgarde_keep/utgarde_pinnacle/utgarde_pinnacle.h
    scripts/northrend/vault_of_archavon/instance_vault_of_archavon.cpp
    scripts/northrend/vault_of_archavon/boss_archavon.cpp
    scripts/northrend/vault_of_archavon/boss_emalon.cpp
-   scripts/northrend/vault_of_archavon/def_vault_of_archavon.h
+   scripts/northrend/vault_of_archavon/vault_of_archavon.h
    scripts/northrend/violet_hold/instance_violet_hold.cpp
    scripts/northrend/violet_hold/boss_cyanigosa.cpp
    scripts/northrend/violet_hold/boss_erekem.cpp
@@ -408,7 +409,7 @@ SET(cwscript_LIB_SRCS
    scripts/northrend/violet_hold/boss_moragg.cpp
    scripts/northrend/violet_hold/boss_xevozz.cpp
    scripts/northrend/violet_hold/boss_zuramat.cpp
-   scripts/northrend/violet_hold/def_violet_hold.h
+   scripts/northrend/violet_hold/violet_hold.h
    scripts/northrend/violet_hold/violet_hold.cpp
    scripts/northrend/borean_tundra.cpp
    scripts/northrend/dragonblight.cpp
@@ -425,13 +426,13 @@ SET(cwscript_LIB_SRCS
    scripts/outland/auchindoun/mana_tombs/boss_pandemonius.cpp
    scripts/outland/auchindoun/sethekk_halls/boss_darkweaver_syth.cpp
    scripts/outland/auchindoun/sethekk_halls/boss_tailonking_ikiss.cpp
-   scripts/outland/auchindoun/sethekk_halls/def_sethekk_halls.h
+   scripts/outland/auchindoun/sethekk_halls/sethekk_halls.h
    scripts/outland/auchindoun/sethekk_halls/instance_sethekk_halls.cpp
    scripts/outland/auchindoun/shadow_labyrinth/boss_ambassador_hellmaw.cpp
    scripts/outland/auchindoun/shadow_labyrinth/boss_blackheart_the_inciter.cpp
    scripts/outland/auchindoun/shadow_labyrinth/boss_grandmaster_vorpil.cpp
    scripts/outland/auchindoun/shadow_labyrinth/boss_murmur.cpp
-   scripts/outland/auchindoun/shadow_labyrinth/def_shadow_labyrinth.h
+   scripts/outland/auchindoun/shadow_labyrinth/shadow_labyrinth.h
    scripts/outland/auchindoun/shadow_labyrinth/instance_shadow_labyrinth.cpp
    scripts/outland/black_temple/black_temple.cpp
    scripts/outland/black_temple/boss_bloodboil.cpp
@@ -442,7 +443,7 @@ SET(cwscript_LIB_SRCS
    scripts/outland/black_temple/boss_supremus.cpp
    scripts/outland/black_temple/boss_teron_gorefiend.cpp
    scripts/outland/black_temple/boss_warlord_najentus.cpp
-   scripts/outland/black_temple/def_black_temple.h
+   scripts/outland/black_temple/black_temple.h
    scripts/outland/black_temple/illidari_council.cpp
    scripts/outland/black_temple/instance_black_temple.cpp
    scripts/outland/coilfang_resevoir/serpent_shrine/boss_fathomlord_karathress.cpp
@@ -451,40 +452,40 @@ SET(cwscript_LIB_SRCS
    scripts/outland/coilfang_resevoir/serpent_shrine/boss_lady_vashj.cpp
    scripts/outland/coilfang_resevoir/serpent_shrine/boss_leotheras_the_blind.cpp
    scripts/outland/coilfang_resevoir/serpent_shrine/boss_morogrim_tidewalker.cpp
-   scripts/outland/coilfang_resevoir/serpent_shrine/def_serpent_shrine.h
+   scripts/outland/coilfang_resevoir/serpent_shrine/serpent_shrine.h
    scripts/outland/coilfang_resevoir/serpent_shrine/instance_serpent_shrine.cpp
    scripts/outland/coilfang_resevoir/steam_vault/boss_hydromancer_thespia.cpp
    scripts/outland/coilfang_resevoir/steam_vault/boss_mekgineer_steamrigger.cpp
    scripts/outland/coilfang_resevoir/steam_vault/boss_warlord_kalithresh.cpp
-   scripts/outland/coilfang_resevoir/steam_vault/def_steam_vault.h
+   scripts/outland/coilfang_resevoir/steam_vault/steam_vault.h
    scripts/outland/coilfang_resevoir/steam_vault/instance_steam_vault.cpp
    scripts/outland/coilfang_resevoir/underbog/boss_hungarfen.cpp
    scripts/outland/coilfang_resevoir/underbog/boss_the_black_stalker.cpp
    scripts/outland/gruuls_lair/boss_gruul.cpp
    scripts/outland/gruuls_lair/boss_high_king_maulgar.cpp
-   scripts/outland/gruuls_lair/def_gruuls_lair.h
+   scripts/outland/gruuls_lair/gruuls_lair.h
    scripts/outland/gruuls_lair/instance_gruuls_lair.cpp
    scripts/outland/hellfire_citadel/blood_furnace/boss_broggok.cpp
    scripts/outland/hellfire_citadel/blood_furnace/boss_kelidan_the_breaker.cpp
    scripts/outland/hellfire_citadel/blood_furnace/boss_the_maker.cpp
    scripts/outland/hellfire_citadel/blood_furnace/instance_blood_furnace.cpp
-   scripts/outland/hellfire_citadel/blood_furnace/def_blood_furnace.h
+   scripts/outland/hellfire_citadel/blood_furnace/blood_furnace.h
    scripts/outland/hellfire_citadel/hellfire_ramparts/boss_omor_the_unscarred.cpp
    scripts/outland/hellfire_citadel/hellfire_ramparts/boss_watchkeeper_gargolmar.cpp
    scripts/outland/hellfire_citadel/hellfire_ramparts/boss_vazruden_the_herald.cpp
-   scripts/outland/hellfire_citadel/hellfire_ramparts/def_hellfire_ramparts.h
+   scripts/outland/hellfire_citadel/hellfire_ramparts/hellfire_ramparts.h
    scripts/outland/hellfire_citadel/hellfire_ramparts/instance_hellfire_ramparts.cpp
    scripts/outland/hellfire_citadel/magtheridons_lair/boss_magtheridon.cpp
-   scripts/outland/hellfire_citadel/magtheridons_lair/def_magtheridons_lair.h
+   scripts/outland/hellfire_citadel/magtheridons_lair/magtheridons_lair.h
    scripts/outland/hellfire_citadel/magtheridons_lair/instance_magtheridons_lair.cpp
    scripts/outland/hellfire_citadel/shattered_halls/boss_nethekurse.cpp
    scripts/outland/hellfire_citadel/shattered_halls/boss_warbringer_omrogg.cpp
-   scripts/outland/hellfire_citadel/shattered_halls/def_shattered_halls.h
+   scripts/outland/hellfire_citadel/shattered_halls/shattered_halls.h
    scripts/outland/hellfire_citadel/shattered_halls/instance_shattered_halls.cpp
    scripts/outland/hellfire_citadel/shattered_halls/boss_warchief_kargath_bladefist.cpp
    scripts/outland/tempest_keep/arcatraz/arcatraz.cpp
    scripts/outland/tempest_keep/arcatraz/boss_harbinger_skyriss.cpp
-   scripts/outland/tempest_keep/arcatraz/def_arcatraz.h
+   scripts/outland/tempest_keep/arcatraz/arcatraz.h
    scripts/outland/tempest_keep/arcatraz/instance_arcatraz.cpp
    scripts/outland/tempest_keep/botanica/boss_high_botanist_freywinn.cpp
    scripts/outland/tempest_keep/botanica/boss_laj.cpp
@@ -493,14 +494,14 @@ SET(cwscript_LIB_SRCS
    scripts/outland/tempest_keep/the_eye/boss_astromancer.cpp
    scripts/outland/tempest_keep/the_eye/boss_kaelthas.cpp
    scripts/outland/tempest_keep/the_eye/boss_void_reaver.cpp
-   scripts/outland/tempest_keep/the_eye/def_the_eye.h
+   scripts/outland/tempest_keep/the_eye/the_eye.h
    scripts/outland/tempest_keep/the_eye/instance_the_eye.cpp
    scripts/outland/tempest_keep/the_eye/the_eye.cpp
    scripts/outland/tempest_keep/the_mechanar/boss_gatewatcher_gyrokill.cpp
    scripts/outland/tempest_keep/the_mechanar/boss_gatewatcher_ironhand.cpp
    scripts/outland/tempest_keep/the_mechanar/boss_nethermancer_sepethrea.cpp
    scripts/outland/tempest_keep/the_mechanar/boss_pathaleon_the_calculator.cpp
-   scripts/outland/tempest_keep/the_mechanar/def_mechanar.h
+   scripts/outland/tempest_keep/the_mechanar/mechanar.h
    scripts/outland/tempest_keep/the_mechanar/instance_mechanar.cpp
    scripts/outland/blades_edge_mountains.cpp
    scripts/outland/boss_doomlord_kazzak.cpp

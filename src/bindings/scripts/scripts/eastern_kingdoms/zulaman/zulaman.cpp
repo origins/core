@@ -26,7 +26,7 @@ npc_forest_frog
 EndContentData */
 
 #include "precompiled.h"
-#include "def_zulaman.h"
+#include "zulaman.h"
 
 /*######
 ## npc_forest_frog
@@ -45,9 +45,9 @@ struct CW_DLL_DECL npc_forest_frogAI : public ScriptedAI
 
     ScriptedInstance *pInstance;
 
-    void Reset() { }
+    void Reset() {}
 
-    void EnterCombat(Unit *who) { }
+    void EnterCombat(Unit *who) {}
 
     void DoSpawnRandom()
     {

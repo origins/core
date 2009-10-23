@@ -4199,7 +4199,7 @@ bool ChatHandler::HandleDieCommand(const char* /*args*/)
         return false;
     }
 
-    if(target->GetTypeId()==TYPEID_PLAYER)
+    if(target->GetTypeId() == TYPEID_PLAYER)
     {
         if(HasLowerSecurity((Player*)target,0,false))
             return false;
@@ -6406,7 +6406,7 @@ bool ChatHandler::HandleMovegensCommand(const char* /*args*/)
         return false;
     }
 
-    PSendSysMessage(LANG_MOVEGENS_LIST,(unit->GetTypeId()==TYPEID_PLAYER ? "Player" : "Creature" ),unit->GetGUIDLow());
+    PSendSysMessage(LANG_MOVEGENS_LIST,(unit->GetTypeId() == TYPEID_PLAYER ? "Player" : "Creature" ),unit->GetGUIDLow());
 
     MotionMaster* mm = unit->GetMotionMaster();
     for(uint8 i = 0; i < MAX_MOTION_SLOT; ++i)
@@ -6426,7 +6426,7 @@ bool ChatHandler::HandleMovegensCommand(const char* /*args*/)
             case CONFUSED_MOTION_TYPE:      SendSysMessage(LANG_MOVEGENS_CONFUSED);      break;
             case TARGETED_MOTION_TYPE:
             {
-                if(unit->GetTypeId()==TYPEID_PLAYER)
+                if(unit->GetTypeId() == TYPEID_PLAYER)
                 {
                     TargetedMovementGenerator<Player> const* mgen = static_cast<TargetedMovementGenerator<Player> const*>(mg);
                     Unit* target = mgen->GetTarget();

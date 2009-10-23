@@ -29,7 +29,7 @@ mobs_spectral_ghostly_citizen
 EndContentData */
 
 #include "precompiled.h"
-#include "def_stratholme.h"
+#include "stratholme.h"
 
 /*######
 ## go_gauntlet_gate (this is the _first_ of the gauntlet gates, two exist)
@@ -86,7 +86,7 @@ struct CW_DLL_DECL mob_freed_soulAI : public ScriptedAI
         DoScriptText(RAND(SAY_ZAPPED0,SAY_ZAPPED1,SAY_ZAPPED2,SAY_ZAPPED3), m_creature);
     }
 
-    void EnterCombat(Unit* who) { }
+    void EnterCombat(Unit* who) {}
 };
 
 CreatureAI* GetAI_mob_freed_soul(Creature* pCreature)

@@ -22,7 +22,7 @@ SDCategory: Magister's Terrace
 EndScriptData */
 
 #include "precompiled.h"
-#include "def_magisters_terrace.h"
+#include "magisters_terrace.h"
 
 enum eEnums
 {
@@ -191,7 +191,7 @@ struct  CW_DLL_DECL mob_pure_energyAI : public ScriptedAI
 {
     mob_pure_energyAI(Creature *c) : ScriptedAI(c) {}
 
-    void Reset() { }
+    void Reset() {}
 
     void JustDied(Unit* slayer)
     {
@@ -202,9 +202,9 @@ struct  CW_DLL_DECL mob_pure_energyAI : public ScriptedAI
         }
     }
 
-    void EnterCombat(Unit *who) { }
-    void MoveInLineOfSight(Unit *who) { }
-    void AttackStart(Unit *who) { }
+    void EnterCombat(Unit *who) {}
+    void MoveInLineOfSight(Unit *who) {}
+    void AttackStart(Unit *who) {}
 };
 
 CreatureAI* GetAI_mob_pure_energy(Creature* pCreature)

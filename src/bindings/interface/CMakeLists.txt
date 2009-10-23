@@ -9,6 +9,7 @@ SET(cwinterface_LIB_SRCS
    Scripts/sc_default.cpp
    Scripts/sc_defines.cpp
    Scripts/sc_defines.h
+   Scripts/on_events.cpp
 )
 
 add_library(cwinterface SHARED ${cwinterface_LIB_SRCS})

@@ -22,7 +22,7 @@ SDCategory: Scarlet Monastery
 EndScriptData */
 
 #include "precompiled.h"
-#include "def_scarlet_monastery.h"
+#include "scarlet_monastery.h"
 #include "sc_creature.h"
 
 #define ENTRY_PUMPKIN_SHRINE    186267
@@ -30,7 +30,7 @@ EndScriptData */
 #define ENTRY_HEAD              23775
 #define ENTRY_PUMPKIN           23694
 
-#define MAX_ENCOUNTER 1
+#define MAX_ENCOUNTER 2
 
 struct CW_DLL_DECL instance_scarlet_monastery : public ScriptedInstance
 {
@@ -101,6 +101,7 @@ struct CW_DLL_DECL instance_scarlet_monastery : public ScriptedInstance
             HandleGameObject(PumpkinShrineGUID, false);
             break;
         case DATA_HORSEMAN_EVENT:
+            m_auiEncounter[1] = data;
             if (data == DONE)
             {
                 for (std::set<uint64>::iterator itr = HorsemanAdds.begin(); itr != HorsemanAdds.end(); ++itr)
@@ -135,7 +136,8 @@ struct CW_DLL_DECL instance_scarlet_monastery : public ScriptedInstance
     {
         if (type == TYPE_MOGRAINE_AND_WHITE_EVENT)
             return m_auiEncounter[0];
-
+        if (type == DATA_HORSEMAN_EVENT)
+            return m_auiEncounter[1];
         return 0;
     }
 };

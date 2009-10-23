@@ -69,17 +69,23 @@ class CW_DLL_SPEC HostilReference : public Reference<Unit, ThreatManager>
 
         // used for temporary setting a threat and reducting it later again.
         // the threat modification is stored
-        void setTempThreat(float pThreat) { iTempThreatModifyer = pThreat - getThreat(); if(iTempThreatModifyer != 0.0f) addThreat(iTempThreatModifyer);  }
+        void setTempThreat(float fThreat)
+        {
+            iTempThreatModifier = fThreat - getThreat();
+            if (iTempThreatModifier != 0.0f)
+                addThreat(iTempThreatModifier);
+        }
 
         void resetTempThreat()
         {
-            if(iTempThreatModifyer != 0.0f)
+            if (iTempThreatModifier != 0.0f)
             {
-                addThreat(-iTempThreatModifyer);  iTempThreatModifyer = 0.0f;
+                addThreat(-iTempThreatModifier);
+                iTempThreatModifier = 0.0f;
             }
         }
 
-        float getTempThreatModifyer() { return iTempThreatModifyer; }
+        float getTempThreatModifier() { return iTempThreatModifier; }
 
         //=================================================
         // check, if source can reach target and set the status
@@ -122,7 +128,7 @@ class CW_DLL_SPEC HostilReference : public Reference<Unit, ThreatManager>
         Unit* getSourceUnit();
     private:
         float iThreat;
-        float iTempThreatModifyer;                          // used for taunt
+        float iTempThreatModifier;                          // used for taunt
         uint64 iUnitGuid;
         bool iOnline;
         bool iAccessible;
@@ -148,9 +154,9 @@ class CW_DLL_SPEC ThreatContainer
         ThreatContainer() { iDirty = false; }
         ~ThreatContainer() { clearReferences(); }
 
-        HostilReference* addThreat(Unit* pVictim, float pThreat);
+        HostilReference* addThreat(Unit* pVictim, float fThreat);
 
-        void modifyThreatPercent(Unit *pVictim, int32 percent);
+        void modifyThreatPercent(Unit *pVictim, int32 iPercent);
 
         HostilReference* selectNextVictim(Creature* pAttacker, HostilReference* pCurrentVictim);
 
@@ -180,12 +186,12 @@ class CW_DLL_SPEC ThreatManager
 
         void clearReferences();
 
-        void addThreat(Unit* pVictim, float threat, SpellSchoolMask schoolMask = SPELL_SCHOOL_MASK_NORMAL, SpellEntry const *threatSpell = NULL);
-        void modifyThreatPercent(Unit *pVictim, int32 pPercent);
+        void addThreat(Unit* pVictim, float fThreat, SpellSchoolMask schoolMask = SPELL_SCHOOL_MASK_NORMAL, SpellEntry const *threatSpell = NULL);
+        void modifyThreatPercent(Unit *pVictim, int32 iPercent);
 
         float getThreat(Unit *pVictim, bool pAlsoSearchOfflineList = false);
 
-        bool isThreatListEmpty() { return iThreatContainer.empty();}
+        bool isThreatListEmpty() { return iThreatContainer.empty(); }
 
         void processThreatEvent(ThreatRefStatusChangeEvent* threatRefStatusChangeEvent);
 
@@ -193,7 +199,7 @@ class CW_DLL_SPEC ThreatManager
 
         HostilReference* getCurrentVictim() { return iCurrentVictim; }
 
-        Unit*  getOwner() { return iOwner; }
+        Unit* getOwner() { return iOwner; }
 
         Unit* getHostilTarget();
 
@@ -202,16 +208,16 @@ class CW_DLL_SPEC ThreatManager
 
         void setCurrentVictim(HostilReference* pHostilReference);
 
-        void setDirty(bool pDirty) { iThreatContainer.setDirty(pDirty); }
+        void setDirty(bool bDirty) { iThreatContainer.setDirty(bDirty); }
 
-        // methods to access the lists from the outside to do sume dirty manipulation (scriping and such)
+        // methods to access the lists from the outside to do some dirty manipulation (scriping and such)
         // I hope they are used as little as possible.
         std::list<HostilReference*>& getThreatList() { return iThreatContainer.getThreatList(); }
         std::list<HostilReference*>& getOfflieThreatList() { return iThreatOfflineContainer.getThreatList(); }
         ThreatContainer& getOnlineContainer() { return iThreatContainer; }
         ThreatContainer& getOfflineContainer() { return iThreatOfflineContainer; }
     private:
-        void _addThreat(Unit *pVictim, float threat);
+        void _addThreat(Unit *pVictim, float fThreat);
 
         HostilReference* iCurrentVictim;
         Unit* iOwner;

@@ -22,7 +22,7 @@ SDCategory: Temple of Ahn'Qiraj
 EndScriptData */
 
 #include "precompiled.h"
-#include "def_temple_of_ahnqiraj.h"
+#include "temple_of_ahnqiraj.h"
 
 //Text emote
 #define EMOTE_WEAKENED              -1531011
@@ -545,7 +545,7 @@ struct CW_DLL_DECL cthunAI : public ScriptedAI
 
         //Get random but only if we have more than one unit on threat list
         if (temp.size() > 1)
-            advance (i , rand() % (temp.size() - 1));
+            advance (j , rand() % (temp.size() - 1));
 
         return (*j);
     }

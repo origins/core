@@ -10,7 +10,7 @@ Script Data End */
 update creature_template set scriptname = 'boss_salramm' where entry = '';
 *** SQL END ***/
 #include "precompiled.h"
-#include "def_culling_of_stratholme.h"
+#include "culling_of_stratholme.h"
 
 enum Spells
 {
@@ -112,7 +112,6 @@ struct CW_DLL_DECL boss_salrammAI : public ScriptedAI
         if (Summon_ghouls_Timer < diff)
         {
             DoScriptText(RAND(SAY_SUMMON_GHOULS_1,SAY_SUMMON_GHOULS_2), m_creature);
-            switch(rand()%2)
             if (Unit* random_target = SelectUnit(SELECT_TARGET_RANDOM, 0))
                 DoCast(random_target,SPELL_SUMMON_GHOULS);
             Summon_ghouls_Timer = 10000;

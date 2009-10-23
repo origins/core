@@ -211,10 +211,10 @@ bool GossipSelect_example_escort(Player* pPlayer, Creature* pCreature, uint32 ui
                 pEscortAI->Start(false, true, pPlayer->GetGUID());
             break;
         default:
-            return false;                                   // nothing defined      -> CW core handling
+            return false;                                   // nothing defined      -> trinity core handling
     }
 
-    return true;                                            // no default handling  -> prevent CW core handling
+    return true;                                            // no default handling  -> prevent trinity core handling
 }
 
 void AddSC_example_escort()

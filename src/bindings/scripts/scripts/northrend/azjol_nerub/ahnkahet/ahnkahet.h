@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2009 CWCore <http://www.wow-extrem.de/>
+ * Copyright (C) 2009 Trinity <http://www.trinitycore.org/>
  *
  * This program is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -36,5 +36,13 @@
 #define DATA_SPHERE1_EVENT              13
 #define DATA_SPHERE2_EVENT              14
 #define DATA_PRINCE_TALDARAM_PLATFORM   15
+
+#define DATA_PL_JEDOGA_TARGET       16
+#define DATA_ADD_JEDOGA_OPFER       17
+#define DATA_JEDOGA_RESET_INITIANDS 18
+#define DATA_JEDOGA_TRIGGER_SWITCH  19
+#define DATA_ADD_JEDOGA_INITIAND    20
+#define DATA_ALL_INITIAND_DEAD      21
+#define DATA_INITIAND_KILLED        22
 
 #endif

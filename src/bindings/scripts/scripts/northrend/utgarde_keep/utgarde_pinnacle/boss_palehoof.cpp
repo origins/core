@@ -10,7 +10,7 @@ Script Data End */
 update creature_template set scriptname = 'boss_palehoof' where entry = '';
 *** SQL END ***/
 #include "precompiled.h"
-#include "def_pinnacle.h"
+#include "utgarde_pinnacle.h"
 
 enum Spells
 {
@@ -806,7 +806,7 @@ void AddSC_boss_palehoof()
     newscript->RegisterSelf();
     
     newscript = new Script;
-    newscript->Name="mob_palehoof_orb";
+    newscript->Name = "mob_palehoof_orb";
     newscript->GetAI = &GetAI_mob_palehoof_orb;
     newscript->RegisterSelf();
 

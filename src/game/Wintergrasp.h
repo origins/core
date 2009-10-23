@@ -22,7 +22,7 @@
 #include "OutdoorPvPImpl.h"
 
 #define ZONE_WINTERGRASP         4197
-#define POS_X_CENTER             4700
+#define POS_X_CENTER             5100
 #define MAX_VEHICLE_PER_WORKSHOP    4
 
 const uint32 WintergraspFaction[3] = {1732, 1735, 35};
@@ -43,16 +43,17 @@ enum WintergraspSpell
     SPELL_TELEPORT_DALARAN  = 53360,
 
     SPELL_TOWER_CONTROL     = 62064,
+    SPELL_RULLERS_OF_WG     = 52108,
     SPELL_VICTORY_REWARD    = 56902,
     SPELL_DEFEAT_REWARD     = 58494,
     SPELL_DAMAGED_TOWER     = 59135,
     SPELL_DESTROYED_TOWER   = 59136,
     SPELL_DAMAGED_BUILDING  = 59201,
     SPELL_INTACT_BUILDING   = 59203,
+    SPELL_ESSENCE_OF_WG     = 58045,
+    SPELL_SPIRITUAL_IMMUNITY = 58729,
 // Unused: Not implemented
 //    SPELL_VICTORY_AURA      = 60044,
-//    SPELL_RULERS_OF_WG      = 52108,
-//    SPELL_ESSENCE_OF_WG     = 58045,
 };
 
 enum WintergraspRewardEvent
@@ -106,6 +107,8 @@ enum WintergraspCreType
     CREATURE_ENGINEER,
     CREATURE_GUARD,
     CREATURE_SPECIAL,
+    CREATURE_SPIRIT_GUIDE,
+    CREATURE_SPIRIT_HEALER,
 };
 
 enum BuildingType
@@ -116,7 +119,7 @@ enum BuildingType
 };
 
 enum DamageState
-{
+{ // Do not change order
     DAMAGE_INTACT,
     DAMAGE_DAMAGED,
     DAMAGE_DESTROYED,
@@ -154,7 +157,8 @@ struct BuildingState
     {
         team = t;
         if(graveTeam)
-            *graveTeam = TeamId2Team[t];
+            if (uint32 newTeam = TeamId2Team[t])
+                *graveTeam = newTeam;
     }
 
 private:
@@ -199,7 +203,24 @@ class OPvPWintergrasp : public OutdoorPvP
         uint32 GetTimer() const { return m_timer / 1000; };
         TeamId GetTeam() const { return m_defender; };
         bool isWarTime() const { return m_wartime; };
+
+        // Temporal BG specific till 3.2
+        void SendAreaSpiritHealerQueryOpcode(Player *pl, const uint64& guid);
+        void AddPlayerToResurrectQueue(uint64 npc_guid, uint64 player_guid);
+        void RemovePlayerFromResurrectQueue(uint64 player_guid);
+        void RelocateDeadPlayers(Creature *cr);
+        // BG end
     protected:
+        // Temporal BG specific till 3.2
+        std::vector<uint64> m_ResurrectQueue;               // Player GUID
+        uint32 m_LastResurrectTime;
+        // Spirit Guide guid + Player list GUIDS
+        std::map<uint64, std::vector<uint64> >  m_ReviveQueue;
+
+        uint32 GetLastResurrectTime() const { return m_LastResurrectTime; }
+        uint32 GetReviveQueueSize() const { return m_ReviveQueue.size(); }
+        // BG end
+
         TeamId m_defender;
         int32 m_tenacityStack;
 
@@ -217,7 +238,8 @@ class OPvPWintergrasp : public OutdoorPvP
         uint32 m_timer;
         uint32 m_clock[5];
         uint32 m_workshopCount[2];
-        uint32 m_towerCount[2][2];
+        uint32 m_towerDestroyedCount[2];
+        uint32 m_towerDamagedCount[2];
 
         uint32 m_customHonorReward[WG_REWARD_EVENT_MAX];
 
@@ -260,6 +282,10 @@ class SiegeWorkshop : public OPvPCapturePoint
         //void DespawnAllVehicles();
 
         //bool CanBuildVehicle() const { return m_vehicles.size() < MAX_VEHICLE_PER_WORKSHOP && m_buildingState->damageState != DAMAGE_DESTROYED; }
+
+        uint32 *m_spiEntry;
+        uint32 m_spiGuid;
+        Creature *m_spiritguide;
 
         uint32 *m_engEntry;
         uint32 m_engGuid;

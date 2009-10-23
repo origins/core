@@ -1,5 +1,5 @@
 #include "precompiled.h"
-#include "def_violet_hold.h"
+#include "violet_hold.h"
 
 #define MAX_ENCOUNTER          3
 
@@ -24,9 +24,24 @@ enum Creatures
     CREATURE_ICHORON                                = 29313,
     CREATURE_ZURAMAT                                = 29314,
     CREATURE_EREKEM                                 = 29315,
+    CREATURE_EREKEM_GUARD                           = 29395,
     CREATURE_MORAGG                                 = 29316,
     CREATURE_CYANIGOSA                              = 31134,
     CREATURE_SINCLARI                               = 30658
+};
+enum GameObjects
+{
+    GO_MAIN_DOOR                                    = 191723,
+    GO_XEVOZZ_DOOR                                  = 191556,
+    GO_LAVANTHOR_DOOR                               = 191566,
+    GO_ICHORON_DOOR                                 = 191557,
+    GO_ZURAMAT_DOOR                                 = 191565,
+    GO_EREKEM_DOOR                                  = 191564,
+    GO_EREKEM_GUARD_1_DOOR                          = 191563,
+    GO_EREKEM_GUARD_2_DOOR                          = 191562,
+    GO_MORAGG_DOOR                                  = 191606,
+    GO_INTRO_ACTIVATION_CRYSTAL                     = 193615,
+    GO_ACTIVATION_CRYSTAL                           = 193611
 };
 struct Location
 {
@@ -44,6 +59,7 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
 
     uint64 uiMoragg;
     uint64 uiErekem;
+    uint64 uiErekemGuard[2];
     uint64 uiIchoron;
     uint64 uiLavanthor;
     uint64 uiXevozz;
@@ -53,13 +69,15 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
 
     uint64 uiMoraggCell;
     uint64 uiErekemCell;
-    uint64 uiErekemRightGuardCell;
     uint64 uiErekemLeftGuardCell;
+    uint64 uiErekemRightGuardCell;
     uint64 uiIchoronCell;
     uint64 uiLavanthorCell;
     uint64 uiXevozzCell;
     uint64 uiZuramatCell;
     uint64 uiMainDoor;
+    
+    uint64 uiActivationCrystal[3];
 
     uint8 uiWaveCount;
     uint8 uiLocation;
@@ -67,6 +85,8 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
     uint8 uiSecondBoss;
 
     uint8 m_auiEncounter[MAX_ENCOUNTER];
+    uint8 uiCountErekemGuards;
+    uint8 uiCountActivationCrystals;
 
     bool HeroicMode;
 
@@ -85,8 +105,8 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
 
         uiMoraggCell = 0;
         uiErekemCell = 0;
-        uiErekemRightGuardCell = 0;
-        uiErekemLeftGuardCell = 0;
+        uiErekemGuard[0] = 0;
+        uiErekemGuard[1] = 0;
         uiIchoronCell = 0;
         uiLavanthorCell = 0;
         uiXevozzCell = 0;
@@ -97,6 +117,8 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
         uiLocation = 0;
         uiFirstBoss = 0;
         uiSecondBoss = 0;
+        uiCountErekemGuards = 0;
+        uiCountActivationCrystals = 0;
 
         memset(&m_auiEncounter, 0, sizeof(m_auiEncounter));
     }
@@ -128,6 +150,10 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
             case CREATURE_EREKEM:
                 uiErekem = pCreature->GetGUID();
                 break;
+            case CREATURE_EREKEM_GUARD:
+                if (uiCountErekemGuards < 2)
+                    uiErekemGuard[uiCountErekemGuards++] = pCreature->GetGUID();
+                break;
             case CREATURE_MORAGG:
                 uiMoragg = pCreature->GetGUID();
                 break;
@@ -144,41 +170,36 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
     {
         switch(pGo->GetEntry())
         {
-            case 191562:
+            case GO_EREKEM_GUARD_1_DOOR:
                 uiErekemLeftGuardCell = pGo->GetGUID();
                 break;
-            case 191563:
+            case GO_EREKEM_GUARD_2_DOOR:
                 uiErekemRightGuardCell = pGo->GetGUID();
                 break;
-            case 191564:
+            case GO_EREKEM_DOOR:
                 uiErekemCell = pGo->GetGUID();
-                if (m_auiEncounter[1] == DONE)
-                    HandleGameObject(NULL, true, pGo);
                 break;
-            case 191565:
+            case GO_ZURAMAT_DOOR:
                 uiZuramatCell = pGo->GetGUID();
-                if (m_auiEncounter[5] == DONE)
-                    HandleGameObject(NULL, true, pGo);
                 break;
-            case 191566:
+            case GO_LAVANTHOR_DOOR:
                 uiLavanthorCell = pGo->GetGUID();
-                if (m_auiEncounter[3] == DONE)
-                    HandleGameObject(NULL, true, pGo);
                 break;
-            case 191606:
+            case GO_MORAGG_DOOR:
                 uiMoraggCell = pGo->GetGUID();
-                if (m_auiEncounter[0] == DONE)
-                    HandleGameObject(NULL, true, pGo);
                 break;
-            case 191722:
+            case GO_ICHORON_DOOR:
                 uiIchoronCell = pGo->GetGUID();
-                if (m_auiEncounter[2] == DONE)
-                    HandleGameObject(NULL, true, pGo);
                 break;
-            case 191723:
+            case GO_XEVOZZ_DOOR:
                 uiXevozzCell = pGo->GetGUID();
-                if (m_auiEncounter[4] == DONE)
-                    HandleGameObject(NULL, true, pGo);
+                break;
+            case GO_MAIN_DOOR:
+                uiMainDoor = pGo->GetGUID();
+                break;
+            case GO_ACTIVATION_CRYSTAL:
+                if (uiCountActivationCrystals < 3)
+                    uiActivationCrystal[uiCountActivationCrystals++] = pGo->GetGUID();
                 break;
         }
     }
@@ -284,6 +305,16 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
                     pBoss->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
                     pBoss->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
                 }
+                if (pBoss = instance->GetCreature(uiErekemGuard[0]))
+                {
+                    pBoss->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    pBoss->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                }
+                if (pBoss = instance->GetCreature(uiErekemGuard[1]))
+                {
+                    pBoss->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE);
+                    pBoss->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_NON_ATTACKABLE);
+                }
                 break;
             case 2:               //Ichoron
                 HandleGameObject(uiIchoronCell,true);
@@ -326,6 +357,8 @@ struct CW_DLL_DECL instance_violet_hold : public ScriptedInstance
         {
             case DATA_MORAGG:                   return uiMoragg;
             case DATA_EREKEM:                   return uiErekem;
+            case DATA_EREKEM_GUARD_1:           return uiErekemGuard[0];
+            case DATA_EREKEM_GUARD_2:           return uiErekemGuard[1];
             case DATA_ICHORON:                  return uiIchoron;
             case DATA_LAVANTHOR:                return uiLavanthor;
             case DATA_XEVOZZ:                   return uiXevozz;
