@@ -236,13 +236,13 @@ bool MapManager::CanPlayerEnter(uint32 mapid, Player* player)
         //Get instance where player's group is bound & its map
         if (player->GetGroup())
         {
-            InstanceGroupBind* boundedInstance = player->GetGroup()->GetBoundInstance(mapid, player->GetDifficulty());
+            InstanceGroupBind* boundedInstance = player->GetGroup()->GetBoundInstance(mapid, player->GetDungeonDifficulty());
             if (boundedInstance && boundedInstance->save)
             {
                 if (Map *boundedMap = MapManager::Instance().FindMap(mapid,boundedInstance->save->GetInstanceId()))
                 {
                     //Player permanently bounded to different instance than groups one
-                    InstancePlayerBind* playerBoundedInstance = player->GetBoundInstance(mapid, player->GetDifficulty());
+                    InstancePlayerBind* playerBoundedInstance = player->GetBoundInstance(mapid, player->GetDungeonDifficulty());
                     if (playerBoundedInstance && playerBoundedInstance->perm && playerBoundedInstance->save &&
                         boundedInstance->save->GetInstanceId() != playerBoundedInstance->save->GetInstanceId())
                     {
@@ -259,7 +259,7 @@ bool MapManager::CanPlayerEnter(uint32 mapid, Player* player)
                     }
                     
                     //Instance is full
-                    int8 maxPlayers = (player->GetDifficulty() == DIFFICULTY_HEROIC) ? instance->maxPlayersHeroic : instance->maxPlayers;
+                    int8 maxPlayers = (player->GetDungeonDifficulty() == DUNGEON_DIFFICULTY_HEROIC) ? instance->maxPlayersHeroic : instance->maxPlayers;
                     if (maxPlayers != -1) //-1: unlimited access
                     {
                         Map::PlayerList const &players = boundedMap->GetPlayers();
