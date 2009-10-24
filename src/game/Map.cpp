@@ -830,7 +830,6 @@ void Map::Update(const uint32 &t_diff)
 
 void Map::Remove(Player *player, bool remove)
 {
-    player->RemoveFromWorld();
     SendRemoveTransports(player);
 
     CellPair p = CW::ComputeCellPair(player->GetPositionX(), player->GetPositionY());
@@ -853,7 +852,9 @@ void Map::Remove(Player *player, bool remove)
     }
 
     if( remove )
-        DeleteFromWorld(player);
+        player->CleanupsBeforeDelete();
+	else
+		player->RemoveFromWorld();
 }
 
 bool Map::RemoveBones(uint64 guid, float x, float y)
@@ -873,7 +874,10 @@ template<class T>
 void
 Map::Remove(T *obj, bool remove)
 {
-    obj->RemoveFromWorld();
+    if(remove)
+		obj->CleanupsBeforeDelete();
+	else
+		obj->RemoveFromWorld();
     if(obj->isActiveObject())
         RemoveFromActive(obj);
 
@@ -2346,9 +2350,6 @@ void Map::RemoveAllObjectsInRemoveList()
             Remove((GameObject*)obj,true);
             break;
         case TYPEID_UNIT:
-            // in case triggered sequence some spell can continue casting after prev CleanupsBeforeDelete call
-            // make sure that like sources auras/etc removed before destructor start
-            ((Creature*)obj)->CleanupsBeforeDelete ();
             Remove((Creature*)obj,true);
             break;
         default:
