@@ -41,7 +41,7 @@ EndScriptData */
 #define GOSSIP_TEXT2    "Click to Test Escort(NoAttack, NoDefend, Walk)"
 #define GOSSIP_TEXT3    "Click to Test Escort(NoAttack, Defend, Walk)"
 
-struct TRINITY_DLL_DECL npc_testAI : public npc_escortAI
+struct CW_DLL_DECL npc_testAI : public npc_escortAI
 {
     public:
 
