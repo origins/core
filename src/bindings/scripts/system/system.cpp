@@ -39,7 +39,7 @@ SystemMgr& SystemMgr::Instance()
 void SystemMgr::LoadVersion()
 {
     //Get Version information
-    QueryResult* pResult = TScriptDB.PQuery("SELECT script_version FROM version LIMIT 1");
+    QueryResult* pResult = TScriptDB.PQuery("SELECT script_version FROM core_version LIMIT 1");
 
     if (pResult)
     {
@@ -50,7 +50,7 @@ void SystemMgr::LoadVersion()
     }
     else
     {
-        error_log("TSCR: Missing `version`.`script_version` information.");
+        error_log("TSCR: Missing `core_version`.`script_version` information.");
         outstring_log("");
     }
 }

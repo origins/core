@@ -43,10 +43,11 @@ struct Script
     std::string Name;
 
     //Methods to be scripted
-    void (*pOnLogin             )(Player*);
+    //Hawthorne - Non-Gossip related events
+    void (*pOnLogin                )(Player*);
     void (*pOnLogout            )(Player*);
-    void (*pOnPVPKill           )(Player*, Player*);
-    bool (*pOnSpellCast         )(Unit*, Item*, GameObject*, uint32, SpellEntry const*);
+    void (*pOnPVPKill            )(Player*,Player*);
+	bool (*pOnSpellCast         )(Unit*, Item*, GameObject*, uint32, SpellEntry const*);
     uint32 (*pOnGetXP           )(Player*, uint32);
     int32 (*pOnGetMoney         )(Player*, int32);
     bool (*pOnPlayerChat        )(Player*, const char*);
@@ -96,11 +97,11 @@ void DoScriptText(int32 textEntry, WorldObject* pSource, Unit* target = NULL);
 #endif
 
 #ifdef WIN32
-  #define TRINITY_DLL_EXPORT extern "C" __declspec(dllexport)
+  #define CW_DLL_EXPORT extern "C" __declspec(dllexport)
 #elif defined( __GNUC__ )
-#define TRINITY_DLL_EXPORT extern "C"
+#define CW_DLL_EXPORT extern "C"
 #else
-#define TRINITY_DLL_EXPORT extern "C" export
+#define CW_DLL_EXPORT extern "C" export
 #endif
 
 #endif
