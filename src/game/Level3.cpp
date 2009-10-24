@@ -570,7 +570,7 @@ bool ChatHandler::HandleReloadAllCommand(const char*)
 
 bool ChatHandler::HandleReloadAllAchievementCommand(const char*)
 {
-    HandleReloadAchievementCriteriaDataCommand("");
+    HandleReloadAchievementCriteriaRequirementCommand("");
     HandleReloadAchievementRewardCommand("");
     return true;
 }
@@ -700,11 +700,11 @@ bool ChatHandler::HandleReloadAccessRequirementCommand(const char*)
     return true;
 }
 
-bool ChatHandler::HandleReloadAchievementCriteriaDataCommand(const char*)
+bool ChatHandler::HandleReloadAchievementCriteriaRequirementCommand(const char*)
 {
-    sLog.outString( "Re-Loading Additional Achievement Criteria Data..." );
-    achievementmgr.LoadAchievementCriteriaData();
-    SendGlobalGMSysMessage("DB table `achievement_criteria_data` reloaded.");
+    sLog.outString( "Re-Loading Additional Achievement Criteria Requirements Data..." );
+    achievementmgr.LoadAchievementCriteriaRequirements();
+    SendGlobalSysMessage("DB table `achievement_criteria_requirement` reloaded.");
     return true;
 }
 
