@@ -27,21 +27,27 @@ Script Data End */
 #include "precompiled.h"
 #include "ahnkahet.h"
 
-#define SPELL_BASH              57094 // Victim
-#define SPELL_ENTANGLING_ROOTS  57095 // Random Victim 100Y
-#define SPELL_MINI              57055 // Self
-#define SPELL_VENOM_BOLT_VOLLEY 57088 // Random Victim 100Y
+enum Spells
+{
+    SPELL_BASH                             = 57094, // Victim
+    SPELL_ENTANGLING_ROOTS                 = 57095, // Random Victim 100Y
+    SPELL_MINI                             = 57055, // Self
+    SPELL_VENOM_BOLT_VOLLEY                = 57088, // Random Victim 100Y
+    
+    HEALTHY_MUSHROOM_SPELL_POTENT_FUNGUS    = 56648, // Killer 3Y
+    
+    POISONOUS_MUSHROOM_SPELL_POISON_CLOUD   = 57061, // Self - Duration 8 Sec
+    POISONOUS_MUSHROOM_SPELL_VISUAL_AREA    = 61566, // Self
+    POISONOUS_MUSHROOM_SPELL_VISUAL_AURA    = 56741, // Self
+    
+    SPELL_PUTRID_MUSHROOM                   = 31690, // To make the mushrooms visible
+};
 
-#define HEALTHY_MUSHROOM_SPELL_POTENT_FUNGUS    56648 // Killer 3Y
-
-#define POISONOUS_MUSHROOM_SPELL_POISON_CLOUD   57061 // Self - Duration 8 Sec
-#define POISONOUS_MUSHROOM_SPELL_VISUAL_AREA    61566 // Self
-#define POISONOUS_MUSHROOM_SPELL_VISUAL_AURA    56741 // Self
-
-#define SPELL_PUTRID_MUSHROOM   31690 // To make the mushrooms visible
-
-#define HealthyMushroom     30391
-#define PoisonousMushroom   30435
+enum Creatures
+{
+#define NPC_HEALTHY_MUSHROOM     30391
+#define NPC_POISONOUS_MUSHROOM   30435
+};
 
 struct MANGOS_DLL_DECL boss_amanitarAI : public ScriptedAI
 {
@@ -70,13 +76,15 @@ struct MANGOS_DLL_DECL boss_amanitarAI : public ScriptedAI
         m_creature->SetMeleeDamageSchool(SPELL_SCHOOL_NATURE);
         m_creature->ApplySpellImmune(0, IMMUNITY_SCHOOL, SPELL_SCHOOL_MASK_NATURE, true);
 
-        if (pInstance && !FirstTime)
-            pInstance->SetData(DATA_AMANITAR_EVENT, FAIL);
-
-        FirstTime = false;
-
         if (pInstance)
+        {
             pInstance->DoRemoveAurasDueToSpellOnPlayers(SPELL_MINI);
+            if (!FirstTime)
+            {
+                pInstance->SetData(DATA_AMANITAR_EVENT, FAIL);
+            }
+            else FirstTime = false;
+        }
     }
 
     void JustDied(Unit *Killer)
@@ -90,8 +98,6 @@ struct MANGOS_DLL_DECL boss_amanitarAI : public ScriptedAI
 
     void EnterCombat(Unit *who)
     {
-        m_creature->SetInCombatWithZone();
-
         if (pInstance)
             pInstance->SetData(DATA_AMANITAR_EVENT, IN_PROGRESS);
 
@@ -100,10 +106,6 @@ struct MANGOS_DLL_DECL boss_amanitarAI : public ScriptedAI
 
     void SpawnAdds()
     {
-        uint32 DSpwTime = 30000;
-        float x = 0.0f, y = 0.0f, z = 0.0f;
-        TempSummonType DSpwType = TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN;
-
         for (uint8 i = 0; i < 30; ++i)
         {
             Unit* victim = SelectUnit(SELECT_TARGET_RANDOM, 0);
@@ -113,9 +115,9 @@ struct MANGOS_DLL_DECL boss_amanitarAI : public ScriptedAI
                 Position pos;
                 victim->GetPosition(&pos);
                 m_creature->GetRandomNearPosition(pos, float(urand(5,80)));
-                m_creature->SummonCreature(PoisonousMushroom, pos, DSpwType, DSpwTime);
+                m_creature->SummonCreature(NPC_POISONOUS_MUSHROOM, pos, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 30000);
                 m_creature->GetRandomNearPosition(pos, float(urand(5,80)));
-                m_creature->SummonCreature(HealthyMushroom, pos, DSpwType, DSpwTime);
+                m_creature->SummonCreature(NPC_HEALTHY_MUSHROOM, pos, TEMPSUMMON_TIMED_OR_CORPSE_DESPAWN, 30000);
             }
         }
     }
@@ -169,23 +171,21 @@ struct MANGOS_DLL_DECL mob_amanitar_mushroomsAI : public Scripted_NoMovementAI
     {
         m_creature->CastSpell(m_creature, SPELL_PUTRID_MUSHROOM, true); // Hack, to make the mushrooms visible, can't find orig. spell...
 
-        if (m_creature->GetEntry() == PoisonousMushroom) m_creature->CastSpell(m_creature, POISONOUS_MUSHROOM_SPELL_VISUAL_AURA, true);
+        if (m_creature->GetEntry() == NPC_POISONOUS_MUSHROOM) m_creature->CastSpell(m_creature, POISONOUS_MUSHROOM_SPELL_VISUAL_AURA, true);
 
         auratimer = 0;
         deathtimer = 30000;
     }
 
-    void DamageTaken(Unit *killer, uint32 &damage)
+    void JustDied(Unit *killer)
     {
-        if (!killer || !damage) return;
+        if (!killer)
+            return;
 
-        if (m_creature->GetEntry() == HealthyMushroom && damage >= m_creature->GetHealth())
+        if (m_creature->GetEntry() == NPC_HEALTHY_MUSHROOM && killer->GetTypeId() == TYPEID_PLAYER)
         {
-            if (killer->GetTypeId() == TYPEID_PLAYER && m_creature->GetDistance(killer) <= 3.0f)
-            {
-                m_creature->InterruptNonMeleeSpells(false);
-                m_creature->CastSpell(killer, HEALTHY_MUSHROOM_SPELL_POTENT_FUNGUS, false);
-            }
+            m_creature->InterruptNonMeleeSpells(false);
+            m_creature->CastSpell(killer, HEALTHY_MUSHROOM_SPELL_POTENT_FUNGUS, false);
         }
     }
 
@@ -194,7 +194,7 @@ struct MANGOS_DLL_DECL mob_amanitar_mushroomsAI : public Scripted_NoMovementAI
 
     void UpdateAI(const uint32 diff)
     {
-        if (m_creature->GetEntry() == PoisonousMushroom)
+        if (m_creature->GetEntry() == NPC_POISONOUS_MUSHROOM)
         {
             if (auratimer < diff)
             {
@@ -206,7 +206,6 @@ struct MANGOS_DLL_DECL mob_amanitar_mushroomsAI : public Scripted_NoMovementAI
         if (deathtimer < diff)
         {
             m_creature->DisappearAndDie();
-            deathtimer = 30000;
         } else deathtimer -= diff;
     }
 };
