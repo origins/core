@@ -746,6 +746,8 @@ void OPvPWintergrasp::BroadcastStateChange(BuildingState *state) const
 // Called at Start and Battle End
 bool OPvPWintergrasp::UpdateCreatureInfo(Creature *creature) const
 {
+    if (!creature)
+        return false;
     uint32 entry = creature->GetEntry();
     switch(GetCreatureType(entry))
     {
@@ -799,12 +801,16 @@ bool OPvPWintergrasp::UpdateCreatureInfo(Creature *creature) const
             return false;
         case CREATURE_GUARD:
         case CREATURE_SPECIAL:
+        {
             TeamPairMap::const_iterator itr = m_creEntryPair.find(creature->GetCreatureData()->id);
             if (itr != m_creEntryPair.end())
             {
                 entry = getDefenderTeam() == TEAM_ALLIANCE ? itr->second : itr->first;
                 RespawnCreatureIfNeeded(creature, entry);
             }
+            return false;
+        }
+        default:
             return false;
     }
 }
