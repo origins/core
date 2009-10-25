@@ -105,7 +105,7 @@ bool AchievementCriteriaRequirement::IsValid(AchievementCriteriaEntry const* cri
         case ACHIEVEMENT_CRITERIA_REQUIRE_VALUE:
         case ACHIEVEMENT_CRITERIA_REQUIRE_DISABLED:
             return true;
-        ccase ACHIEVEMENT_CRITERIA_REQUIRE_T_CREATURE:
+        case ACHIEVEMENT_CRITERIA_REQUIRE_T_CREATURE:
             if (!creature.id || !objmgr.GetCreatureTemplate(creature.id))
             {
                 sLog.outErrorDb( "Table `achievement_criteria_requirement` (Entry: %u Type: %u) for requirement ACHIEVEMENT_CRITERIA_REQUIRE_CREATURE (%u) have not existed creature id in value1 (%u), ignore.",

@@ -40,7 +40,7 @@ struct CriteriaProgress
     bool changed;
 };
 
-enum AchievementCriteriaDataType
+enum AchievementCriteriaRequirementType
 {                                                           // value1         value2        comment
     ACHIEVEMENT_CRITERIA_REQUIRE_NONE                = 0,   // 0              0
     ACHIEVEMENT_CRITERIA_REQUIRE_T_CREATURE          = 1,   // creature_id    0
